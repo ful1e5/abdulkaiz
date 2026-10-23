@@ -1,0 +1,25 @@
+# Binary / assets
+assets/**/*.svg
+assets/**/*.png
+assets/**/*.jpg
+assets/**/*.jpeg
+assets/**/*.gif
+assets/**/*.ico
+
+# Minified / generated
+**/*.min.js
+**/*.min.css
+**/dist/**
+**/build/**
+
+# Lockfiles
+**/package-lock.json
+**/pnpm-lock.yaml
+**/yarn.lock
+**/bun.lockb
+**/bun.lock
+
+# Misc
+**/.gitkeep
+**/sitemap.xml
+**/robots.txt
