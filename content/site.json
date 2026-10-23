@@ -1,0 +1,238 @@
+{
+ "email": "hello@abdulkaiz.com",
+ "bookCall": "",
+ "whatsapp": "https://wa.me/qr/23T2H7T6KPADN1",
+ "photo": "",
+ "video": {
+  "src": "assets/intro.mp4",
+  "poster": "",
+  "title": "Meet Abdulkaiz: how I design and build"
+ },
+ "story": "I'm a design engineer from Gujarat, India with a Computer Science degree. UI/UX comes first, then the build. I work in Framer, Webflow, WordPress and Wix, and go custom when the tool gets in the way.\n\nI've done product design at Mastercard and data visualization at Nixtla, and since 2018 I've built open-source software on GitHub as @ful1e5. My designs reach over 500K users, and the number keeps growing.\n\nI use Figma, Claude, MCP and whatever ships fastest. Message me \"Hi.\" No form, no brief, no 12-slide deck.",
+ "bio": "Abdulkaiz Khatri is a design engineer who treats interface design and engineering as one discipline. With a Bachelor of Engineering in Computer Science from Gujarat Technological University and years of hands-on product work, he designs the experience first and then builds it, so what is approved in Figma is what ships.\n\nHis work spans websites, landing pages, web apps and mobile interfaces, built in Framer, Webflow, WordPress and Wix, or in custom code when a tool becomes the constraint. He pairs a conversion-minded UX process of wireframes and prototypes with clean, fast front-end engineering and workflow automation that removes repetitive work for small teams.\n\nSince 2018 he has also built open-source software as @ful1e5, supported through GitHub Sponsors. Products he has designed and shipped reach more than 500K users, and that number keeps growing.\n\nAbdulkaiz works directly with founders and small business owners: clear scope, steady updates and a build that is fast by default.",
+ "stats": [
+  {
+   "n": 500,
+   "suf": "K+",
+   "label": "Users reached"
+  },
+  {
+   "n": 59,
+   "suf": "+",
+   "label": "Projects delivered"
+  },
+  {
+   "n": 45,
+   "suf": "+",
+   "label": "Client reviews"
+  },
+  {
+   "n": 8,
+   "suf": "+",
+   "label": "Years building"
+  }
+ ],
+ "services": [
+  {
+   "title": "Website Design & Development",
+   "summary": "Fast, conversion-focused websites in Framer, Webflow, WordPress or custom code.",
+   "details": "From structure and copy direction to a live, responsive site. Built fast by default, with clean SEO foundations and an editing setup you can actually use.",
+   "features": [
+    "Custom design in Figma",
+    "Responsive build, all devices",
+    "On-page SEO foundations",
+    "Speed and accessibility checks",
+    "Handover and training"
+   ],
+   "media": "assets/img/s1.svg"
+  },
+  {
+   "title": "Shopify & E-commerce",
+   "summary": "Online stores built to sell: themes, product pages, checkout polish and speed.",
+   "details": "Custom Shopify stores and e-commerce setups, from first launch to growth. I design the store experience and handle the technical setup so you can focus on products.",
+   "features": [
+    "Custom Shopify theme and sections",
+    "Product and collection page design",
+    "Cart and checkout optimization",
+    "Payments, shipping and tax setup",
+    "Apps and integrations",
+    "Store speed and conversion tuning"
+   ],
+   "media": "assets/img/s2.svg"
+  },
+  {
+   "title": "Cloud & Hosting",
+   "summary": "Reliable hosting, deployment and cloud setup for your site or app.",
+   "details": "Secure, fast infrastructure without the headaches: hosting, DNS, deployments and monitoring set up properly on Cloudflare, AWS or similar platforms.",
+   "features": [
+    "Hosting, DNS and SSL setup",
+    "Automated deployments (CI/CD)",
+    "Backups and monitoring",
+    "Security hardening",
+    "Low-downtime migrations",
+    "Cost optimization"
+   ],
+   "media": "assets/img/s3.svg"
+  },
+  {
+   "title": "UI/UX & Product Design",
+   "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
+   "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
+   "features": [
+    "User flows and wireframes",
+    "Clickable prototypes",
+    "Design systems",
+    "Developer-ready handoff"
+   ],
+   "media": "assets/img/s4.svg"
+  },
+  {
+   "title": "Automation Tools",
+   "summary": "Lead capture, follow-ups and workflows that save teams hours every week.",
+   "details": "I connect your forms, inbox, CRM, store and spreadsheets so repetitive tasks run themselves, using no-code tools or custom scripts where needed.",
+   "features": [
+    "Lead capture and routing",
+    "Email and WhatsApp follow-ups",
+    "CRM, store and sheet syncing",
+    "Custom scripts and AI-assisted workflows"
+   ],
+   "media": "assets/img/s5.svg"
+  },
+  {
+   "title": "Graphic Design",
+   "summary": "Logos, brand kits and marketing visuals that look consistent everywhere.",
+   "details": "A cohesive visual identity and the everyday assets your business needs, from brand guidelines to ad and print creatives.",
+   "features": [
+    "Logo and brand identity",
+    "Brand guidelines",
+    "Ads, banners and print",
+    "Pitch and presentation decks"
+   ],
+   "media": "assets/img/s6.svg"
+  },
+  {
+   "title": "Social Media Management",
+   "summary": "Planning, creative and publishing so your brand shows up consistently.",
+   "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
+   "features": [
+    "Content calendar",
+    "Post, story and reel creatives",
+    "Scheduling and publishing",
+    "Monthly performance summary"
+   ],
+   "media": "assets/img/s7.svg"
+  },
+  {
+   "title": "Website Care & Maintenance",
+   "summary": "Updates, backups, security checks and small improvements, handled monthly.",
+   "details": "Keep your site or store fast, secure and current without thinking about it. Choose a monthly plan that fits how often it changes.",
+   "features": [
+    "Updates and backups",
+    "Uptime and security checks",
+    "Content and design edits",
+    "Monthly report"
+   ],
+   "media": "assets/img/s8.svg"
+  }
+ ],
+ "process": [
+  {
+   "title": "Discovery",
+   "text": "We talk goals, audience and scope on a short call."
+  },
+  {
+   "title": "Proposal",
+   "text": "Deliverables, timeline and price in writing."
+  },
+  {
+   "title": "Wireframe",
+   "text": "You approve the structure before visual design."
+  },
+  {
+   "title": "Design & build",
+   "text": "Figma design, then a live build."
+  },
+  {
+   "title": "Updates",
+   "text": "A progress update every 2 days."
+  },
+  {
+   "title": "Revisions",
+   "text": "Agreed rounds of feedback."
+  },
+  {
+   "title": "Handover",
+   "text": "Launch, files and a short training."
+  }
+ ],
+ "experience": [
+  {
+   "title": "Digital Designer & Web Developer | Full-Cycle Media Specialist",
+   "org": "Freelance",
+   "when": "Mar 2024 – Present",
+   "place": "Bhuj · Remote",
+   "text": "Designing and building high-converting digital products. Specializing in Figma-to-code workflows, WordPress/Webflow development and AI-assisted design systems. Website, web app and mobile app design built around real business goals.",
+   "skills": "Prototyping, Graphic Design +17 skills"
+  },
+  {
+   "title": "Senior Product Developer",
+   "org": "GitHub · Self-employed",
+   "when": "Oct 2018 – Present",
+   "place": "India · Remote",
+   "text": "@ful1e5, GitHub Sponsored open-source developer, supported by GitHub, Linux Mint and leading technology companies. Focused on Linux, Python and full-stack development, building open-source software used by developers worldwide.",
+   "skills": "Full-Stack Development, Responsive Web Design +29 skills"
+  }
+ ],
+ "education": [
+  {
+   "title": "Bachelor of Engineering, Computer Science",
+   "org": "Gujarat Technological University (GTU)",
+   "when": "Jun 2014 – Dec 2020",
+   "grade": "A",
+   "skills": "Framer, Graphic Design +12 skills"
+  }
+ ],
+ "heroPhoto": "",
+ "heroLogos": [
+  {
+   "name": "Google",
+   "logo": "assets/logos/google.svg"
+  },
+  {
+   "name": "Google",
+   "logo": "assets/logos/google-wordmark.svg"
+  }
+ ],
+ "text": {
+  "hero_badge": "Licensed Design Engineer · Automation Expert · Computer Science",
+  "hero_title": "Fast Websites, Shopify Stores & Automation That Turn Visitors Into Customers",
+  "hero_lead": "UI/UX first, then the build. I design and engineer websites, e-commerce stores, cloud setups and automation tools that help businesses earn trust and win more customers.",
+  "hero_cta": "Book Your Free Strategy Call",
+  "hero_note": "Message me \"Hi.\" No form, no brief, no 12-slide deck.",
+  "logos_title": "Trusted by brands whose products reach 500K+ users, and growing",
+  "video_title": "Hi, I'm Abdulkaiz. Here's how I work.",
+  "services_title": "Everything your brand needs to grow online",
+  "work_title": "Work that speaks. Design built for real impact.",
+  "process_title": "A process that keeps projects on track",
+  "reviews_title": "Client success stories",
+  "pricing_cta_title": "Clear pricing. No surprises.",
+  "about_title": "Design engineer with a Computer Science foundation.",
+  "about_h1": "Design engineer. UI/UX first, then the build.",
+  "pricing_title": "Clear packages. Fair rates.",
+  "pricing_lead": "Pick a build package, add a monthly care plan, or ask for a custom quote. Prices adjust to your region, and every project starts with a written proposal."
+ },
+ "approach": [
+  {
+   "title": "Design first",
+   "text": "Wireframes and prototypes in Figma, so you approve the experience before a line of code is written."
+  },
+  {
+   "title": "Build fast",
+   "text": "Clean, fast front-end and store builds in Framer, Webflow, WordPress, Shopify or custom code."
+  },
+  {
+   "title": "Automate the rest",
+   "text": "Forms, follow-ups, inventory and reporting wired together so your team does less manual work."
+  }
+ ]
+}

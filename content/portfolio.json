@@ -1,0 +1,46 @@
+{
+ "projects": [
+  {
+   "title": "SaaS Landing Page",
+   "summary": "A clear hero, proof and a single sign-up path. (Concept project)",
+   "result": "",
+   "image": "assets/img/p1.svg",
+   "url": ""
+  },
+  {
+   "title": "Shopify Fashion Store",
+   "summary": "A fast, mobile-first store with a simple checkout. (Concept project)",
+   "result": "",
+   "image": "assets/img/p3.svg",
+   "url": ""
+  },
+  {
+   "title": "Fintech Website Redesign",
+   "summary": "Clearer messaging and an easier path to sign-up. (Concept project)",
+   "result": "",
+   "image": "assets/img/p2.svg",
+   "url": ""
+  },
+  {
+   "title": "Cloud Dashboard UI",
+   "summary": "A calm, readable dashboard for monitoring services. (Concept project)",
+   "result": "",
+   "image": "assets/img/p5.svg",
+   "url": ""
+  },
+  {
+   "title": "AI Product Website",
+   "summary": "A marketing site that explains an AI tool in seconds. (Concept project)",
+   "result": "",
+   "image": "assets/img/p4.svg",
+   "url": ""
+  },
+  {
+   "title": "Agency Rebrand & Site",
+   "summary": "A fresh identity and a portfolio that sells. (Concept project)",
+   "result": "",
+   "image": "assets/img/p6.svg",
+   "url": ""
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+backend:
+  name: github
+  repo: ful1e5/abdulkaiz
+  branch: main
+  base_url: https://abdulkaiz.com
+  auth_endpoint: auth
+media_folder: assets/uploads
+public_folder: assets/uploads
+collections:
+  - name: content
+    label: Website content
+    files:
+      - name: site
+        label: Site text, About, Services, Hero
+        file: content/site.json
+        fields:
+          - {name: email, label: Email, widget: string}
+          - {name: bookCall, label: Booking link (Calendly etc.), widget: string, required: false}
+          - {name: whatsapp, label: WhatsApp link, widget: string}
+          - {name: photo, label: Your photo (About), widget: image, required: false}
+          - {name: heroPhoto, label: Hero photo (optional, else uses your photo), widget: image, required: false}
+          - name: text
+            label: Headlines and key text
+            widget: object
+            fields: [{name: hero_badge, label: Hero badge, widget: string}, {name: hero_title, label: Hero headline, widget: text}, {name: hero_lead, label: Hero text, widget: text}, {name: hero_cta, label: Hero button, widget: string}, {name: hero_note, label: Hero small note, widget: string}, {name: logos_title, label: Logos line, widget: string}, {name: video_title, label: Video heading, widget: string}, {name: services_title, label: Services heading, widget: string}, {name: work_title, label: Portfolio heading, widget: string}, {name: process_title, label: Process heading, widget: string}, {name: reviews_title, label: Reviews heading, widget: string}, {name: pricing_cta_title, label: Pricing teaser heading, widget: string}, {name: about_title, label: Home About heading, widget: string}, {name: about_h1, label: About page heading, widget: string}, {name: pricing_title, label: Pricing page heading, widget: string}, {name: pricing_lead, label: Pricing page text, widget: text}]
+          - name: heroLogos
+            label: Hero brand logos (SVG)
+            widget: list
+            fields: [{name: name, label: Brand name, widget: string}, {name: logo, label: SVG/PNG logo, widget: image}]
+          - name: video
+            label: Intro video
+            widget: object
+            fields: [{name: src, label: Video file path or YouTube link, widget: string}, {name: poster, label: Poster image, widget: image, required: false}, {name: title, label: Title, widget: string}]
+          - {name: story, label: Home story (blank line = new paragraph), widget: text}
+          - {name: bio, label: About page biography, widget: text}
+          - name: approach
+            label: How I work (About page)
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: text, label: Text, widget: text}]
+          - name: stats
+            label: Stats
+            widget: list
+            fields: [{name: n, label: Number, widget: number}, {name: suf, label: Suffix, widget: string, required: false}, {name: label, label: Label, widget: string}]
+          - name: services
+            label: Services
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: summary, label: Summary, widget: text}, {name: details, label: Details, widget: text}, {name: features, label: Features, widget: list}, {name: media, label: GIF, MP4 or image, widget: file, required: false}]
+          - name: process
+            label: Process
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: text, label: Text, widget: text}]
+          - name: experience
+            label: Experience
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: org, label: Company, widget: string}, {name: when, label: Dates, widget: string}, {name: place, label: Place, widget: string, required: false}, {name: text, label: Description, widget: text, required: false}, {name: skills, label: Skills line, widget: string, required: false}]
+          - name: education
+            label: Education
+            widget: list
+            fields: [{name: title, label: Degree, widget: string}, {name: org, label: School, widget: string}, {name: when, label: Dates, widget: string}, {name: grade, label: Grade, widget: string, required: false}, {name: skills, label: Skills line, widget: string, required: false}]
+      - name: portfolio
+        label: Portfolio
+        file: content/portfolio.json
+        fields:
+          - name: projects
+            label: Projects
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: image, label: Image, widget: image, required: false}, {name: summary, label: Description, widget: text}, {name: result, label: Result, widget: string, required: false}, {name: url, label: Link, widget: string, required: false}]
+      - name: testimonials
+        label: Testimonials
+        file: content/testimonials.json
+        fields:
+          - name: reviews
+            label: Reviews (only 5-star are shown)
+            widget: list
+            fields: [{name: name, label: Client name, widget: string}, {name: team, label: Team or company name, widget: string, required: false}, {name: project, label: Project, widget: string, required: false}, {name: quote, label: Review text, widget: text}, {name: rating, label: Rating (only 5 is shown), widget: number, min: 1, max: 5, default: 5}, {name: website, label: Client website, widget: string, required: false}, {name: photo, label: Client photo, widget: image, required: false}, {name: date, label: Date, widget: string, required: false}, {name: source, label: Source, widget: string, required: false}, {name: show, label: Show on site, widget: boolean, default: true}]
+      - name: pricing
+        label: Pricing (base amounts in dollars)
+        file: content/pricing.json
+        fields:
+          - {name: websiteNote, label: Website packages note, widget: string}
+          - {name: retainerNote, label: Retainer note, widget: string}
+          - name: websites
+            label: Website and store packages
+            widget: list
+            fields: &plan [{name: name, label: Name, widget: string}, {name: amount, label: Base amount (dollars), widget: number}, {name: from, label: Show "starting at", widget: boolean, default: true}, {name: unit, label: Unit, widget: string}, {name: note, label: Note, widget: string, required: false}, {name: features, label: Features, widget: list}, {name: popular, label: Highlight (glow card), widget: boolean, default: false}]
+          - {name: retainers, label: Monthly retainers, widget: list, fields: *plan}
+          - name: regions
+            label: Regional price adjustment
+            widget: object
+            fields: [{name: default, label: Multiplier for all other countries, widget: number, value_type: float}, {name: tiers, label: Country groups, widget: list, fields: [{name: mult, label: Multiplier, widget: number, value_type: float}, {name: countries, label: Country codes (comma separated), widget: string}]}]
