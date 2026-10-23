@@ -9,12 +9,12 @@ still works using its client-side fallbacks.
 
 Everything visible on the site comes from four JSON files, all directly editable:
 
-| File | Drives |
-| --- | --- |
-| `content/site.json` | Contact details, intro video, About copy, stats, services, process, experience, education, hero logos, headings |
-| `content/portfolio.json` | Portfolio projects and the homepage marquee |
-| `content/testimonials.json` | Client reviews |
-| `content/pricing.json` | Pricing packages, retainers and regional multipliers |
+| File                        | Drives                                                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `content/site.json`         | Contact details, intro video, About copy, stats, services, process, experience, education, hero logos, headings |
+| `content/portfolio.json`    | Portfolio projects and the homepage marquee                                                                     |
+| `content/testimonials.json` | Client reviews                                                                                                  |
+| `content/pricing.json`      | Pricing packages, retainers and regional multipliers                                                            |
 
 `content/seed.js` is a generated, inlined copy of those four files (`window.SEED`)
 used as an offline fallback so pages still render if a JSON request fails.

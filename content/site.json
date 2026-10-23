@@ -7,33 +7,36 @@
     "poster": "",
     "title": "Meet Abdulkaiz: how I design and build"
   },
-  "story": "I'm a design engineer from Gujarat, India with a Computer Science degree. UI/UX comes first, then the build. I work in Framer, Webflow, WordPress and Wix, and go custom when the tool gets in the way.\n\nI've done product design at Mastercard and data visualization at Nixtla, and since 2018 I've built open-source software on GitHub as @ful1e5. My designs reach over 500K users, and the number keeps growing.\n\nI use Figma, Claude, MCP and whatever ships fastest. Message me \"Hi.\" No form, no brief, no 12-slide deck.",
-  "bio": "Abdulkaiz Khatri is a design engineer who treats interface design and engineering as one discipline. With a Bachelor of Engineering in Computer Science from Gujarat Technological University and years of hands-on product work, he designs the experience first and then builds it, so what is approved in Figma is what ships.\n\nHis work spans websites, landing pages, web apps and mobile interfaces, built in Framer, Webflow, WordPress and Wix, or in custom code when a tool becomes the constraint. He pairs a conversion-minded UX process of wireframes and prototypes with clean, fast front-end engineering and workflow automation that removes repetitive work for small teams.\n\nSince 2018 he has also built open-source software as @ful1e5, supported through GitHub Sponsors. Products he has designed and shipped reach more than 500K users, and that number keeps growing.\n\nAbdulkaiz works directly with founders and small business owners: clear scope, steady updates and a build that is fast by default.",
+  "story": "Most people who build things for the web stop at either design or code. I never got comfortable with that split, so I learned both.\n\nI put my first project on the internet in 2016 and never really stopped. My best-known piece of open source is Bibata — a cursor theme I designed and built that ended up shipping as a default on Linux distributions I'd never met the maintainers of. It's been downloaded more than 1.4 million times, which still surprises me.\n\nThat's the same job I do for clients: take something small and fiddly, design it properly, and build it so it holds up on a stranger's machine.",
+  "bio": "I'm a design engineer based in Bhuj, India. I work in the overlap between design and front-end development — usually starting in Figma and finishing in Webflow, WordPress, Framer or plain code, depending on what the project actually needs.\n\nThe open-source work is the part I'm proudest of. Alongside Bibata I maintain github-nvim-theme, apple_cursor and clickgen, a Python toolbox for building cursor themes. Between them that's a few thousand stars and a lot of strangers trusting my work on their own machines, which is a strange and lovely thing to think about.\n\nOn Upwork I'm Top Rated with a 98% job success score across 45 five-star reviews. Most of that work is the same thing I do here: taking a design from a Figma file to a live, fast site.\n\nI care about the details you only notice when they're missing — load times, empty states, error messages, and what happens on a slow phone. I work directly with founders and small teams: clear scope, steady updates, and something that's fast by default.",
   "stats": [
     {
-      "n": 500,
-      "suf": "K+",
-      "label": "Users reached"
+      "n": 1.4,
+      "suf": "M+",
+      "label": "Bibata downloads"
     },
     {
-      "n": 59,
-      "suf": "+",
-      "label": "Projects delivered"
+      "n": 4.2,
+      "suf": "K",
+      "label": "Stars on Bibata"
     },
     {
-      "n": 45,
-      "suf": "+",
-      "label": "Client reviews"
+      "n": 98,
+      "suf": "%",
+      "label": "Upwork job success"
     },
     {
       "n": 8,
       "suf": "+",
-      "label": "Years building"
+      "label": "Years in open source"
     }
   ],
   "services": [
     {
+      "id": "websites",
       "title": "Website Design & Development",
+      "icon": "monitor",
+      "cta": "Start my site",
       "summary": "Fast, conversion-focused websites in Framer, Webflow, WordPress or custom code.",
       "details": "From structure and copy direction to a live, responsive site. Built fast by default, with clean SEO foundations and an editing setup you can actually use.",
       "features": [
@@ -43,10 +46,63 @@
         "Speed and accessibility checks",
         "Handover and training"
       ],
-      "media": "assets/img/s1.svg"
+      "media": "assets/img/s1.svg",
+      "plans": [
+        {
+          "name": "Landing Page",
+          "amount": 800,
+          "unit": "one-off",
+          "from": true,
+          "desc": "One focused page built around a single action.",
+          "note": "1 custom page · about a week",
+          "features": [
+            "Custom design in Figma",
+            "Responsive build",
+            "On-page SEO basics",
+            "Contact form or booking link",
+            "2 revision rounds"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Business Website",
+          "amount": 2200,
+          "unit": "one-off",
+          "from": true,
+          "desc": "The full site most small businesses need.",
+          "note": "Up to 5 pages · 2–3 weeks",
+          "features": [
+            "Everything in Landing Page",
+            "Home, About, Services, Contact, +1",
+            "Editable content setup",
+            "Speed and accessibility pass",
+            "3 revision rounds"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Growth Website",
+          "amount": 4000,
+          "unit": "one-off",
+          "from": true,
+          "desc": "A bigger site with a blog and light automation.",
+          "note": "Up to 10 pages · about 4 weeks",
+          "features": [
+            "Everything in Business Website",
+            "Blog or portfolio section",
+            "Integrations and light automation",
+            "Analytics and tracking setup",
+            "Extra pages $300 each"
+          ],
+          "popular": true
+        }
+      ]
     },
     {
+      "id": "shopify",
       "title": "Shopify & E-commerce",
+      "icon": "cart",
+      "cta": "Start my store",
       "summary": "Online stores built to sell: themes, product pages, checkout polish and speed.",
       "details": "Custom Shopify stores and e-commerce setups, from first launch to growth. I design the store experience and handle the technical setup so you can focus on products.",
       "features": [
@@ -57,10 +113,204 @@
         "Apps and integrations",
         "Store speed and conversion tuning"
       ],
-      "media": "assets/img/s2.svg"
+      "media": "assets/img/s2.svg",
+      "plans": [
+        {
+          "name": "Shopify Store",
+          "amount": 2800,
+          "unit": "one-off",
+          "from": true,
+          "desc": "A store built to sell, from theme to checkout.",
+          "note": "Up to 25 products · about 3 weeks",
+          "features": [
+            "Custom Shopify theme sections",
+            "Product and collection pages",
+            "Payments, shipping and tax setup",
+            "Key apps and integrations",
+            "Launch support and training"
+          ],
+          "popular": true
+        }
+      ]
     },
     {
+      "id": "ui-ux",
+      "title": "UI/UX & Product Design",
+      "icon": "layers",
+      "cta": "Design my product",
+      "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
+      "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
+      "features": [
+        "User flows and wireframes",
+        "Clickable prototypes",
+        "Design systems",
+        "Developer-ready handoff"
+      ],
+      "media": "assets/img/s4.svg",
+      "plans": [
+        {
+          "name": "UI/UX Design",
+          "amount": 1800,
+          "unit": "one-off",
+          "from": true,
+          "desc": "Web app, dashboard or mobile screens, developer-ready.",
+          "note": "Priced by screen count",
+          "features": [
+            "User flows and wireframes",
+            "Clickable prototype",
+            "High-fidelity screens in Figma",
+            "Developer handoff notes"
+          ],
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "automation",
+      "title": "Automation Tools",
+      "icon": "bolt",
+      "cta": "Automate it",
+      "summary": "Lead capture, follow-ups and workflows that save teams hours every week.",
+      "details": "I connect your forms, inbox, CRM, store and spreadsheets so repetitive tasks run themselves, using no-code tools or custom scripts where needed.",
+      "features": [
+        "Lead capture and routing",
+        "Email and follow-ups on autopilot",
+        "CRM, store and sheet syncing",
+        "Custom scripts and AI-assisted workflows"
+      ],
+      "media": "assets/img/s5.svg",
+      "plans": [
+        {
+          "name": "Lead Capture & Follow-up",
+          "amount": 450,
+          "unit": "one-off",
+          "from": false,
+          "desc": "Every enquiry lands in your inbox and gets a reply.",
+          "note": "Form → email + CRM",
+          "features": [
+            "Form wired to email and CRM",
+            "Automatic acknowledgement email",
+            "Spam and bot protection",
+            "Tested end to end"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Workflow Automation",
+          "amount": 850,
+          "unit": "one-off",
+          "from": true,
+          "desc": "The repetitive jobs your team does by hand, automated.",
+          "note": "Up to 3 connected workflows",
+          "features": [
+            "Order and inventory syncing",
+            "Sheets, CRM and store connected",
+            "Scheduled reports",
+            "Error alerts"
+          ],
+          "popular": true
+        },
+        {
+          "name": "Custom Scripts & AI",
+          "amount": 1500,
+          "unit": "one-off",
+          "from": true,
+          "desc": "When the no-code tools run out, I write it.",
+          "note": "Quoted after a short call",
+          "features": [
+            "Custom scripts and integrations",
+            "AI-assisted workflows",
+            "Cloud deployment",
+            "Documentation and handover"
+          ],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "graphic-design",
+      "title": "Graphic Design",
+      "icon": "palette",
+      "cta": "Build my brand",
+      "summary": "Logos, brand kits and marketing visuals that look consistent everywhere.",
+      "details": "A cohesive visual identity and the everyday assets your business needs, from brand guidelines to ad and print creatives.",
+      "features": [
+        "Logo and brand identity",
+        "Brand guidelines",
+        "Ads, banners and print",
+        "Pitch and presentation decks"
+      ],
+      "media": "assets/img/s6.svg",
+      "plans": [
+        {
+          "name": "Logo & Brand Identity",
+          "amount": 600,
+          "unit": "one-off",
+          "from": true,
+          "desc": "A logo that works everywhere, from a favicon to a shop sign.",
+          "note": "3 concepts · 2 revision rounds",
+          "features": [
+            "3 logo concepts",
+            "Final files (SVG, PNG, PDF)",
+            "Colour and type direction",
+            "Social avatar set"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Brand Guidelines",
+          "amount": 900,
+          "unit": "one-off",
+          "from": true,
+          "desc": "The rulebook that keeps your brand consistent.",
+          "note": "PDF guideline document",
+          "features": [
+            "Logo usage and clear space",
+            "Colour palette and type scale",
+            "Do and don't examples",
+            "Ready to share with any designer"
+          ],
+          "popular": true
+        }
+      ]
+    },
+    {
+      "id": "social-media",
+      "title": "Social Media Management",
+      "icon": "share",
+      "cta": "Plan my content",
+      "summary": "Planning, creative and publishing so your brand shows up consistently.",
+      "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
+      "features": [
+        "Content calendar",
+        "Post, story and reel creatives",
+        "Scheduling and publishing",
+        "Monthly performance summary"
+      ],
+      "media": "assets/img/s7.svg",
+      "plans": [
+        {
+          "name": "Social Media Kit",
+          "amount": 450,
+          "unit": "one-off",
+          "from": true,
+          "desc": "A month of on-brand posts, designed and ready to schedule.",
+          "note": "12 post templates",
+          "features": [
+            "12 editable post templates",
+            "Story and reel covers",
+            "Caption starter copy",
+            "Editable in Canva or Figma"
+          ],
+          "popular": false
+        }
+      ]
+    },
+    {
+      "id": "cloud",
       "title": "Cloud & Hosting",
+      "icon": "cloud",
+      "cta": "Move my hosting",
       "summary": "Reliable hosting, deployment and cloud setup for your site or app.",
       "details": "Secure, fast infrastructure without the headaches: hosting, DNS, deployments and monitoring set up properly on Cloudflare, AWS or similar platforms.",
       "features": [
@@ -71,58 +321,45 @@
         "Low-downtime migrations",
         "Cost optimization"
       ],
-      "media": "assets/img/s3.svg"
+      "media": "assets/img/s3.svg",
+      "plans": [
+        {
+          "name": "Cloud Setup & Migration",
+          "amount": 600,
+          "unit": "one-off",
+          "from": true,
+          "desc": "Move to fast, reliable hosting without downtime.",
+          "note": "Cloudflare, AWS or similar",
+          "features": [
+            "Hosting, DNS and SSL setup",
+            "Automated deployments (CI/CD)",
+            "Backups and monitoring",
+            "Low-downtime migration"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Performance & Security Audit",
+          "amount": 350,
+          "unit": "one-off",
+          "from": false,
+          "desc": "Find out exactly why your site is slow or exposed.",
+          "note": "Written report and fix list",
+          "features": [
+            "Speed audit (Core Web Vitals)",
+            "Security review",
+            "Prioritised fix list",
+            "Estimate for the fixes"
+          ],
+          "popular": true
+        }
+      ]
     },
     {
-      "title": "UI/UX & Product Design",
-      "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
-      "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
-      "features": [
-        "User flows and wireframes",
-        "Clickable prototypes",
-        "Design systems",
-        "Developer-ready handoff"
-      ],
-      "media": "assets/img/s4.svg"
-    },
-    {
-      "title": "Automation Tools",
-      "summary": "Lead capture, follow-ups and workflows that save teams hours every week.",
-      "details": "I connect your forms, inbox, CRM, store and spreadsheets so repetitive tasks run themselves, using no-code tools or custom scripts where needed.",
-      "features": [
-        "Lead capture and routing",
-        "Email and WhatsApp follow-ups",
-        "CRM, store and sheet syncing",
-        "Custom scripts and AI-assisted workflows"
-      ],
-      "media": "assets/img/s5.svg"
-    },
-    {
-      "title": "Graphic Design",
-      "summary": "Logos, brand kits and marketing visuals that look consistent everywhere.",
-      "details": "A cohesive visual identity and the everyday assets your business needs, from brand guidelines to ad and print creatives.",
-      "features": [
-        "Logo and brand identity",
-        "Brand guidelines",
-        "Ads, banners and print",
-        "Pitch and presentation decks"
-      ],
-      "media": "assets/img/s6.svg"
-    },
-    {
-      "title": "Social Media Management",
-      "summary": "Planning, creative and publishing so your brand shows up consistently.",
-      "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
-      "features": [
-        "Content calendar",
-        "Post, story and reel creatives",
-        "Scheduling and publishing",
-        "Monthly performance summary"
-      ],
-      "media": "assets/img/s7.svg"
-    },
-    {
+      "id": "care",
       "title": "Website Care & Maintenance",
+      "icon": "shield",
+      "cta": "Keep it running",
       "summary": "Updates, backups, security checks and small improvements, handled monthly.",
       "details": "Keep your site or store fast, secure and current without thinking about it. Choose a monthly plan that fits how often it changes.",
       "features": [
@@ -131,7 +368,54 @@
         "Content and design edits",
         "Monthly report"
       ],
-      "media": "assets/img/s8.svg"
+      "media": "assets/img/s8.svg",
+      "plans": [
+        {
+          "name": "Care",
+          "amount": 99,
+          "unit": "per month",
+          "from": false,
+          "desc": "For a small site that rarely changes.",
+          "note": "1 hour of edits included",
+          "features": [
+            "Updates and backups",
+            "Uptime and security checks",
+            "1 hour of edits",
+            "Email support"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Growth",
+          "amount": 249,
+          "unit": "per month",
+          "from": false,
+          "desc": "For sites and stores that change every month.",
+          "note": "4 hours of edits included",
+          "features": [
+            "Everything in Care",
+            "4 hours of design or dev edits",
+            "Monthly performance report",
+            "Basic SEO checks"
+          ],
+          "popular": true
+        },
+        {
+          "name": "Partner",
+          "amount": 599,
+          "unit": "per month",
+          "from": false,
+          "desc": "A design engineer on call, whenever you need one.",
+          "note": "10 hours of edits included",
+          "features": [
+            "Everything in Growth",
+            "10 hours of design, dev or automation",
+            "Social media or graphic design support",
+            "Priority replies"
+          ],
+          "popular": false
+        }
+      ]
     }
   ],
   "process": [
@@ -166,20 +450,20 @@
   ],
   "experience": [
     {
-      "title": "Digital Designer & Web Developer | Full-Cycle Media Specialist",
-      "org": "Freelance",
-      "when": "Mar 2024 – Present",
-      "place": "Bhuj · Remote",
-      "text": "Designing and building high-converting digital products. Specializing in Figma-to-code workflows, WordPress/Webflow development and AI-assisted design systems. Website, web app and mobile app design built around real business goals.",
-      "skills": "Prototyping, Graphic Design +17 skills"
+      "title": "Design Engineer — Freelance",
+      "org": "Upwork · Top Rated",
+      "when": "2024 – Present",
+      "place": "Bhuj, India · Remote",
+      "text": "Websites and product interfaces for founders and small teams, mostly Figma to code. Top Rated with a 98% job success score across 45 five-star reviews.",
+      "skills": "UI/UX Design, Front-End Development, Figma, Webflow, WordPress, Framer, Wix"
     },
     {
-      "title": "Senior Product Developer",
-      "org": "GitHub · Self-employed",
-      "when": "Oct 2018 – Present",
-      "place": "India · Remote",
-      "text": "@ful1e5, GitHub Sponsored open-source developer, supported by GitHub, Linux Mint and leading technology companies. Focused on Linux, Python and full-stack development, building open-source software used by developers worldwide.",
-      "skills": "Full-Stack Development, Responsive Web Design +29 skills"
+      "title": "Open-Source Maintainer",
+      "org": "GitHub · @ful1e5 and projekt0n",
+      "when": "2016 – Present",
+      "place": "Remote",
+      "text": "Author of Bibata, an open-source cursor theme downloaded over 1.4 million times and shipped as a default on ArcoLinux. Also maintain github-nvim-theme, apple_cursor and clickgen, a Python toolbox for building cursor themes. Funded by GitHub Sponsors.",
+      "skills": "Python, TypeScript, Lua, Shell, Linux"
     }
   ],
   "education": [
@@ -194,31 +478,119 @@
   "heroPhoto": "",
   "heroLogos": [
     {
-      "name": "Google",
-      "logo": "assets/logos/google.svg"
+      "name": "Figma",
+      "logo": "assets/logos/figma.svg"
     },
     {
-      "name": "Google",
-      "logo": "assets/logos/google-wordmark.svg"
+      "name": "Framer",
+      "logo": "assets/logos/framer.svg"
+    },
+    {
+      "name": "Webflow",
+      "logo": "assets/logos/webflow.svg"
+    },
+    {
+      "name": "WordPress",
+      "logo": "assets/logos/wordpress.svg"
+    },
+    {
+      "name": "Shopify",
+      "logo": "assets/logos/shopify.svg"
+    },
+    {
+      "name": "Wix",
+      "logo": "assets/logos/wix.svg"
+    },
+    {
+      "name": "Next.js",
+      "logo": "assets/logos/nextdotjs.svg"
+    },
+    {
+      "name": "Python",
+      "logo": "assets/logos/python.svg"
+    },
+    {
+      "name": "n8n",
+      "logo": "assets/logos/n8n.svg"
+    },
+    {
+      "name": "GitHub",
+      "logo": "assets/logos/github.svg"
+    },
+    {
+      "name": "Git",
+      "logo": "assets/logos/git.svg"
+    },
+    {
+      "name": "Linux",
+      "logo": "assets/logos/linux.svg"
+    },
+    {
+      "name": "Vercel",
+      "logo": "assets/logos/vercel.svg"
+    },
+    {
+      "name": "Cloudflare",
+      "logo": "assets/logos/cloudflare.svg"
+    },
+    {
+      "name": "Claude",
+      "logo": "assets/logos/anthropic.svg"
+    },
+    {
+      "name": "Gemini",
+      "logo": "assets/logos/googlegemini.svg"
+    },
+    {
+      "name": "DeepSeek",
+      "logo": "assets/logos/deepseek.svg"
+    },
+    {
+      "name": "Reddit",
+      "logo": "assets/logos/reddit.svg"
+    },
+    {
+      "name": "Instagram",
+      "logo": "assets/logos/instagram.svg"
+    },
+    {
+      "name": "Meta",
+      "logo": "assets/logos/meta.svg"
+    },
+    {
+      "name": "Miro",
+      "logo": "assets/logos/miro.svg"
     }
   ],
   "text": {
-    "hero_badge": "Licensed Design Engineer · Automation Expert · Computer Science",
-    "hero_title": "Fast Websites, Shopify Stores & Automation That Turn Visitors Into Customers",
-    "hero_lead": "UI/UX first, then the build. I design and engineer websites, e-commerce stores, cloud setups and automation tools that help businesses earn trust and win more customers.",
-    "hero_cta": "Book Your Free Strategy Call",
+    "hero_status": "Available for new projects",
+    "hero_title": "I design and build websites that turn visitors into customers",
+    "hero_lead": "I'm Abdulkaiz Khatri, a design engineer from Gujarat, India. I handle the whole thing — the UI/UX, the build, and the automation behind it — so you get one person instead of a hand-off chain.",
+    "hero_cta": "Start a project",
     "hero_note": "Message me \"Hi.\" No form, no brief, no 12-slide deck.",
-    "logos_title": "Trusted by brands whose products reach 500K+ users, and growing",
+    "logos_title": "I work in these every day — from the first Figma frame to the deploy button.",
     "video_title": "Hi, I'm Abdulkaiz. Here's how I work.",
+    "services_eyebrow": "What I do",
+    "tools_note": "and a few more I reach for when the job calls for it",
     "services_title": "Everything your brand needs to grow online",
+    "services_intro": "Websites, stores, design and the automation behind them — handled by one person, start to finish.",
+    "work_eyebrow": "Selected work",
     "work_title": "Work that speaks. Design built for real impact.",
+    "work_h1": "Work that speaks. Design built for real impact.",
+    "work_intro": "A few projects that show how I think about structure, clarity and getting people to take the next step.",
+    "process_eyebrow": "How it works",
     "process_title": "A process that keeps projects on track",
-    "reviews_title": "Client success stories",
-    "pricing_cta_title": "Clear pricing. No surprises.",
-    "about_title": "Design engineer with a Computer Science foundation.",
-    "about_h1": "Design engineer. UI/UX first, then the build.",
-    "pricing_title": "Clear packages. Fair rates.",
-    "pricing_lead": "Pick a build package, add a monthly care plan, or ask for a custom quote. Prices adjust to your region, and every project starts with a written proposal."
+    "process_intro": "No mystery and no silence. You always know what stage we're at and what happens next.",
+    "reviews_eyebrow": "Reviews",
+    "reviews_title": "What clients actually say",
+    "prices_eyebrow": "Prices",
+    "pricing_cta_title": "Every price, up front",
+    "pricing_cta_lead": "Tap a service to see exactly what's included and what it costs. Monthly plans start at $99.",
+    "about_title": "The person behind the work",
+    "about_bio_title": "Where I come from",
+    "about_h1": "I'm Abdulkaiz. I design it, then I build it.",
+    "pricing_title": "Clear prices, agreed before we start",
+    "pricing_lead": "Pick the service you need and you'll see the price right there — no \"contact us for a quote\" for the basics. Every project begins with a fixed price in writing."
   },
   "approach": [
     {

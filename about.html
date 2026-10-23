@@ -37,13 +37,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      /* lets scroll-reveal hide content only when JS can reveal it again */
+      document.documentElement.classList.add('js');
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -52,83 +56,62 @@
         <div class="about">
           <div class="photo px" data-px=".05" id="photo"><span>AK</span></div>
           <div>
-            <p class="eyebrow rise">✦ About</p>
-            <h1
-              class="left rise"
-              style="--d: 0.1s; font-size: clamp(2rem, 4.5vw, 3.4rem)"
-              data-t="about_h1"
-            >
-              Design engineer. UI/UX first, then the build.
+            <p class="eyebrow rise">About</p>
+            <h1 class="left rise" style="--d: 0.08s" data-t="about_h1">
+              I'm Abdulkaiz. I design it, then I build it.
             </h1>
-            <div id="story" class="rise" style="--d: 0.2s">
+            <div id="story" class="rise" style="--d: 0.16s">
               <p>
-                I'm a design engineer from Gujarat, India with a Computer
-                Science degree. UI/UX comes first, then the build. I work in
-                Framer, Webflow, WordPress and Wix, and go custom when the tool
-                gets in the way.
-              </p>
-              <p>
-                My designs reach over 500K users, and the number keeps growing.
-                Message me "Hi." No form, no brief, no 12-slide deck.
-              </p>
-            </div>
-            <div id="bio" class="rise" style="--d: 0.3s">
-              <p>
-                Abdulkaiz Khatri is a design engineer who treats interface
-                design and engineering as one discipline. With a Bachelor of
-                Engineering in Computer Science from Gujarat Technological
-                University, he designs the experience first and then builds it,
-                so what is approved in Figma is what ships.
-              </p>
-              <p>
-                His work spans websites, Shopify stores, cloud setups and
-                automation, built in Framer, Webflow, WordPress and Shopify, or
-                in custom code when a tool becomes the constraint. Products he
-                has designed reach more than 500K users, and that number keeps
-                growing.
+                Most people who build websites stop at either design or code. I
+                was never comfortable with that split, so I learned both.
               </p>
             </div>
             <div class="cta-row left">
-              <button class="btn" data-contact>Let's Meet Over a Call</button
-              ><a class="btn btn-ghost" href="portfolio.html"
-                >See my portfolio</a
-              >
+              <button class="btn" data-contact>Start a project</button>
+              <a class="btn btn-ghost" href="portfolio.html">See my work</a>
             </div>
           </div>
         </div>
       </section>
+
       <section class="section reveal">
-        <h2>How I work</h2>
+        <div class="section-head">
+          <p class="eyebrow">Background</p>
+          <h2 class="left" data-t="about_bio_title">Where I come from</h2>
+        </div>
+        <div id="bio"></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-head">
+          <p class="eyebrow">How I work</p>
+          <h2 class="left">Three things I do on every project</h2>
+        </div>
         <div class="grid3" id="approach"></div>
       </section>
+
       <section class="section reveal">
-        <h2>Selected work</h2>
+        <div class="section-head">
+          <p class="eyebrow">Selected work</p>
+          <h2 class="left">A few things I've built</h2>
+        </div>
         <div class="gal" id="gallery"></div>
       </section>
+
       <section class="section reveal">
-        <h2>Two doors</h2>
-        <div class="grid2">
-          <article class="card door">
-            <h3>Clients</h3>
-            <p>
-              Message me "Hi." That's it. No form, no brief, no 12-slide deck.
-            </p>
-            <button class="btn" data-contact="message">Say "Hi"</button>
-          </article>
-          <article class="card door">
-            <h3>Designers &amp; developers</h3>
-            <p>Ship on time? Message me "Ready For Hire."</p>
-            <button class="btn btn-ghost" data-contact="message">
-              Say "Ready For Hire"</button
-            >
-          </article>
+        <div class="section-head">
+          <p class="eyebrow">Experience</p>
+          <h2 class="left">What I've been doing</h2>
         </div>
-        <p class="muted center" style="margin-top: 20px">
-          Small note: if "on time" made you wince, we're probably not a match.
-        </p>
+        <div class="tl" id="exp"></div>
+        <div class="tl" id="edu" style="margin-top: var(--sp-5)"></div>
       </section>
+
       <section class="section reveal">
-        <h2>Tools &amp; skills</h2>
+        <div class="section-head">
+          <p class="eyebrow">Tools &amp; skills</p>
+          <h2 class="left">Things I'm comfortable with</h2>
+        </div>
         <div class="chips">
           <span>Web Design</span><span>Web Development</span><span>Shopify</span
           ><span>E-commerce</span><span>Cloud &amp; Hosting</span
@@ -138,22 +121,38 @@
           ><span>Automation</span><span>Claude &amp; MCP</span>
         </div>
       </section>
+
       <section class="section reveal">
-        <h2>Experience</h2>
-        <div class="tl" id="exp"></div>
+        <div class="grid2">
+          <article class="card door">
+            <h3>Got a project?</h3>
+            <p>
+              Message me "Hi." That's it. No form, no brief, no 12-slide deck.
+            </p>
+            <button class="btn" data-contact="message">Say "Hi"</button>
+          </article>
+          <article class="card door">
+            <h3>Need a hand on your team?</h3>
+            <p>
+              I take on contract work for design and dev teams. Message me
+              "Ready For Hire."
+            </p>
+            <button class="btn btn-ghost" data-contact="message">
+              Say "Ready For Hire"
+            </button>
+          </article>
+        </div>
       </section>
-      <section class="section reveal">
-        <h2>Education</h2>
-        <div class="tl" id="edu"></div>
-      </section>
+
       <section class="section reveal">
         <div class="cta">
           <h2>Let's build something fast.</h2>
           <p class="muted">
             Email or a scheduled call, whichever is easiest for you.
           </p>
-          <div class="cta-row" style="margin-top: 24px">
-            <button class="btn" data-contact>Start the Conversation</button>
+          <div class="cta-row">
+            <button class="btn" data-contact>Start a conversation</button>
+            <a class="btn btn-outline" href="#prices">See prices</a>
           </div>
         </div>
       </section>

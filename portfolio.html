@@ -37,30 +37,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      /* lets scroll-reveal hide content only when JS can reveal it again */
+      document.documentElement.classList.add('js');
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
       <section class="section page-head">
-        <p class="eyebrow rise">✦ Portfolio</p>
-        <h1 class="rise" style="--d: 0.1s" data-t="work_title">
+        <p class="eyebrow rise">Portfolio</p>
+        <h1 class="rise" style="--d: 0.08s" data-t="work_h1">
           Work that speaks. Design built for real impact.
         </h1>
-        <p class="lead rise" style="--d: 0.2s">
-          Selected work in websites, stores, product design and automation.
+        <p class="lead rise" style="--d: 0.16s">
+          Concept and client projects across websites, stores, product design
+          and automation. Each one states the problem and what it achieved.
         </p>
       </section>
-      <section class="section reveal" style="padding-top: 0">
+      <section class="section reveal">
         <div class="work" id="work-grid"></div>
         <div class="section-cta">
-          <button class="btn" data-contact>Start Your Project</button>
+          <button class="btn" data-contact>Start a project</button>
+          <a class="btn btn-ghost" href="#prices">See prices</a>
         </div>
       </section>
     </main>

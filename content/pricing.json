@@ -1,110 +1,25 @@
 {
-  "websiteNote": "Fixed-price packages. Cloud and custom automation work is quoted per project.",
-  "retainerNote": "Month-to-month. Hosting and domain costs are billed at cost. Unused hours do not roll over.",
-  "websites": [
+  "note": "Fixed prices, agreed in writing before I start. No hourly surprises and no hidden fees. Prices are shown in USD and adjust to your region.",
+  "faq": [
     {
-      "name": "Landing Page",
-      "amount": 800,
-      "from": true,
-      "unit": "/ page",
-      "note": "One custom page",
-      "features": [
-        "Custom Figma design",
-        "Responsive build",
-        "Basic on-page SEO",
-        "Contact form or booking link",
-        "2 revision rounds"
-      ],
-      "popular": false
+      "q": "How do I know which plan I need?",
+      "a": "Tell me what you're building and I'll point you to the right one — usually on a single short call. You don't have to pick from this page alone."
     },
     {
-      "name": "Business Website",
-      "amount": 2200,
-      "from": true,
-      "unit": "/ up to 5 pages",
-      "note": "About $440 per page",
-      "features": [
-        "Everything in Landing Page",
-        "Home, About, Services, Contact + 1",
-        "Editable content setup",
-        "Speed and accessibility checks",
-        "3 revision rounds"
-      ],
-      "popular": false
+      "q": "Why do some prices say \"starting at\"?",
+      "a": "The build price is fixed, but the final number moves with scope — page count, product count or how many screens you need. You get the exact figure in a written proposal before any work begins."
     },
     {
-      "name": "Shopify Store",
-      "amount": 2800,
-      "from": true,
-      "unit": "/ store",
-      "note": "Up to 25 products set up",
-      "features": [
-        "Custom theme sections",
-        "Product and collection pages",
-        "Payments, shipping and tax setup",
-        "Key apps and integrations",
-        "Launch support and training"
-      ],
-      "popular": true
+      "q": "When do I pay?",
+      "a": "Half up front to book your slot, half on launch. Monthly plans are billed at the start of each month and you can cancel any time."
     },
     {
-      "name": "Growth Website",
-      "amount": 4000,
-      "from": true,
-      "unit": "/ up to 10 pages",
-      "note": "About $400 per page",
-      "features": [
-        "Everything in Business Website",
-        "Blog or portfolio section",
-        "Integrations and basic automation",
-        "Analytics and tracking setup",
-        "Extra pages $300 each"
-      ],
-      "popular": false
-    }
-  ],
-  "retainers": [
-    {
-      "name": "Care",
-      "amount": 99,
-      "from": false,
-      "unit": "/ month",
-      "note": "Keep a small site safe and current",
-      "features": [
-        "Updates and backups",
-        "Uptime and security checks",
-        "1 hour of edits",
-        "Email support"
-      ],
-      "popular": false
+      "q": "What isn't included?",
+      "a": "Third-party costs — domains, hosting fees, paid Shopify apps, stock images and premium fonts — are billed at cost. I'll list any of these in the proposal so there are no surprises."
     },
     {
-      "name": "Growth",
-      "amount": 249,
-      "from": false,
-      "unit": "/ month",
-      "note": "For sites and stores that change monthly",
-      "features": [
-        "Everything in Care",
-        "4 hours of design or dev edits",
-        "Monthly performance report",
-        "Basic SEO checks"
-      ],
-      "popular": true
-    },
-    {
-      "name": "Partner",
-      "amount": 599,
-      "from": false,
-      "unit": "/ month",
-      "note": "A design engineer on call",
-      "features": [
-        "Everything in Growth",
-        "10 hours of design, dev, cloud or automation",
-        "Social media or graphic design support",
-        "Priority replies"
-      ],
-      "popular": false
+      "q": "Can you take over a site someone else built?",
+      "a": "Yes. I'll audit what's there first and tell you honestly whether it's better to fix it or rebuild it. The audit fee comes off the project if you go ahead."
     }
   ],
   "regions": {

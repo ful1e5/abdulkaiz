@@ -36,28 +36,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      /* lets scroll-reveal hide content only when JS can reveal it again */
+      document.documentElement.classList.add('js');
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
       <section class="section page-head">
-        <p class="eyebrow rise">✦ Testimonials</p>
-        <h1 class="rise" style="--d: 0.1s">What clients say</h1>
-        <p class="lead rise" style="--d: 0.2s">
-          Every review shown here is 5 stars.
+        <p class="eyebrow rise">Reviews</p>
+        <h1 class="rise" style="--d: 0.08s">What clients say</h1>
+        <p class="lead rise" style="--d: 0.16s">
+          Unedited feedback from people I've worked with. Every review here is
+          five stars.
         </p>
       </section>
-      <section class="section reveal" style="padding-top: 0">
-        <div class="grid3" id="tgrid"></div>
+      <section class="section reveal">
+        <div class="tgrid" id="tgrid"></div>
         <div class="section-cta">
-          <button class="btn" data-contact>Become My Next Success Story</button>
+          <button class="btn" data-contact>Work with me</button>
         </div>
       </section>
     </main>
