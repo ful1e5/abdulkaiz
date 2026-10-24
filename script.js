@@ -125,12 +125,12 @@
   <nav class="foot-col" aria-label="Services">
     <h2 class="foot-col__h">Services</h2>
     <ul class="foot-list">
-      <li><a href="index.html#service-websites">Website Design &amp; Development</a></li>
-      <li><a href="index.html#service-shopify">Shopify &amp; E-commerce</a></li>
-      <li><a href="index.html#service-automation">Automation Tools</a></li>
-      <li><a href="index.html#service-ui-ux">Product Design</a></li>
-      <li><a href="index.html#service-graphic-design">Graphic Design</a></li>
-      <li><a href="index.html#service-cloud">Cloud &amp; Hosting</a></li>
+      ${(S.services || [])
+        .map(
+          (s) =>
+            `<li><a href="index.html#service-${esc(s.id)}">${esc(s.title)}</a></li>`,
+        )
+        .join('\n      ')}
     </ul>
   </nav>
 
@@ -425,12 +425,23 @@ ${
   // A plan card: what the plan costs, what it covers, and what is in it. The
   // actions live in the contact dialog, so the cards stay a price comparison
   // and nothing here competes with the panel's own way in.
+  // The description, the note and the checklist are each optional — an add-on
+  // carries less than a package — so an absent one is left out rather than
+  // rendered empty and leaving its margin behind.
   const planCard = (p, tab) =>
     `<article class="plan ${p.popular ? 'featured-glow' : ''}"${
       tab
         ? ` role="tabpanel" id="${tab.id}" aria-labelledby="${tab.lab}"${tab.hidden ? ' hidden' : ''}`
         : ''
-    }>${p.popular ? '<span class="pop-badge">Most popular</span>' : ''}<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div><p class="plan-desc">${esc(p.desc || '')}</p><p class="pnote">${esc(p.note || '')}</p><ul>${(p.features || []).map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`).join('')}</ul></article>`;
+    }>${p.popular ? '<span class="pop-badge">Most popular</span>' : ''}<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div>${
+      p.desc ? `<p class="plan-desc">${esc(p.desc)}</p>` : ''
+    }${p.note ? `<p class="pnote">${esc(p.note)}</p>` : ''}${
+      (p.features || []).length
+        ? `<ul>${p.features
+            .map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`)
+            .join('')}</ul>`
+        : ''
+    }</article>`;
   // "What I do" — one scroll-driven section. The rail on the left tracks which
   // service panel is in view; the active service sets the section's accent colour.
   const sv = S.services || [];
@@ -490,17 +501,40 @@ ${
       priceBody = priceOv.querySelector('.svc-price-body');
     // Whether the sheet can lay its plans out in a row. A row is worth having —
     // every plan is on screen and comparable — but only while the cards are
-    // still comfortable: 340px each, plus 64px of dialog padding and 32px of
+    // still comfortable: 380px each, plus 64px of dialog padding and 32px of
     // overlay, and the gaps come out of the same budget. Under that the plans go
     // back behind the switcher and stay one card at a time.
     // script.js owns this rather than a media query, because the markup has to
     // agree with it: hiding a tablist in CSS would still leave tabpanel roles on
     // cards whose tabs nobody can see and a one-card grid taking a third of the
     // dialog. The flag it writes is what the stylesheet keys off.
-    const rowFits = (n) => innerWidth >= n * 340 + 96;
+    const rowFits = (n) => innerWidth >= n * 380 + 96;
+    // Some services carry plans that are not alternatives to each other: a logo,
+    // a brochure and a pitch deck are different jobs at different prices, and so
+    // are Care and its add-ons. Those are grouped, and a group is a heading
+    // rather than a tab — the switcher asks which one you want, which is the
+    // wrong question to put to a menu of print work.
+    const isGrouped = (s) => (s.plans || []).some((p) => p.group);
+    const groupMarkup = (s) => {
+      const plans = s.plans || [],
+        order = [...new Set(plans.map((p) => p.group || ''))];
+      return `<div class="svc-plans">${order
+        .map(
+          (g) =>
+            `<div class="price-group">${
+              g ? `<div class="price-group-head"><h3>${esc(g)}</h3></div>` : ''
+            }<div class="pgrid">${plans
+              .filter((p) => (p.group || '') === g)
+              .map((p) => planCard(p))
+              .join('')}</div></div>`,
+        )
+        .join('')}</div>`;
+    };
     // a service's plans, as a row of cards or as a switcher over them
     const priceMarkup = (s, row, sid) => {
       const plans = s.plans || [];
+      // a grouped service is always its groups, whatever the viewport
+      if (isGrouped(s)) return groupMarkup(s);
       // one plan means there is nothing to switch between, so no control
       const tabs = plans.length > 1 && !row;
       const switcher = tabs
@@ -581,12 +615,14 @@ ${
       const s = sv[i];
       if (!s) return null;
       const plans = s.plans || [],
-        row = rowFits(plans.length);
+        grouped = isGrouped(s),
+        row = !grouped && rowFits(plans.length);
       priceTitle.textContent = s.title;
       priceOv.style.setProperty('--svc-accent', s.accent || '#4F6BFF');
       priceOv.style.setProperty('--plans', plans.length || 1);
       priceBody.innerHTML = priceMarkup(s, row, esc(s.id || i));
       priceModal.toggleAttribute('data-row', row);
+      priceModal.toggleAttribute('data-grouped', grouped);
       const sw = priceBody.querySelector('.plan-switch');
       if (sw) wireSwitcher(sw);
       return sw;
@@ -614,8 +650,14 @@ ${
       'resize',
       () => {
         if (showing === null || !priceOv.classList.contains('open')) return;
-        const plans = (sv[showing] || {}).plans || [];
-        if (rowFits(plans.length) === priceModal.hasAttribute('data-row'))
+        const open = sv[showing] || {},
+          plans = open.plans || [];
+        // a grouped sheet is laid out the same at every width, so a resize has
+        // nothing to re-decide and rebuilding would only drop the focus
+        if (
+          isGrouped(open) ||
+          rowFits(plans.length) === priceModal.hasAttribute('data-row')
+        )
           return;
         const sw = fillSheet(showing);
         (sw
@@ -834,24 +876,76 @@ ${
   const rv = (T.reviews || []).filter(
     (r) => Number(r.rating) === 5 && r.show !== false,
   );
+  // Which platform a review was left on. The mark goes in the card's
+  // bottom-right corner; a review with no known platform simply goes without.
+  const source = (r) => {
+    const k = String(r.source || '')
+      .toLowerCase()
+      .trim();
+    if (k.includes('upwork')) return { file: 'upwork', label: 'Upwork' };
+    if (k.includes('linkedin')) return { file: 'linkedin', label: 'LinkedIn' };
+    if (k.includes('twitter') || k === 'x') return { file: 'x', label: 'X' };
+    return null;
+  };
   // One card renderer feeds both walls of reviews: the home page takes the
   // newest few (data-limit), the reviews page takes all of them.
   const QUOTE_ICON =
     '<svg class="icon-quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 5.2C6.3 6.3 4 9.3 4 12.9v5.9h6.6v-6.6H7.2c0-2 1.1-3.6 3-4.4l-.6-2.6zm10 0c-3.3 1.1-5.6 4.1-5.6 7.7v5.9h6.6v-6.6h-3.4c0-2 1.1-3.6 3-4.4l-.6-2.6z"/></svg>';
-  const rcard = (r, featured) =>
-    `<article class="tcard${featured ? ' featured-glow' : ''} reveal">${
+  const rcard = (r, featured) => {
+    const s = source(r);
+    return `<article class="tcard${featured ? ' featured-glow' : ''} reveal">${
       featured
         ? `<div class="tcard-top">${QUOTE_ICON}<span class="tcard-flag">Featured review</span></div>`
         : ''
-    }<div class="stars" role="img" aria-label="Rated ${Number(r.rating)} out of 5">${STARS}</div><blockquote>${esc(r.quote).replace(/\n\n/g, '<br><br>')}</blockquote><cite>${esc(r.name)}${r.website ? ` <a class="vis" href="${esc(r.website)}" target="_blank" rel="noopener" aria-label="Client website">↗</a>` : ''}<span>${esc(sub(r))}</span></cite></article>`;
-  ['#reviewGrid', '#tgrid'].forEach((sel) => {
-    const box = $(sel);
-    if (!box || !rv.length) return;
+    }<div class="stars" role="img" aria-label="Rated ${Number(r.rating)} out of 5">${STARS}</div><blockquote class="clamp">${esc(r.quote).replace(/\n\n/g, '<br><br>')}</blockquote><button class="tcard-more" type="button" aria-expanded="false">Read more</button><div class="tcard-foot"><cite>${esc(r.name)}${r.website ? ` <a class="vis" href="${esc(r.website)}" target="_blank" rel="noopener" aria-label="Client website">↗</a>` : ''}<span>${esc(sub(r))}</span></cite>${
+      s
+        ? `<span class="tsrc" role="img" title="Posted on ${s.label}" aria-label="Review posted on ${s.label}"><img src="assets/logos/${s.file}.svg" alt=""></span>`
+        : ''
+    }</div></article>`;
+  };
+  // Whether a review is "long" is a question about layout, not about character
+  // count: it turns on the column width and on which font has arrived. So every
+  // card ships clamped, and keeps its clamp only where the text really does
+  // overflow — re-checked when the webfonts land and when the columns reflow.
+  const layout = (box) =>
+    [...box.querySelectorAll('.tcard')].forEach((c) => {
+      const bq = c.querySelector('blockquote'),
+        btn = c.querySelector('.tcard-more');
+      if (!bq || !btn) return;
+      const over = bq.scrollHeight > bq.clientHeight + 1;
+      bq.classList.toggle('clamp', over);
+      btn.hidden = !over;
+      btn.textContent = over ? 'Read more' : 'Show less';
+      btn.setAttribute('aria-expanded', String(!over));
+      btn.onclick = () => {
+        const open = bq.classList.toggle('clamp') === false;
+        btn.textContent = open ? 'Show less' : 'Read more';
+        btn.setAttribute('aria-expanded', String(open));
+      };
+    });
+  const grids = ['#reviewGrid', '#tgrid']
+    .map((s) => $(s))
+    .filter((b) => b && rv.length);
+  grids.forEach((box) => {
     box.innerHTML = rv
       .slice(0, +box.dataset.limit || rv.length)
       .map((r, i) => rcard(r, i === 0))
       .join('');
   });
+  const relayout = () => grids.forEach(layout);
+  relayout();
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(relayout);
+  }
+  let refit;
+  window.addEventListener(
+    'resize',
+    () => {
+      clearTimeout(refit);
+      refit = setTimeout(relayout, 150);
+    },
+    { passive: true },
+  );
   // header scroll state: full-size at top, floating pill on scroll
   const navWrap = document.querySelector('.nav-wrap');
   const onScroll = () => {
@@ -957,4 +1051,108 @@ ${
       },
       { passive: true },
     );
+
+  // The page's own scrollbar, drawn instead of styled — .sb in the stylesheet,
+  // because Chromium runs no transition and no animation on scrollbar parts and
+  // this one has to move. It rides the whole document, so it belongs to every
+  // page; a coarse pointer keeps its platform bar and gets nothing here.
+  if (matchMedia('(pointer: fine)').matches) {
+    const bar = document.createElement('div'),
+      thumb = document.createElement('div');
+    bar.className = reduced ? 'sb reduced' : 'sb';
+    bar.setAttribute('aria-hidden', 'true');
+    thumb.className = 'sb-thumb';
+    bar.append(thumb);
+    document.body.append(bar);
+    // height of the whole bar, how far the page can travel, height of the pill
+    let track = 0,
+      max = 0,
+      h = 48,
+      idle = 0,
+      frame = 0;
+    const measure = () => {
+      const d = document.documentElement;
+      max = d.scrollHeight - innerHeight;
+      // A dialog holds the page still — and it holds it by clipping the body,
+      // which leaves the document just as tall as it was, so scrollHeight alone
+      // would keep offering a bar for a page that cannot move.
+      bar.hidden = max <= 0 || document.body.classList.contains('lock');
+      if (bar.hidden) return;
+      track = bar.clientHeight;
+      paint();
+    };
+    const paint = () => {
+      if (bar.hidden) return;
+      const next = Math.max(
+        48,
+        Math.round((track * innerHeight) / (innerHeight + max)),
+      );
+      // height and offset only go to the DOM when they have actually changed;
+      // this runs on every frame of a scroll
+      if (next !== h) thumb.style.height = (h = next) + 'px';
+      thumb.style.transform = `translateY(${Math.round((scrollY / max) * (track - h))}px)`;
+    };
+    const wake = () => {
+      bar.classList.add('on');
+      clearTimeout(idle);
+      idle = setTimeout(() => bar.classList.remove('on'), 1100);
+    };
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        paint();
+        wake();
+      });
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    // the page grows under the bar: fonts land, images decode, the shell fetches
+    // its content, a dialog locks it
+    new ResizeObserver(measure).observe(document.body);
+    new MutationObserver(measure).observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    addEventListener('resize', measure, { passive: true });
+    if (document.fonts?.ready) document.fonts.ready.then(measure);
+    measure();
+    if (max > 0) wake();
+
+    // Resting on the bar keeps it out — otherwise the idle timer would pull it
+    // from under the pointer that is about to grab it.
+    bar.addEventListener('pointerenter', () => clearTimeout(idle));
+    bar.addEventListener('pointerleave', wake);
+    // Grabbing anywhere on the strip drags the page: the strip is what is easy
+    // to hit, and a drag that starts above or below the pill is what a scrollbar
+    // feels like anyway.
+    bar.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      const from = e.clientY,
+        at = scrollY,
+        travel = track - h || 1;
+      thumb.classList.add('drag');
+      clearTimeout(idle);
+      bar.setPointerCapture(e.pointerId);
+      const move = (ev) => {
+        // The pill's own travel is shorter than the page's, so a pixel of drag
+        // is worth more than a pixel of scroll. Instant, or the stylesheet's
+        // smooth scrolling would chase the pointer instead of following it. The
+        // scroll this causes is what repaints the bar.
+        scrollTo({
+          top: at + ((ev.clientY - from) * max) / travel,
+          behavior: 'instant',
+        });
+      };
+      const up = () => {
+        thumb.classList.remove('drag');
+        bar.removeEventListener('pointermove', move);
+        bar.removeEventListener('pointerup', up);
+        bar.removeEventListener('pointercancel', up);
+        wake();
+      };
+      bar.addEventListener('pointermove', move);
+      bar.addEventListener('pointerup', up);
+      bar.addEventListener('pointercancel', up);
+    });
+  }
 })();

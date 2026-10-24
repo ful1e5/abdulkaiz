@@ -62,7 +62,7 @@ Token system: black/white base + one accent. Full-width sections.
   screen this over the same black, so the two read as one continuous surface
   — with the grain on the footer alone, the footer looked like a lighter
   rectangle pasted below the band, with a hard edge where they met. */
---grain-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.29 0 0 0 0 0.55 0 0 0 0 1 0.34 0.34 0.34 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.29 0 0 0 0 0.55 0 0 0 0 1 0.34 0.34 0.34 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* 2. Base ------------------------------------------------------------------ */
@@ -83,10 +83,10 @@ html {
 
 body {
   font-family:
-  'DM Sans',
-  system-ui,
-  -apple-system,
-  sans-serif;
+    'DM Sans',
+    system-ui,
+    -apple-system,
+    sans-serif;
   font-size: 16px;
   line-height: 1.6;
   background: var(--bg);
@@ -110,6 +110,154 @@ video {
 ::selection {
   background: var(--accent);
   color: var(--on-accent);
+}
+
+/* 2b. Scrollbars ------------------------------------------------------------ */
+/* Inner scrollers — a dialog with more body than screen, a textarea — keep the
+native bar, wearing the site's own colours: a rounded pill, ink at rest, the
+highlight gradient under the pointer. Firefox gets the same idea through the
+standard properties, which Chromium also understands but which make it paint its
+own bar and throw these rules away, so they are kept behind a selector test. */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  /* the transparent border is inset, so the pill floats in the gutter instead of
+  filling it edge to edge */
+  background-color: color-mix(in srgb, var(--ink) 26%, transparent);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: var(--pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ink);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--faint) transparent;
+  }
+}
+
+/* The page's own bar is not that bar. Chromium paints ::-webkit-scrollbar parts
+from a static style — it runs no transition and no animation on them, so a
+themed native bar can never be more than a still image. Since this one should
+answer the scroll it is drawn instead, as .sb: a real element, which can fade,
+grow and carry a moving gradient like anything else on the page. Where the
+pointer is coarse the platform's transient bar is the better one and is left
+alone. */
+@media (pointer: fine) {
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.sb {
+  /* off the very edge, so the pill reads as part of the page rather than as
+  browser furniture */
+  --sb-inset: 4px;
+  position: fixed;
+  z-index: 90;
+  top: var(--sb-inset);
+  right: var(--sb-inset);
+  bottom: var(--sb-inset);
+  width: 14px;
+  opacity: 0;
+  /* only while it is out is it in the way of a click: an invisible strip down
+  the edge of every page would otherwise be eating them */
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+@media (pointer: coarse) {
+  .sb {
+    display: none;
+  }
+}
+
+/* Awake: while the page is moving, and for a beat after it stops so the bar is
+still there to be grabbed at the end of a scroll. The strip takes the pointer
+only for that beat, which is when a drag would start — 14px is a comfortable
+thing to catch, where the 6px pill is a comfortable thing to look at. */
+.sb.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sb-thumb {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  width: 6px;
+  height: 48px;
+  background-color: color-mix(in srgb, var(--ink) 22%, transparent);
+  border-radius: var(--pill);
+  /* it is moved on every frame of a scroll, so it gets a layer of its own —
+  the same reason .px has one */
+  will-change: transform;
+  transition:
+    left 0.3s ease,
+    width 0.3s ease,
+    background-color 0.4s ease;
+}
+
+.sb.on .sb-thumb {
+  left: 2px;
+  width: 10px;
+  /* the accent, which on this site is the one spot of colour: the same
+  orange-to-indigo the buttons and the hero highlight are built from */
+  background-image: linear-gradient(
+    170deg,
+    var(--hl-1),
+    var(--hl-2),
+    var(--hl-1)
+  );
+  background-size: 100% 300%;
+  animation: sb-flow 6s linear infinite;
+}
+
+/* Held or pointed at it goes quiet and solid: the colour is there to tell you
+where you are, and once your hand is on it you already know. */
+.sb.on:hover .sb-thumb,
+.sb.on .sb-thumb.drag {
+  background-image: none;
+  background-color: var(--ink);
+}
+
+/* The gradient's two ends are the same colour, so a run of it lands back where
+it started and the loop has no seam. */
+@keyframes sb-flow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 300%;
+  }
+}
+
+/* Reduced motion is decided in script.js rather than here, because it is the
+same flag the rest of the page's motion hangs off; the bar keeps its colour and
+stays put instead. */
+.sb.reduced.on .sb-thumb {
+  background-image: none;
+  background-color: var(--ink);
+  animation: none;
 }
 
 /* 3. Typography ------------------------------------------------------------ */
@@ -268,37 +416,37 @@ transition on hover — plain gradients snap between stops. */
   --btn-bottom: #060606;
   /* colour of the sheen that sweeps across on hover; the white-on-dark
   variant has no use for one and sets it to transparent */
---btn-sheen: rgba(255, 255, 255, 0.22);
+  --btn-sheen: rgba(255, 255, 255, 0.22);
 
-position: relative;
-/* keeps the sheen's negative z-index inside this button's stacking context */
-isolation: isolate;
-overflow: hidden;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: var(--sp-2);
-padding: 14px 26px;
-font-family: 'Poppins', sans-serif;
-font-size: 0.95rem;
-font-weight: 600;
-line-height: 1;
-border: 1.5px solid transparent;
-border-radius: var(--pill);
-background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
-color: var(--on-accent);
-cursor: pointer;
-box-shadow:
-inset 0 1px 0 rgba(255, 255, 255, 0.14),
-0 1px 2px rgba(10, 10, 10, 0.28),
-0 4px 12px rgba(10, 10, 10, 0.12);
-transition:
---btn-top 0.22s ease,
-transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
-border-color 0.18s ease,
-color 0.18s ease,
-background-color 0.18s ease,
-box-shadow 0.22s ease;
+  position: relative;
+  /* keeps the sheen's negative z-index inside this button's stacking context */
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 14px 26px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  border: 1.5px solid transparent;
+  border-radius: var(--pill);
+  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+  color: var(--on-accent);
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 1px 2px rgba(10, 10, 10, 0.28),
+    0 4px 12px rgba(10, 10, 10, 0.12);
+  transition:
+    --btn-top 0.22s ease,
+    transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.22s ease;
 }
 
 /* the sheen: a soft diagonal band parked past the left edge, swept across on
@@ -310,10 +458,10 @@ hover. z-index -1 paints it over the gradient but under the label. */
   z-index: -1;
   pointer-events: none;
   background: linear-gradient(
-  100deg,
-  transparent 32%,
-  var(--btn-sheen) 50%,
-  transparent 68%
+    100deg,
+    transparent 32%,
+    var(--btn-sheen) 50%,
+    transparent 68%
   );
   transform: translateX(-100%);
   transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -324,9 +472,9 @@ hover. z-index -1 paints it over the gradient but under the label. */
   --btn-top: #3f3f3f;
   transform: translateY(-2px);
   box-shadow:
-  inset 0 1px 0 rgba(255, 255, 255, 0.2),
-  0 2px 5px rgba(10, 10, 10, 0.3),
-  0 12px 26px rgba(10, 10, 10, 0.26);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 5px rgba(10, 10, 10, 0.3),
+    0 12px 26px rgba(10, 10, 10, 0.26);
 }
 
 .btn:hover::before {
@@ -376,8 +524,8 @@ becomes a second primary. */
   background: #fff;
   color: var(--ink);
   box-shadow:
-  inset 0 1px 0 #fff,
-  0 1px 2px rgba(0, 0, 0, 0.3);
+    inset 0 1px 0 #fff,
+    0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn-on-dark:hover,
@@ -420,17 +568,17 @@ outline variant would inherit a fill's shadow and gradient. */
   --btn-sheen: transparent;
   color: var(--ink);
   box-shadow:
-  inset 0 1px 0 #fff,
-  0 1px 2px rgba(0, 0, 0, 0.35),
-  0 6px 18px rgba(0, 0, 0, 0.3);
+    inset 0 1px 0 #fff,
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 .cta .btn:not(.btn-outline):hover {
   --btn-top: #f4f4f4;
   box-shadow:
-  inset 0 1px 0 #fff,
-  0 3px 6px rgba(0, 0, 0, 0.35),
-  0 14px 30px rgba(0, 0, 0, 0.4);
+    inset 0 1px 0 #fff,
+    0 3px 6px rgba(0, 0, 0, 0.35),
+    0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
 .cta .btn:not(.btn-outline):active {
@@ -477,21 +625,21 @@ summary:focus-visible {
 .nav {
   /* side padding is applied only when the nav has a visible surface,
   so a transparent header lines up with the page container */
---nav-px: 0px;
---nav-py: 11px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: var(--sp-4);
-padding: var(--nav-py) var(--nav-px);
-border: 1px solid transparent;
-border-radius: var(--pill);
-background: transparent;
-transition:
-padding 0.3s ease,
-background 0.3s ease,
-border-color 0.3s ease,
-box-shadow 0.3s ease;
+  --nav-px: 0px;
+  --nav-py: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--nav-py) var(--nav-px);
+  border: 1px solid transparent;
+  border-radius: var(--pill);
+  background: transparent;
+  transition:
+    padding 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 /* roomier header on desktop */
@@ -938,18 +1086,18 @@ ratio means cover never crops it. */
   padding: var(--sp-5) 0;
   overflow: hidden;
   mask-image: linear-gradient(
-  90deg,
-  transparent,
-  #000 6%,
-  #000 94%,
-  transparent
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
   );
   -webkit-mask-image: linear-gradient(
-  90deg,
-  transparent,
-  #000 6%,
-  #000 94%,
-  transparent
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
   );
 }
 
@@ -1034,8 +1182,8 @@ ratio means cover never crops it. */
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition:
-  transform 0.25s ease,
-  box-shadow 0.25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .pcard:hover {
@@ -1120,15 +1268,7 @@ ratio means cover never crops it. */
 /* 13. Reviews -------------------------------------------------------------- */
 /* one card, used by both walls of reviews: the short one on the home page and
 the full one on the reviews page */
-.tcard blockquote {
-  font-size: 1.2rem;
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-
 .tcard cite {
-  display: block;
-  margin-top: var(--sp-4);
   font-style: normal;
   font-weight: 600;
 }
@@ -1139,6 +1279,37 @@ the full one on the reviews page */
   color: var(--muted);
   font-size: 0.9rem;
   font-weight: 400;
+}
+
+/* the client's name and the platform the review came from share one baseline.
+the auto margin parks them on the card's bottom edge, which is what puts the
+platform mark in the corner rather than wherever the text happens to end. */
+.tcard-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-top: var(--sp-4);
+}
+
+/* where a review was left: the platform's own mark, kept quiet until you
+look at the card so it reads as provenance rather than decoration */
+.tsrc {
+  flex: none;
+}
+
+.tsrc img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+}
+
+.tcard:hover .tsrc img,
+.tcard:focus-within .tsrc img {
+  opacity: 0.9;
 }
 
 .stars {
@@ -1162,6 +1333,8 @@ instead of fattening, and the points stay round at any size. */
 }
 
 .tcard {
+  display: flex;
+  flex-direction: column;
   padding: var(--sp-5);
   background: var(--card);
   border: 1px solid var(--line);
@@ -1170,6 +1343,38 @@ instead of fattening, and the points stay round at any size. */
 
 .tcard blockquote {
   font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* A long review is clamped to a handful of lines, so one client's four
+paragraphs can't tower over everything beside it. The button opens the rest in
+place; the renderer drops both the clamp and the button on any card whose text
+turned out to fit, so only genuinely long reviews get the control. */
+.tcard blockquote.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+  overflow: hidden;
+}
+
+.tcard-more {
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.tcard-more:hover {
+  color: var(--ink);
 }
 
 /* reviews page: variable-height masonry so cards sit close together */
@@ -1179,23 +1384,45 @@ instead of fattening, and the points stay round at any size. */
 }
 
 .tgrid .tcard {
-  display: block;
   break-inside: avoid;
   margin-bottom: var(--sp-4);
+}
+
+/* The home page shows three reviews as a single row. Multicol balances columns
+by height instead, which packed two cards into one column and left the third
+empty, so that row is a real grid: three even cards, footers level. */
+.tgrid-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.tgrid.tgrid-row .tcard {
+  margin-bottom: 0;
+}
+
+/* The home page row is a teaser, not the reviews page: a shorter clamp keeps
+the three cards within reach of each other's height, so the row stays compact
+instead of one long review setting a 500px floor for its neighbours. Only
+applies above the phone breakpoint, where the row is side by side. */
+@media (min-width: 701px) {
+  .tgrid-row .tcard blockquote.clamp {
+    -webkit-line-clamp: 5;
+  }
 }
 
 @keyframes hlGlow {
   0%,
   100% {
     background-position:
-    0 0,
-    0% 50%;
+      0 0,
+      0% 50%;
     box-shadow: 0 10px 30px rgba(255, 90, 31, 0.16);
   }
   50% {
     background-position:
-    0 0,
-    100% 50%;
+      0 0,
+      100% 50%;
     box-shadow: 0 18px 50px rgba(99, 102, 241, 0.2);
   }
 }
@@ -1228,69 +1455,44 @@ instead of fattening, and the points stay round at any size. */
   .tgrid {
     columns: 2;
   }
+
+  .tgrid-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-/* Phones keep two columns rather than collapsing to one. The cards tighten up
-instead of the layout, so the reviews still read as a wall you can scan. */
+/* Phones get one full-width column. At two, a review is a ribbon three or four
+words wide, which is the hardest thing on the page to read — the wall is worth
+less there than the sentences in it. */
 @media (max-width: 700px) {
   .tgrid {
-    columns: 2;
-    column-gap: var(--sp-3);
+    columns: 1;
+  }
+
+  .tgrid-row {
+    grid-template-columns: 1fr;
   }
 
   .tgrid .tcard {
-    padding: var(--sp-3);
+    padding: var(--sp-4);
     margin-bottom: var(--sp-3);
     border-radius: var(--radius-sm);
   }
 
-  .tgrid .tcard blockquote {
-    font-size: 0.92rem;
-    line-height: 1.5;
+  /* tighten the gap above the name; margin-top stays auto so the foot keeps
+  sitting on the card's bottom edge */
+  .tgrid .tcard-foot {
+    padding-top: var(--sp-3);
   }
 
-  .tgrid .tcard cite {
-    margin-top: var(--sp-3);
-  }
-
-  .tgrid .tcard cite span {
-    font-size: 0.8rem;
-  }
-
-  .tgrid .tcard-top {
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-2);
-  }
-
-  .tgrid .icon-quote {
-    width: 18px;
-    height: 18px;
+  /* fewer lines before the fold, since a phone line holds less */
+  .tgrid .tcard blockquote.clamp {
+    -webkit-line-clamp: 7;
   }
 
   .tgrid .tcard-flag {
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-  }
-
-  .tgrid .stars {
-    gap: 2px;
-    margin-bottom: var(--sp-2);
-  }
-
-  .tgrid .icon-star {
-    width: 14px;
-    height: 14px;
-  }
-}
-
-/* narrow phones: squeeze the gutters rather than the columns */
-@media (max-width: 400px) {
-  .tgrid {
-    column-gap: var(--sp-2);
-  }
-
-  .tgrid .tcard {
-    padding: 12px;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
   }
 }
 
@@ -1305,25 +1507,26 @@ instead of the layout, so the reviews still read as a wall you can scan. */
 }
 
 /* 14. Pricing -------------------------------------------------------------- */
-/* grouped, per-service pricing so every price is scannable */
-
+/* per-service pricing, grouped so every price is scannable. A group is a
+heading over a grid of plan cards, used where one service holds plans that are
+different jobs rather than alternatives to each other. */
 .price-group + .price-group {
-  margin-top: var(--sp-7);
+  margin-top: var(--sp-6);
 }
 
 .price-group-head {
-  margin-bottom: var(--sp-5);
+  margin-bottom: var(--sp-4);
 }
 
+/* the heading is a label, not a second title — the service name is already the
+sheet's own h2, so this reads like the "what's included" label in the panel */
 .price-group-head h3 {
-  font-size: 1.35rem;
-  margin-bottom: var(--sp-2);
-}
-
-.price-group-head p {
-  max-width: var(--measure);
-  color: var(--muted);
-  font-size: 0.96rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
 }
 
 .pgrid {
@@ -1342,8 +1545,8 @@ instead of the layout, so the reviews still read as a wall you can scan. */
   border: 1.5px solid var(--line);
   border-radius: var(--radius);
   transition:
-  border-color 0.2s ease,
-  box-shadow 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .plan:hover {
@@ -1443,11 +1646,11 @@ Placed after .plan so it wins on specificity ties. */
   position: relative;
   border: 2px solid transparent;
   background:
-  linear-gradient(var(--card), var(--card)) padding-box,
-  linear-gradient(120deg, var(--hl-1), var(--hl-2), var(--hl-1)) border-box;
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(120deg, var(--hl-1), var(--hl-2), var(--hl-1)) border-box;
   background-size:
-  100% 100%,
-  220% 220%;
+    100% 100%,
+    220% 220%;
   animation: hlGlow 7s ease-in-out infinite;
 }
 
@@ -1847,16 +2050,16 @@ are capped well below the contrast the text needs. */
   /* a hard ceiling on how much white the mark can add. Measured on the rendered
   footer, its brightest point reaches luminance ~44 on the grained black,
   which still leaves the muted greys above 4.5:1 */
-opacity: 0.1;
+  opacity: 0.1;
 }
 
 .footer .foot-mark > * {
   position: absolute;
   /* upper-middle, so the mass sits behind the social grid and the top of the
   link columns rather than dead centre in the footer */
-top: 34%;
-left: 50%;
-/* The box is deliberately far larger than the mark, and the svg is centred
+  top: 34%;
+  left: 50%;
+  /* The box is deliberately far larger than the mark, and the svg is centred
 inside it at 70%.
 
 A mask clips to its own box, but blur() spills well past the glyphs — so a
@@ -1866,11 +2069,11 @@ the mark, the blur's guillotine. The extra room is what the spill needs.
 
 Every mask stop below is a percentage of THIS box, so the crossover stays
 locked to the glyphs at any width. */
-width: min(100%, 1400px);
-aspect-ratio: 1 / 1;
-display: grid;
-place-items: center;
-transform: translate(-50%, -50%);
+  width: min(100%, 1400px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
 }
 
 .footer .foot-mark svg {
@@ -1895,27 +2098,27 @@ from a glow into an edge with no seam where they cross */
   barely touch them, leaving the letters legible — the one thing a watermark
   must not be. 5vw keeps the blur at roughly a quarter of the mark's height
   from phone to desktop, so it dissolves the same amount at every width. */
-filter: blur(clamp(14px, 5vw, 72px));
-mask-image: linear-gradient(
-to bottom,
-#000 0%,
-#000 38%,
-rgba(0, 0, 0, 0.9) 44%,
-rgba(0, 0, 0, 0.75) 49%,
-rgba(0, 0, 0, 0.6) 54%,
-rgba(0, 0, 0, 0.5) 57%,
-rgba(0, 0, 0, 0.5) 100%
-);
--webkit-mask-image: linear-gradient(
-to bottom,
-#000 0%,
-#000 38%,
-rgba(0, 0, 0, 0.9) 44%,
-rgba(0, 0, 0, 0.75) 49%,
-rgba(0, 0, 0, 0.6) 54%,
-rgba(0, 0, 0, 0.5) 57%,
-rgba(0, 0, 0, 0.5) 100%
-);
+  filter: blur(clamp(14px, 5vw, 72px));
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 38%,
+    rgba(0, 0, 0, 0.9) 44%,
+    rgba(0, 0, 0, 0.75) 49%,
+    rgba(0, 0, 0, 0.6) 54%,
+    rgba(0, 0, 0, 0.5) 57%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 38%,
+    rgba(0, 0, 0, 0.9) 44%,
+    rgba(0, 0, 0, 0.75) 49%,
+    rgba(0, 0, 0, 0.6) 54%,
+    rgba(0, 0, 0, 0.5) 57%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 
 .footer .foot-mark__sharp {
@@ -1924,26 +2127,26 @@ rgba(0, 0, 0, 0.5) 100%
   the sharp copy is what draws the letterforms' edges, and at full strength
   those edges are what turn the mark into hard rectangles. Half strength
   gives the shape a bit of definition without ever drawing a crisp line. */
-mask-image: linear-gradient(
-to bottom,
-transparent 0%,
-transparent 38%,
-rgba(0, 0, 0, 0.1) 44%,
-rgba(0, 0, 0, 0.25) 49%,
-rgba(0, 0, 0, 0.4) 54%,
-rgba(0, 0, 0, 0.5) 57%,
-rgba(0, 0, 0, 0.5) 100%
-);
--webkit-mask-image: linear-gradient(
-to bottom,
-transparent 0%,
-transparent 38%,
-rgba(0, 0, 0, 0.1) 44%,
-rgba(0, 0, 0, 0.25) 49%,
-rgba(0, 0, 0, 0.4) 54%,
-rgba(0, 0, 0, 0.5) 57%,
-rgba(0, 0, 0, 0.5) 100%
-);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.1) 44%,
+    rgba(0, 0, 0, 0.25) 49%,
+    rgba(0, 0, 0, 0.4) 54%,
+    rgba(0, 0, 0, 0.5) 57%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.1) 44%,
+    rgba(0, 0, 0, 0.25) 49%,
+    rgba(0, 0, 0, 0.4) 54%,
+    rgba(0, 0, 0, 0.5) 57%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 
 /* --- blue grain ---
@@ -2032,8 +2235,8 @@ sit on the footer's own content column */
   margin-inline-start: auto;
   color: rgba(255, 255, 255, 0.5);
   transition:
-  transform 0.25s ease,
-  color 0.25s ease;
+    transform 0.25s ease,
+    color 0.25s ease;
 }
 
 .footer .social-row .social-cell:hover {
@@ -2093,13 +2296,13 @@ sit on the footer's own content column */
   color: rgba(255, 255, 255, 0.72);
   /* the underline is always painted, just transparent, so hover fades it in
   without the row reflowing under the pointer */
-text-decoration: underline;
-text-decoration-color: transparent;
-text-decoration-thickness: 1px;
-text-underline-offset: 3px;
-transition:
-color 0.18s ease,
-text-decoration-color 0.18s ease;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 0.18s ease,
+    text-decoration-color 0.18s ease;
 }
 
 .footer .foot-list a:hover,
@@ -2168,10 +2371,10 @@ under the giant watermark behind it */
   padding-top: var(--sp-5);
   /* low-opacity rather than --line-dark: at 1px on black that token reads as a
   full border, and this has to stay under the weight of the copy */
-border-top: 1px solid rgba(255, 255, 255, 0.14);
-/* the old footer carried .4 here, which is 3.8:1 — under AA for small text */
-color: rgba(255, 255, 255, 0.6);
-font-size: 0.88rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  /* the old footer carried .4 here, which is 3.8:1 — under AA for small text */
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.88rem;
 }
 
 @media (max-width: 1024px) {
@@ -2201,15 +2404,15 @@ font-size: 0.88rem;
 
   /* stacked, the button is the last thing in the document — full width gives it
   the easiest target and echoes the CTA band's button */
-.footer .foot-bottom {
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--sp-5);
-}
+  .footer .foot-bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-5);
+  }
 
-.footer .foot-bottom .btn {
-  width: 100%;
-}
+  .footer .foot-bottom .btn {
+    width: 100%;
+  }
 }
 
 @media (max-width: 520px) {
@@ -2253,8 +2456,8 @@ needs dropping here too */
   opacity: 0;
   visibility: hidden;
   transition:
-  opacity 0.3s ease,
-  visibility 0.3s ease;
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .ov.open {
@@ -2506,8 +2709,8 @@ so the page still reads with scripting disabled */
   opacity: 0;
   transform: translateY(20px);
   transition:
-  opacity 0.6s ease,
-  transform 0.6s ease;
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .js .reveal.in {
@@ -2556,12 +2759,12 @@ cross-fades between services instead of snapping to the next hue. */
   position: relative;
   /* the same container as every other section, so this one lines up with the
   page grid instead of running edge to edge */
-width: 100%;
-max-width: var(--wrap);
-margin-inline: auto;
-/* the gap above is already paid for by the section before this one */
-padding: 0 var(--pad) var(--section-y);
---svc-accent: #4f6bff;
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  /* the gap above is already paid for by the section before this one */
+  padding: 0 var(--pad) var(--section-y);
+  --svc-accent: #4f6bff;
 }
 
 /* and this one pays for the gap below, so the rhythm matches the rest */
@@ -2586,14 +2789,14 @@ content still on the 1400px grid. */
   opacity: 0.3;
   transition: --svc-accent 0.7s ease;
   background:
-  radial-gradient(50% 46% at 16% 32%, var(--svc-accent), transparent 68%),
-  radial-gradient(46% 44% at 88% 72%, var(--svc-accent), transparent 72%);
+    radial-gradient(50% 46% at 16% 32%, var(--svc-accent), transparent 68%),
+    radial-gradient(46% 44% at 88% 72%, var(--svc-accent), transparent 72%);
 }
 
 .svc-glow[data-side='right'] {
   background:
-  radial-gradient(50% 46% at 84% 32%, var(--svc-accent), transparent 68%),
-  radial-gradient(46% 44% at 12% 72%, var(--svc-accent), transparent 72%);
+    radial-gradient(50% 46% at 84% 32%, var(--svc-accent), transparent 68%),
+    radial-gradient(46% 44% at 12% 72%, var(--svc-accent), transparent 72%);
 }
 
 .grain {
@@ -2605,7 +2808,6 @@ content still on the 1400px grid. */
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
 
 .svc-sec > *:not(.grain):not(.svc-glow) {
   position: relative;
@@ -2653,11 +2855,11 @@ content still on the 1400px grid. */
   text-align: left;
   cursor: pointer;
   transition:
-  color 0.3s ease,
-  border-color 0.3s ease,
-  filter 0.3s ease,
-  opacity 0.3s ease,
-  transform 0.3s ease;
+    color 0.3s ease,
+    border-color 0.3s ease,
+    filter 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
   filter: blur(0.4px);
   opacity: 0.6;
 }
@@ -2811,12 +3013,39 @@ per plan, they sit in a row and the dialog is sized to that row — script.js
 decides which from the plan count and writes data-row, so the markup and this
 stylesheet can't disagree. */
 .modal.svc-price {
-  width: min(560px, 100%);
+  width: min(620px, 100%);
+  /* Any service past a couple of plans is taller than the viewport, so this
+  dialog scrolls — but it does not draw the bar. Against the white sheet the bar
+  read as a grey stripe down the right edge, a piece of browser chrome sitting
+  inside the card; the plan cut off along the bottom edge says "there is more"
+  just as well. Wheel, trackpad and keyboard all still scroll it. */
+  scrollbar-width: none;
+}
+
+.modal.svc-price::-webkit-scrollbar {
+  display: none;
 }
 
 .modal.svc-price[data-row] {
-  /* 64px is this dialog's own horizontal padding, 340px a comfortable plan */
-  width: min(calc(64px + var(--plans, 1) * 340px), 100%);
+  /* 64px is this dialog's own horizontal padding, 380px a comfortable plan —
+  the same width a grouped sheet caps its own cards at */
+  width: min(calc(64px + var(--plans, 1) * 380px), 100%);
+}
+
+/* A grouped sheet shows its plans a group at a time, so it wants the width of a
+couple of cards rather than the single column the switcher gives. .pgrid's
+auto-fit decides how many columns that turns into; this only sets the ceiling,
+and on a narrow viewport it is simply 100%. */
+.modal.svc-price[data-grouped] {
+  width: min(1120px, 100%);
+}
+
+/* A group holding fewer cards than the grid has columns would stretch its last
+card across the sheet, and a 900px-wide card carrying one price reads as a
+mistake. Capping the card keeps an add-on the same size as the plans it sits
+under; at the widths where groups are full, the cap never comes into play. */
+.svc-price .pgrid > .plan {
+  max-width: 380px;
 }
 
 .modal.svc-price h2 {
@@ -2857,9 +3086,9 @@ the pills stay aligned however long the names are. */
   color: var(--muted);
   cursor: pointer;
   transition:
-  background 0.2s ease,
-  color 0.2s ease,
-  box-shadow 0.2s ease;
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .plan-tab:hover {
@@ -2959,6 +3188,21 @@ sit in the name's own box and just push the text down. */
 }
 
 .svc-price[data-row] .plan:not(:has(.pop-badge))::before {
+  content: '';
+  display: block;
+  height: 24px;
+  margin-bottom: var(--sp-3);
+}
+
+/* Cards in a group sit side by side too, so the same reservation applies there.
+Scoped to .pgrid rather than to data-row, because a grouped sheet is never in
+row mode. */
+.svc-price .pgrid .pop-badge {
+  height: 24px;
+  line-height: 16px;
+}
+
+.svc-price .pgrid .plan:not(:has(.pop-badge))::before {
   content: '';
   display: block;
   height: 24px;
@@ -3096,18 +3340,18 @@ sit in the name's own box and just push the text down. */
   /* Stacked, the art is the first row and the body follows it — so the sticky
   offset that pins the art beside the questions on desktop instead pushes it
    *down* over the heading below. Drop the pin and let it take its own row. */
-.faq-art {
-  position: static;
-  max-height: none;
-  border-radius: var(--radius);
-}
+  .faq-art {
+    position: static;
+    max-height: none;
+    border-radius: var(--radius);
+  }
 
-/* 4:5 is a portrait composition; in a stacked row it cropped to an arbitrary
+  /* 4:5 is a portrait composition; in a stacked row it cropped to an arbitrary
 slice, so the art becomes a banner and shows its whole width instead */
-.faq-art img {
-  aspect-ratio: 16 / 9;
-  height: auto;
-}
+  .faq-art img {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
 }
 
 @media (max-width: 560px) {
@@ -3129,31 +3373,31 @@ slice, so the art becomes a banner and shows its whole width instead */
 
   /* a long specialty like "Full-Cycle Media Specialist" wraps at this width,
   so reserve both lines to keep the hero from jumping between phrases */
-.hero-role {
-  min-height: 2.4em;
-}
+  .hero-role {
+    min-height: 2.4em;
+  }
 
-.track .tile {
-  flex-basis: 240px;
-  height: 160px;
-}
+  .track .tile {
+    flex-basis: 240px;
+    height: 160px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
-    *::before,
-    *::after {
-      animation: none !important;
-      transition: none !important;
-    }
-
-    html {
-      scroll-behavior: auto;
-    }
-
-    .rise,
-    .reveal {
-      opacity: 1;
-      transform: none;
-    }
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
