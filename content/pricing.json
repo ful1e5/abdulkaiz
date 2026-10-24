@@ -2,6 +2,26 @@
   "note": "Fixed prices, agreed in writing before I start. No hourly surprises and no hidden fees. Prices are shown in USD and adjust to your region.",
   "faq": [
     {
+      "q": "Why hire one person instead of an agency?",
+      "a": "With an agency you brief whoever sells the work, and it gets handed to whoever builds it. Here it's the same person from the first call to launch — I do the design, the build and the automation, so nothing is lost between people and one person is accountable for the result. You also skip the account-manager layer, which is a lot of what you'd otherwise be paying for."
+    },
+    {
+      "q": "Who actually does the work? Do you subcontract?",
+      "a": "It's me. No subcontracting and no passing it to a junior team — that's the point of hiring an individual rather than a studio, and it's why every round of feedback reaches the person who wrote the code. If a job needs a specialist I'm not the right fit for, I'll say so before you pay anything rather than quietly staff it."
+    },
+    {
+      "q": "How do I know I can trust someone I found online?",
+      "a": "Check rather than take my word for it. I'm Top Rated on Upwork with 45 five-star reviews, and every review on this site is unedited. My open-source work is public too: Bibata has been downloaded over 1.4 million times and ships as a default cursor theme on Linux distributions whose maintainers I've never met. That's strangers running my work on their own machines."
+    },
+    {
+      "q": "How much contact will I actually get?",
+      "a": "A written progress update every two days, whether or not there's something to show. You approve the wireframe before visual design, and the design before the build, so nothing arrives as a surprise at the end. No mystery and no silence."
+    },
+    {
+      "q": "What do I end up owning?",
+      "a": "The code, the designs and the accounts are yours. Handover is a step in the process rather than a favour at the end: launch, the files, and a short training session so your team can run the site without me. I don't bill you for access to your own work."
+    },
+    {
       "q": "How do I know which plan I need?",
       "a": "Tell me what you're building and I'll point you to the right one — usually on a single short call. You don't have to pick from this page alone."
     },

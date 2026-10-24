@@ -1,8 +1,8 @@
 /* ==========================================================================
-   Abdulkaiz Khatri — portfolio
-   Token system: black/white base + one accent. Full-width sections.
-   8px spacing scale. Poppins (headings/UI) + DM Sans (body).
-   ========================================================================== */
+Abdulkaiz Khatri — portfolio
+Token system: black/white base + one accent. Full-width sections.
+8px spacing scale. Poppins (headings/UI) + DM Sans (body).
+========================================================================== */
 
 /* 1. Tokens ---------------------------------------------------------------- */
 :root {
@@ -57,6 +57,12 @@
   --wrap: 1400px;
   /* measured at runtime; keeps the hero tucked under the header */
   --nav-h: 112px;
+
+  /* The blue grain the closing region shares. Both the CTA band and the footer
+  screen this over the same black, so the two read as one continuous surface
+  — with the grain on the footer alone, the footer looked like a lighter
+  rectangle pasted below the band, with a hard edge where they met. */
+--grain-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.29 0 0 0 0 0.55 0 0 0 0 1 0.34 0.34 0.34 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* 2. Base ------------------------------------------------------------------ */
@@ -77,10 +83,10 @@ html {
 
 body {
   font-family:
-    'DM Sans',
-    system-ui,
-    -apple-system,
-    sans-serif;
+  'DM Sans',
+  system-ui,
+  -apple-system,
+  sans-serif;
   font-size: 16px;
   line-height: 1.6;
   background: var(--bg);
@@ -169,7 +175,7 @@ p {
 }
 
 /* in the document for screen readers and crawlers, out of the visual layout —
-   used for the hero's specialty list, which is otherwise an animated line */
+used for the hero's specialty list, which is otherwise an animated line */
 .vh {
   position: absolute;
   width: 1px;
@@ -248,9 +254,9 @@ p {
 
 /* 5. Buttons --------------------------------------------------------------- */
 /* The primary is a physical key rather than a flat black pill: a vertical
-   gradient, a lit top edge, and a drop shadow that lifts it off the page.
-   Registering the gradient's top stop as a real colour is what lets it
-   transition on hover — plain gradients snap between stops. */
+gradient, a lit top edge, and a drop shadow that lifts it off the page.
+Registering the gradient's top stop as a real colour is what lets it
+transition on hover — plain gradients snap between stops. */
 @property --btn-top {
   syntax: '<color>';
   inherits: false;
@@ -261,42 +267,42 @@ p {
   --btn-top: #2c2c2c;
   --btn-bottom: #060606;
   /* colour of the sheen that sweeps across on hover; the white-on-dark
-     variant has no use for one and sets it to transparent */
-  --btn-sheen: rgba(255, 255, 255, 0.22);
+  variant has no use for one and sets it to transparent */
+--btn-sheen: rgba(255, 255, 255, 0.22);
 
-  position: relative;
-  /* keeps the sheen's negative z-index inside this button's stacking context */
-  isolation: isolate;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--sp-2);
-  padding: 14px 26px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1;
-  border: 1.5px solid transparent;
-  border-radius: var(--pill);
-  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
-  color: var(--on-accent);
-  cursor: pointer;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 1px 2px rgba(10, 10, 10, 0.28),
-    0 4px 12px rgba(10, 10, 10, 0.12);
-  transition:
-    --btn-top 0.22s ease,
-    transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
-    border-color 0.18s ease,
-    color 0.18s ease,
-    background-color 0.18s ease,
-    box-shadow 0.22s ease;
+position: relative;
+/* keeps the sheen's negative z-index inside this button's stacking context */
+isolation: isolate;
+overflow: hidden;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: var(--sp-2);
+padding: 14px 26px;
+font-family: 'Poppins', sans-serif;
+font-size: 0.95rem;
+font-weight: 600;
+line-height: 1;
+border: 1.5px solid transparent;
+border-radius: var(--pill);
+background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+color: var(--on-accent);
+cursor: pointer;
+box-shadow:
+inset 0 1px 0 rgba(255, 255, 255, 0.14),
+0 1px 2px rgba(10, 10, 10, 0.28),
+0 4px 12px rgba(10, 10, 10, 0.12);
+transition:
+--btn-top 0.22s ease,
+transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1),
+border-color 0.18s ease,
+color 0.18s ease,
+background-color 0.18s ease,
+box-shadow 0.22s ease;
 }
 
 /* the sheen: a soft diagonal band parked past the left edge, swept across on
-   hover. z-index -1 paints it over the gradient but under the label. */
+hover. z-index -1 paints it over the gradient but under the label. */
 .btn::before {
   content: '';
   position: absolute;
@@ -304,10 +310,10 @@ p {
   z-index: -1;
   pointer-events: none;
   background: linear-gradient(
-    100deg,
-    transparent 32%,
-    var(--btn-sheen) 50%,
-    transparent 68%
+  100deg,
+  transparent 32%,
+  var(--btn-sheen) 50%,
+  transparent 68%
   );
   transform: translateX(-100%);
   transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -318,9 +324,9 @@ p {
   --btn-top: #3f3f3f;
   transform: translateY(-2px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 2px 5px rgba(10, 10, 10, 0.3),
-    0 12px 26px rgba(10, 10, 10, 0.26);
+  inset 0 1px 0 rgba(255, 255, 255, 0.2),
+  0 2px 5px rgba(10, 10, 10, 0.3),
+  0 12px 26px rgba(10, 10, 10, 0.26);
 }
 
 .btn:hover::before {
@@ -339,11 +345,11 @@ p {
 }
 
 /* Secondary: a hairline outline, not a filled key. The border sits at mid grey
-   rather than the full ink it used to carry — at full strength it read as
-   heavily as the primary — but no lighter, since the edge is what identifies
-   the control and mid grey is the point it still clears 3:1 on white. Only on
-   hover does it reach full ink. The fill stays a light neutral so it never
-   becomes a second primary. */
+rather than the full ink it used to carry — at full strength it read as
+heavily as the primary — but no lighter, since the edge is what identifies
+the control and mid grey is the point it still clears 3:1 on white. Only on
+hover does it reach full ink. The fill stays a light neutral so it never
+becomes a second primary. */
 .btn-ghost {
   --btn-sheen: rgba(10, 10, 10, 0.05);
   background: transparent;
@@ -370,8 +376,8 @@ p {
   background: #fff;
   color: var(--ink);
   box-shadow:
-    inset 0 1px 0 #fff,
-    0 1px 2px rgba(0, 0, 0, 0.3);
+  inset 0 1px 0 #fff,
+  0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btn-on-dark:hover,
@@ -380,7 +386,7 @@ p {
 }
 
 /* the same hairline logic as .btn-ghost, inverted for dark bands — and with
-   the lift and shadow it was previously missing */
+the lift and shadow it was previously missing */
 .btn-outline {
   --btn-sheen: rgba(255, 255, 255, 0.16);
   background: transparent;
@@ -405,26 +411,26 @@ p {
 }
 
 /* Primary buttons on dark bands: the key inverts to white and carries its own
-   highlight, since a white inset edge on white would read as nothing. The
-   :not() is load-bearing — .cta .btn outranks .btn-outline, so without it the
-   outline variant would inherit a fill's shadow and gradient. */
+highlight, since a white inset edge on white would read as nothing. The
+:not() is load-bearing — .cta .btn outranks .btn-outline, so without it the
+outline variant would inherit a fill's shadow and gradient. */
 .cta .btn:not(.btn-outline) {
   --btn-top: #ffffff;
   --btn-bottom: #e6e6e6;
   --btn-sheen: transparent;
   color: var(--ink);
   box-shadow:
-    inset 0 1px 0 #fff,
-    0 1px 2px rgba(0, 0, 0, 0.35),
-    0 6px 18px rgba(0, 0, 0, 0.3);
+  inset 0 1px 0 #fff,
+  0 1px 2px rgba(0, 0, 0, 0.35),
+  0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 .cta .btn:not(.btn-outline):hover {
   --btn-top: #f4f4f4;
   box-shadow:
-    inset 0 1px 0 #fff,
-    0 3px 6px rgba(0, 0, 0, 0.35),
-    0 14px 30px rgba(0, 0, 0, 0.4);
+  inset 0 1px 0 #fff,
+  0 3px 6px rgba(0, 0, 0, 0.35),
+  0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
 .cta .btn:not(.btn-outline):active {
@@ -438,7 +444,7 @@ p {
 }
 
 /* The outline variants have no fill to press into, so they take the travel
-   without the inset shadow — that would read as a smudge on a transparent key. */
+without the inset shadow — that would read as a smudge on a transparent key. */
 .btn-ghost:active,
 .btn-outline:active,
 .btn-soft:active {
@@ -470,22 +476,22 @@ summary:focus-visible {
 
 .nav {
   /* side padding is applied only when the nav has a visible surface,
-     so a transparent header lines up with the page container */
-  --nav-px: 0px;
-  --nav-py: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-4);
-  padding: var(--nav-py) var(--nav-px);
-  border: 1px solid transparent;
-  border-radius: var(--pill);
-  background: transparent;
-  transition:
-    padding 0.3s ease,
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  so a transparent header lines up with the page container */
+--nav-px: 0px;
+--nav-py: 11px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--sp-4);
+padding: var(--nav-py) var(--nav-px);
+border: 1px solid transparent;
+border-radius: var(--pill);
+background: transparent;
+transition:
+padding 0.3s ease,
+background 0.3s ease,
+border-color 0.3s ease,
+box-shadow 0.3s ease;
 }
 
 /* roomier header on desktop */
@@ -726,8 +732,8 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* Two columns, and the figure is deliberately the larger one — it bleeds into
-   the page gutter so the portrait reads as the biggest thing on the page
-   rather than an illustration beside the copy. */
+the page gutter so the portrait reads as the biggest thing on the page
+rather than an illustration beside the copy. */
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
@@ -746,15 +752,15 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* Taller than the square source, so cover trims the studio backdrop instead
-   of the figure, and the portrait fills the column. */
+of the figure, and the portrait fills the column. */
 .hero-figure .portrait {
   aspect-ratio: 4 / 5;
 }
 
 /* The specialty line completes the headline — "I'm Abdulkaiz ✱ Automation
-   Expert" — in the site's own face. Each phrase arrives on the same
-   slide-up-and-unblur the tool tiles use; that animation lives in script.js,
-   so this rule only has to set the stage for it. */
+Expert" — in the site's own face. Each phrase arrives on the same
+slide-up-and-unblur the tool tiles use; that animation lives in script.js,
+so this rule only has to set the stage for it. */
 .hero-role {
   display: flex;
   align-items: center;
@@ -799,7 +805,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* the rule sits under the numbers, so it lands on the same line the figure
-   stands on — one baseline across both columns */
+stands on — one baseline across both columns */
 .hero-proof {
   display: flex;
   flex-wrap: wrap;
@@ -823,11 +829,11 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* The uploaded portrait is a 1000x1000 frame on a light grey studio backdrop.
-   It carries an alpha channel but every pixel of it is opaque, so the cut-out
-   treatment it was originally styled for doesn't apply — on white it would
-   read as a hard grey rectangle. It gets a framed, rounded card instead, in
-   the same language as .faq-art. The source is already square, so the 1:1
-   ratio means cover never crops it. */
+It carries an alpha channel but every pixel of it is opaque, so the cut-out
+treatment it was originally styled for doesn't apply — on white it would
+read as a hard grey rectangle. It gets a framed, rounded card instead, in
+the same language as .faq-art. The source is already square, so the 1:1
+ratio means cover never crops it. */
 .portrait {
   position: relative;
   width: 100%;
@@ -932,18 +938,18 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   padding: var(--sp-5) 0;
   overflow: hidden;
   mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 6%,
-    #000 94%,
-    transparent
+  90deg,
+  transparent,
+  #000 6%,
+  #000 94%,
+  transparent
   );
   -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 6%,
-    #000 94%,
-    transparent
+  90deg,
+  transparent,
+  #000 6%,
+  #000 94%,
+  transparent
   );
 }
 
@@ -1028,8 +1034,8 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transform 0.25s ease,
+  box-shadow 0.25s ease;
 }
 
 .pcard:hover {
@@ -1113,7 +1119,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 
 /* 13. Reviews -------------------------------------------------------------- */
 /* one card, used by both walls of reviews: the short one on the home page and
-   the full one on the reviews page */
+the full one on the reviews page */
 .tcard blockquote {
   font-size: 1.2rem;
   line-height: 1.55;
@@ -1143,8 +1149,8 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* rounded star: the fill carries the shape and the stroke rounds every point
-   off. paint-order draws that stroke underneath, so the star grows evenly
-   instead of fattening, and the points stay round at any size. */
+off. paint-order draws that stroke underneath, so the star grows evenly
+instead of fattening, and the points stay round at any size. */
 .icon-star {
   width: 16px;
   height: 16px;
@@ -1182,14 +1188,14 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   0%,
   100% {
     background-position:
-      0 0,
-      0% 50%;
+    0 0,
+    0% 50%;
     box-shadow: 0 10px 30px rgba(255, 90, 31, 0.16);
   }
   50% {
     background-position:
-      0 0,
-      100% 50%;
+    0 0,
+    100% 50%;
     box-shadow: 0 18px 50px rgba(99, 102, 241, 0.2);
   }
 }
@@ -1225,7 +1231,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* Phones keep two columns rather than collapsing to one. The cards tighten up
-   instead of the layout, so the reviews still read as a wall you can scan. */
+instead of the layout, so the reviews still read as a wall you can scan. */
 @media (max-width: 700px) {
   .tgrid {
     columns: 2;
@@ -1336,8 +1342,8 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   border: 1.5px solid var(--line);
   border-radius: var(--radius);
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  border-color 0.2s ease,
+  box-shadow 0.2s ease;
 }
 
 .plan:hover {
@@ -1402,28 +1408,6 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   font-size: 0.9rem;
 }
 
-.plan .btn {
-  width: 100%;
-  margin-top: var(--sp-4);
-}
-
-.plan .more {
-  display: block;
-  width: 100%;
-  padding: var(--sp-2) 0;
-  background: none;
-  border: 0;
-  font: inherit;
-  font-size: 0.9rem;
-  color: var(--muted);
-  text-align: center;
-  cursor: pointer;
-}
-
-.plan .more:hover {
-  color: var(--ink);
-}
-
 .plan ul {
   list-style: none;
   margin: var(--sp-4) 0 0;
@@ -1454,16 +1438,16 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* shared highlight treatment — animated gradient edge + glow.
-   Placed after .plan so it wins on specificity ties. */
+Placed after .plan so it wins on specificity ties. */
 .featured-glow {
   position: relative;
   border: 2px solid transparent;
   background:
-    linear-gradient(var(--card), var(--card)) padding-box,
-    linear-gradient(120deg, var(--hl-1), var(--hl-2), var(--hl-1)) border-box;
+  linear-gradient(var(--card), var(--card)) padding-box,
+  linear-gradient(120deg, var(--hl-1), var(--hl-2), var(--hl-1)) border-box;
   background-size:
-    100% 100%,
-    220% 220%;
+  100% 100%,
+  220% 220%;
   animation: hlGlow 7s ease-in-out infinite;
 }
 
@@ -1503,7 +1487,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* "what I don't take on" — a boundary stated on the page's own terms: a
-   ruled two-column block, not a warning box */
+ruled two-column block, not a warning box */
 .eth {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -1603,15 +1587,45 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* 15. CTA band ------------------------------------------------------------- */
-.cta {
-  padding: clamp(32px, 4vw, 56px) var(--pad);
-  text-align: center;
+/* Full-bleed and black, butted straight against the footer, so the band and the
+footer read as one surface — the band is the top of the footer rather than a
+card floating in the page. .cta itself only owns the measure and the
+centring; the spacing belongs to the band. */
+.cta-band {
+  position: relative; /* containing block for the grain below */
+  isolation: isolate;
+  width: 100%;
+  padding: var(--section-y) var(--pad) var(--sp-8);
   background: var(--ink);
   color: #fff;
-  border-radius: var(--radius-lg);
+  text-align: center;
 }
 
+.cta-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  background-image: var(--grain-blue);
+}
+
+.cta-band > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cta {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+/* the band is the page's closing statement, so it carries the largest h2 on the
+site; the section headings keep their own scale */
 .cta h2 {
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
   margin-bottom: var(--sp-3);
 }
 
@@ -1621,8 +1635,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   margin-inline: auto;
 }
 
-.cta .cta-row,
-.cta .section-cta {
+.cta .cta-row {
   justify-content: center;
   margin-top: var(--sp-5);
 }
@@ -1636,7 +1649,7 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* the About portrait is a cut-out, so it uses .portrait rather than a framed
-   box — see the hero section above */
+box — see the hero section above */
 
 #bio p,
 #story p,
@@ -1805,77 +1818,425 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 }
 
 /* 18. Footer --------------------------------------------------------------- */
+/* One black surface: a hairline social grid, four link columns, the brand mark
+blooming behind all of it, and a blue grain over the top. The mark and the
+grain are the only decoration on the site that sits under body copy, so both
+are capped well below the contrast the text needs. */
 .footer {
-  padding: var(--sp-7) var(--pad) var(--sp-5);
+  position: relative; /* containing block for the mark and the grain */
+  isolation: isolate; /* …and the stacking context that keeps them underneath */
+  padding: 0 var(--pad) var(--sp-5);
   background: var(--ink);
   color: #fff;
 }
 
-.foot-grid {
-  max-width: var(--wrap);
-  margin-inline: auto;
+/* the mark and the grain are decoration; every other child is content */
+.footer > *:not(.foot-mark):not(.grain) {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- the mark, blown up behind everything --- */
+.footer .foot-mark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden; /* clips the oversized mark at the footer, not the page */
+  pointer-events: none;
+  color: var(--on-accent);
+  /* a hard ceiling on how much white the mark can add. Measured on the rendered
+  footer, its brightest point reaches luminance ~44 on the grained black,
+  which still leaves the muted greys above 4.5:1 */
+opacity: 0.1;
+}
+
+.footer .foot-mark > * {
+  position: absolute;
+  /* upper-middle, so the mass sits behind the social grid and the top of the
+  link columns rather than dead centre in the footer */
+top: 34%;
+left: 50%;
+/* The box is deliberately far larger than the mark, and the svg is centred
+inside it at 70%.
+
+A mask clips to its own box, but blur() spills well past the glyphs — so a
+box sized to the mark cuts the blur off at the edge and leaves a hard-edged
+rectangle exactly the size of the mark. That is the "weird rectangle": not
+the mark, the blur's guillotine. The extra room is what the spill needs.
+
+Every mask stop below is a percentage of THIS box, so the crossover stays
+locked to the glyphs at any width. */
+width: min(100%, 1400px);
+aspect-ratio: 1 / 1;
+display: grid;
+place-items: center;
+transform: translate(-50%, -50%);
+}
+
+.footer .foot-mark svg {
+  width: 70%; /* the mark's own size, independent of the room around it */
+  height: auto;
+  aspect-ratio: 254 / 83;
+}
+
+.footer .foot-mark__blur,
+.footer .foot-mark__sharp {
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+}
+
+/* the two copies cross-fade: every stop pair sums to 1, so the shape resolves
+from a glow into an edge with no seam where they cross */
+.footer .foot-mark__blur {
+  /* The radius has to track the mark, not sit at a fixed 20px: the mark is
+  ~1000px wide here, so its strokes are ~110px thick and a fixed radius would
+  barely touch them, leaving the letters legible — the one thing a watermark
+  must not be. 5vw keeps the blur at roughly a quarter of the mark's height
+  from phone to desktop, so it dissolves the same amount at every width. */
+filter: blur(clamp(14px, 5vw, 72px));
+mask-image: linear-gradient(
+to bottom,
+#000 0%,
+#000 38%,
+rgba(0, 0, 0, 0.9) 44%,
+rgba(0, 0, 0, 0.75) 49%,
+rgba(0, 0, 0, 0.6) 54%,
+rgba(0, 0, 0, 0.5) 57%,
+rgba(0, 0, 0, 0.5) 100%
+);
+-webkit-mask-image: linear-gradient(
+to bottom,
+#000 0%,
+#000 38%,
+rgba(0, 0, 0, 0.9) 44%,
+rgba(0, 0, 0, 0.75) 49%,
+rgba(0, 0, 0, 0.6) 54%,
+rgba(0, 0, 0, 0.5) 57%,
+rgba(0, 0, 0, 0.5) 100%
+);
+}
+
+.footer .foot-mark__sharp {
+  /* The complement of the blur mask — every pair sums to 1, so the crossover is
+  seamless. It deliberately stops at 0.5 rather than reaching full opacity:
+  the sharp copy is what draws the letterforms' edges, and at full strength
+  those edges are what turn the mark into hard rectangles. Half strength
+  gives the shape a bit of definition without ever drawing a crisp line. */
+mask-image: linear-gradient(
+to bottom,
+transparent 0%,
+transparent 38%,
+rgba(0, 0, 0, 0.1) 44%,
+rgba(0, 0, 0, 0.25) 49%,
+rgba(0, 0, 0, 0.4) 54%,
+rgba(0, 0, 0, 0.5) 57%,
+rgba(0, 0, 0, 0.5) 100%
+);
+-webkit-mask-image: linear-gradient(
+to bottom,
+transparent 0%,
+transparent 38%,
+rgba(0, 0, 0, 0.1) 44%,
+rgba(0, 0, 0, 0.25) 49%,
+rgba(0, 0, 0, 0.4) 54%,
+rgba(0, 0, 0, 0.5) 57%,
+rgba(0, 0, 0, 0.5) 100%
+);
+}
+
+/* --- blue grain ---
+.grain multiplies, which has nothing to darken on a black surface, so here it
+screens instead and the turbulence is tinted blue: the black picks up a cold
+speckle rather than staying flat. Static, unlike the page-wide grain — a
+moving texture on the footer pulls the eye to empty space, and the band above
+has the same speckle with nothing to animate it. */
+.footer .grain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  background-image: var(--grain-blue);
+}
+
+/* --- social grid ---
+Four full-bleed cells sharing hairline rules: the row owns top and bottom,
+each cell owns one junction. Drawn as a single grid rather than four bordered
+cards, so the seams stay perfectly continuous. */
+.footer .social-row {
+  --social-gutter: var(--pad); /* the footer's own gutter, cancelled */
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--sp-6);
+  grid-template-columns: repeat(4, 1fr);
+  margin-inline: calc(var(--social-gutter) * -1);
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+/* the whole cell is the hit area, not just the label */
+.footer .social-row .social-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 96px;
+  padding-inline: var(--sp-5);
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
+}
+
+/* only inner junctions get a rule; the row already supplies top and bottom */
+.footer .social-row .social-cell:not(:last-child) {
+  border-right: 1px solid var(--line-dark);
+}
+
+/* the outer cells borrow the gutter back, so the first mark and the last arrow
+sit on the footer's own content column */
+.footer .social-row .social-cell:first-child {
+  padding-inline-start: var(--social-gutter);
+}
+
+.footer .social-row .social-cell:last-child {
+  padding-inline-end: var(--social-gutter);
+}
+
+/* faint ring and fill, so the four marks read as one set over the black */
+.footer .social-badge {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--pill);
+  background: rgba(255, 255, 255, 0.06);
+  transition: background-color 0.25s ease;
+}
+
+.footer .social-badge svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.footer .social-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+/* pushed to the far edge; the arrow drifts on hover, the only motion in the row */
+.footer .social-go {
+  margin-inline-start: auto;
+  color: rgba(255, 255, 255, 0.5);
+  transition:
+  transform 0.25s ease,
+  color 0.25s ease;
+}
+
+.footer .social-row .social-cell:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.footer .social-row .social-cell:hover .social-badge {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.footer .social-row .social-cell:hover .social-go {
+  transform: translateX(4px);
+  color: #fff;
+}
+
+.footer .social-row .social-cell:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: -2px;
+}
+
+/* --- link columns, sign-off, legal --- */
+.footer .foot-cols {
+  max-width: var(--wrap);
+  margin: var(--sp-6) auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-6) var(--sp-5);
   padding-bottom: var(--sp-6);
   border-bottom: 1px solid var(--line-dark);
 }
 
-.footer p {
-  margin-top: var(--sp-2);
-  color: rgba(255, 255, 255, 0.55);
+.footer .foot-col {
+  min-width: 0; /* long service names wrap instead of widening the track */
 }
 
-.footer b {
+.footer .foot-col__h {
   font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* a step quieter than its links, and still 6.9:1 on the grained black */
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: var(--sp-3);
+}
+
+.footer .foot-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+}
+
+.footer .foot-list a {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+  /* the underline is always painted, just transparent, so hover fades it in
+  without the row reflowing under the pointer */
+text-decoration: underline;
+text-decoration-color: transparent;
+text-decoration-thickness: 1px;
+text-underline-offset: 3px;
+transition:
+color 0.18s ease,
+text-decoration-color 0.18s ease;
+}
+
+.footer .foot-list a:hover,
+.footer .foot-list a:focus-visible {
+  color: #fff;
+  text-decoration-color: currentColor;
+}
+
+/* the global focus ring is --accent — near black — and vanishes on this surface */
+.footer .foot-list a:focus-visible {
+  outline: 2px solid var(--on-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* plain text inside a link list (the location) */
+.footer .foot-note {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer .foot-bottom {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  padding-top: var(--sp-6);
+}
+
+.footer .foot-sign {
+  min-width: 0;
+}
+
+.footer .foot-sign__mark {
+  display: inline-flex;
+  color: var(--on-accent);
+}
+
+/* the header's .logo-mark is 19px; this is the mark at footer scale, and well
+under the giant watermark behind it */
+.footer .foot-sign__mark .logo-mark {
+  height: clamp(30px, 3.4vw, 42px);
+  width: auto;
+  opacity: 0.95;
+}
+
+.footer .foot-tag {
+  margin-top: var(--sp-3);
+  max-width: 40ch;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* the same key as the header's CTA, with the room a footer row has */
+.footer .foot-bottom .btn {
+  flex: none;
+  padding: 15px 30px;
   font-size: 1rem;
 }
 
-.footer a:not(.soc) {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.footer a:not(.soc):hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-  margin-top: var(--sp-4);
-}
-
-.soc {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border: 1px solid var(--line-dark);
-  border-radius: var(--pill);
-  font-size: 0.88rem;
-  color: #fff;
-  transition: 0.2s ease;
-}
-
-.soc:hover {
-  border-color: #fff;
-  background: #fff;
-  color: var(--ink);
-}
-
-.soc svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-.copy {
+.footer .foot-legal {
   max-width: var(--wrap);
-  margin: var(--sp-5) auto 0;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.88rem;
+  margin: var(--sp-6) auto 0;
+  padding-top: var(--sp-5);
+  /* low-opacity rather than --line-dark: at 1px on black that token reads as a
+  full border, and this has to stay under the weight of the copy */
+border-top: 1px solid rgba(255, 255, 255, 0.14);
+/* the old footer carried .4 here, which is 3.8:1 — under AA for small text */
+color: rgba(255, 255, 255, 0.6);
+font-size: 0.88rem;
+}
+
+@media (max-width: 1024px) {
+  .footer .social-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* once the cells wrap, the seam leaves the outer edge and moves between rows */
+  .footer .social-row .social-cell:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .footer .social-row .social-cell:nth-child(n + 3) {
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .footer .foot-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .footer .foot-cols {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+
+  /* stacked, the button is the last thing in the document — full width gives it
+  the easiest target and echoes the CTA band's button */
+.footer .foot-bottom {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sp-5);
+}
+
+.footer .foot-bottom .btn {
+  width: 100%;
+}
+}
+
+@media (max-width: 520px) {
+  .footer .social-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* one cell per row: every seam is horizontal now */
+  .footer .social-row .social-cell:not(:last-child) {
+    border-right: 0;
+  }
+
+  .footer .social-row .social-cell:nth-child(n + 2) {
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .footer .social-row .social-cell {
+    min-height: 76px;
+  }
+}
+
+/* the global guard kills transitions but not transforms, so the arrow's drift
+needs dropping here too */
+@media (prefers-reduced-motion: reduce) {
+  .footer .social-row .social-cell:hover .social-go {
+    transform: none;
+  }
 }
 
 /* 19. Overlays ------------------------------------------------------------- */
@@ -1892,8 +2253,8 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+  opacity 0.3s ease,
+  visibility 0.3s ease;
 }
 
 .ov.open {
@@ -1949,7 +2310,9 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
 
 .opts {
   display: grid;
-  gap: var(--sp-2);
+  /* a button leads the dialog and a row follows it, so the gap is a separation
+  rather than the tight list rhythm it was between two rows */
+  gap: var(--sp-3);
 }
 
 .opt {
@@ -1979,12 +2342,60 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   font-style: normal;
 }
 
+/* the two marks that replaced the ✉ and ◷ text glyphs, drawn on the same grid
+as the section icons and inked by whatever they sit in */
+.opt-icon,
+.btn-icon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.opt-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
 .opt b {
   display: block;
 }
 
 .opt small {
   color: var(--muted);
+}
+
+/* The LinkedIn card leads the dialog with the profile's own code. It is the size
+it is because the code has 37 modules across — below about 110px they stop being
+separate squares to a phone camera, and the card is only worth having as a code
+if it actually scans. */
+.opt-qr {
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.opt-qr img {
+  flex: none;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+/* the two ways to work together, sharing the row until they can't */
+.pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.pair .btn {
+  flex: 1 1 auto;
 }
 
 .or {
@@ -1994,50 +2405,86 @@ body.has-hero-dark .nav-wrap:not(.scrolled) .burger span {
   font-size: 0.82rem;
 }
 
-.mform {
-  display: grid;
-  gap: var(--sp-2);
+/* "or send me a quick message" is the control that opens the WhatsApp block, so
+it reads as a link but is a button — and carries a caret, which is what says
+"this opens something" rather than "this takes you somewhere" */
+.quick {
+  margin-top: var(--sp-4);
+  text-align: center;
 }
 
-.mform input,
-.mform textarea {
+.quick-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0;
+  background: none;
+  border: 0;
   font: inherit;
-  padding: 13px 16px;
-  background: var(--bg-alt);
+  font-size: 0.82rem;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.quick-toggle:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.quick-caret {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+
+.quick-toggle[aria-expanded='true'] .quick-caret {
+  transform: rotate(180deg);
+}
+
+/* the quick-message QR, where the contact form used to be. A QR wants clear
+space around it, so the card is padding and a hairline and nothing else. */
+.qr {
+  text-align: center;
+}
+
+/* folded away until asked for, then it arrives the way the dialog's own
+controls did */
+.qr:not([hidden]) {
+  animation: pop 0.3s both;
+}
+
+.qr-card {
+  display: inline-block;
+  padding: var(--sp-2);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
+  transition: 0.2s ease;
 }
 
-.mform .btn {
-  width: 100%;
-  margin-top: var(--sp-2);
+.qr-card:hover {
+  border-color: var(--accent);
+}
+
+.qr-card img {
+  display: block;
+  width: 164px;
+  height: 164px;
+}
+
+.qr-note {
+  margin-top: var(--sp-3);
+  color: var(--faint);
+  font-size: 0.82rem;
 }
 
 body.lock {
   overflow: hidden;
-}
-
-.hp {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
-}
-
-.fst {
-  min-height: 1.2em;
-  font-size: 0.9rem;
-}
-
-.fst.err {
-  color: var(--err);
-}
-
-.fst.ok {
-  color: var(--ok);
-}
-
-.fst a {
-  text-decoration: underline;
 }
 
 /* 20. Motion --------------------------------------------------------------- */
@@ -2054,13 +2501,13 @@ body.lock {
 }
 
 /* scroll reveal — only hides content when JS is available to reveal it,
-   so the page still reads with scripting disabled */
+so the page still reads with scripting disabled */
 .js .reveal {
   opacity: 0;
   transform: translateY(20px);
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  opacity 0.6s ease,
+  transform 0.6s ease;
 }
 
 .js .reveal.in {
@@ -2068,8 +2515,9 @@ body.lock {
   transform: none;
 }
 
-.ov.open .opt,
-.ov.open .mform {
+/* the dialog's controls arrive in sequence, each row on one beat */
+.ov.open .opts > *,
+.ov.open .quick {
   animation: pop 0.4s both;
   animation-delay: calc(var(--i, 0) * 0.06s + 0.1s);
 }
@@ -2097,7 +2545,7 @@ body.lock {
 /* 22. "What I do" — scroll-driven services + prices ------------------------- */
 
 /* Registering the accent as a real colour lets it interpolate, so the wash
-   cross-fades between services instead of snapping to the next hue. */
+cross-fades between services instead of snapping to the next hue. */
 @property --svc-accent {
   syntax: '<color>';
   inherits: true;
@@ -2107,13 +2555,13 @@ body.lock {
 .svc-sec {
   position: relative;
   /* the same container as every other section, so this one lines up with the
-     page grid instead of running edge to edge */
-  width: 100%;
-  max-width: var(--wrap);
-  margin-inline: auto;
-  /* the gap above is already paid for by the section before this one */
-  padding: 0 var(--pad) var(--section-y);
-  --svc-accent: #4f6bff;
+  page grid instead of running edge to edge */
+width: 100%;
+max-width: var(--wrap);
+margin-inline: auto;
+/* the gap above is already paid for by the section before this one */
+padding: 0 var(--pad) var(--section-y);
+--svc-accent: #4f6bff;
 }
 
 /* and this one pays for the gap below, so the rhythm matches the rest */
@@ -2122,9 +2570,9 @@ body.lock {
 }
 
 /* The wash is pinned to the viewport rather than stretched over the whole
-   section, so its gradient is always screen-sized and actually reads. It also
-   bleeds past the container to the full page width — colour across the page,
-   content still on the 1400px grid. */
+section, so its gradient is always screen-sized and actually reads. It also
+bleeds past the container to the full page width — colour across the page,
+content still on the 1400px grid. */
 .svc-glow {
   position: sticky;
   top: 0;
@@ -2138,14 +2586,14 @@ body.lock {
   opacity: 0.3;
   transition: --svc-accent 0.7s ease;
   background:
-    radial-gradient(50% 46% at 16% 32%, var(--svc-accent), transparent 68%),
-    radial-gradient(46% 44% at 88% 72%, var(--svc-accent), transparent 72%);
+  radial-gradient(50% 46% at 16% 32%, var(--svc-accent), transparent 68%),
+  radial-gradient(46% 44% at 88% 72%, var(--svc-accent), transparent 72%);
 }
 
 .svc-glow[data-side='right'] {
   background:
-    radial-gradient(50% 46% at 84% 32%, var(--svc-accent), transparent 68%),
-    radial-gradient(46% 44% at 12% 72%, var(--svc-accent), transparent 72%);
+  radial-gradient(50% 46% at 84% 32%, var(--svc-accent), transparent 68%),
+  radial-gradient(46% 44% at 12% 72%, var(--svc-accent), transparent 72%);
 }
 
 .grain {
@@ -2156,23 +2604,8 @@ body.lock {
   opacity: 0.04;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grainShift 1.2s steps(3) infinite;
 }
 
-@keyframes grainShift {
-  0% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(-4%, 3%);
-  }
-  66% {
-    transform: translate(3%, -4%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
 
 .svc-sec > *:not(.grain):not(.svc-glow) {
   position: relative;
@@ -2220,11 +2653,11 @@ body.lock {
   text-align: left;
   cursor: pointer;
   transition:
-    color 0.3s ease,
-    border-color 0.3s ease,
-    filter 0.3s ease,
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  color 0.3s ease,
+  border-color 0.3s ease,
+  filter 0.3s ease,
+  opacity 0.3s ease,
+  transform 0.3s ease;
   filter: blur(0.4px);
   opacity: 0.6;
 }
@@ -2253,28 +2686,17 @@ body.lock {
   font-weight: 500;
 }
 
-.rail-item b {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--faint);
-  white-space: nowrap;
-}
-
-.rail-item.on b {
-  color: var(--svc-accent);
-}
-
 /* right panels */
 .svc-panels {
   display: grid;
 }
 
-/* details left, one compact pricing card right */
+/* body left, checklist right. The right column is given a little more than its
+content needs: the checklist reads a word or two per line otherwise. */
 .svc-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(20px, 3.5vw, 48px);
   align-items: start;
   padding: var(--sp-6) 0;
   border-top: 1px solid var(--line);
@@ -2325,7 +2747,9 @@ body.lock {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  color: var(--svc-accent);
+  /* the panel's own colour, not the section's — --svc-accent follows whichever
+  service is active, which would tint every panel with the same accent */
+  color: var(--panel-accent);
 }
 
 .svc-lead {
@@ -2344,37 +2768,71 @@ body.lock {
   margin-bottom: var(--sp-3);
 }
 
+/* right column: what's included, outlined like a plan card and pinned while the
+body scrolls past it. The padding is fluid because this column is the first to
+get tight — at 1024 the fixed padding left the items a word or two per line. */
 .svc-list {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--sp-4));
+  padding: clamp(20px, 2.4vw, 32px);
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.svc-list .svc-sub {
+  margin-bottom: var(--sp-4);
+}
+
+.svc-list ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--sp-5);
+  margin: 0;
   display: grid;
-  gap: var(--sp-2);
+  gap: var(--sp-3);
 }
 
 .svc-list li {
   display: flex;
   align-items: flex-start;
-  gap: var(--sp-3);
+  gap: var(--sp-2);
   font-size: 0.95rem;
 }
 
 .svc-list .icon-check {
+  stroke: var(--panel-accent);
+}
+
+/* The pricing sheet: a panel's plans open here instead of holding a column of
+their own. The card inside is the site's own plan card, uncompacted — a dialog
+has the width the old sidebar column never did.
+Narrow, one card at a time behind the plan switcher. Wide enough for one card
+per plan, they sit in a row and the dialog is sized to that row — script.js
+decides which from the plan count and writes data-row, so the markup and this
+stylesheet can't disagree. */
+.modal.svc-price {
+  width: min(560px, 100%);
+}
+
+.modal.svc-price[data-row] {
+  /* 64px is this dialog's own horizontal padding, 340px a comfortable plan */
+  width: min(calc(64px + var(--plans, 1) * 340px), 100%);
+}
+
+.modal.svc-price h2 {
+  /* clear of the close button, which sits over this corner */
+  padding-right: 44px;
+  margin-bottom: var(--sp-4);
+}
+
+/* The sheet carries the accent of the service it was opened from, so its ticks
+agree with the wash behind it and with the panel's own checklist */
+.svc-price .plan li svg {
   stroke: var(--svc-accent);
 }
 
-/* right column: the compact pricing card, pinned while its panel scrolls */
-.svc-price {
-  position: sticky;
-  top: calc(var(--nav-h) + var(--sp-4));
-}
-
-.svc-price .svc-sub {
-  margin-bottom: var(--sp-2);
-}
-
 /* plan switcher — a segmented control over the plan names. Equal shares, so
-   the pills stay aligned however long the names are. */
+the pills stay aligned however long the names are. */
 .plan-switch {
   display: flex;
   gap: var(--sp-1);
@@ -2399,9 +2857,9 @@ body.lock {
   color: var(--muted);
   cursor: pointer;
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
+  background 0.2s ease,
+  color 0.2s ease,
+  box-shadow 0.2s ease;
 }
 
 .plan-tab:hover {
@@ -2423,55 +2881,31 @@ body.lock {
   display: none;
 }
 
-/* compact plan card inside the section */
-.svc-price .plan {
-  padding: var(--sp-4);
-  border-width: 1px;
-}
-
-.svc-price .price b {
-  font-size: 1.9rem;
-}
-
-.svc-price .plan-desc {
-  font-size: 0.9rem;
-  margin-bottom: var(--sp-2);
-}
-
-.svc-price .pnote {
-  font-size: 0.85rem;
-}
-
-.svc-price .plan .btn {
-  padding: 11px 16px;
-  font-size: 0.88rem;
-}
-
-.svc-price .plan .more {
-  display: none;
-}
-
-.svc-price .plan ul {
-  margin-top: var(--sp-3);
-  padding-top: var(--sp-3);
-  gap: var(--sp-1);
-}
-
-.svc-price .plan li {
-  font-size: 0.86rem;
-}
-
 .svc-cta {
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-3);
 }
 
-/* 23. FAQ — half image, half list ------------------------------------------ */
-.faq-sec {
-  border-top: 1px solid var(--line);
+/* The call to action wears its own service's colour rather than the site's black
+key: the same button, lit the same way, with the gradient's two ends swapped for
+a darkened accent. White needs the fill this deep to read — against the accent
+as it comes it only reaches 1.9:1 on the cyan and the amber. At these stops the
+weakest of the eight accents is 5.4:1, and the hover's -38% keeps it at 4.7:1. */
+.svc-cta .btn {
+  --btn-top: color-mix(in srgb, var(--panel-accent) 56%, #0a0a0a);
+  --btn-bottom: color-mix(in srgb, var(--panel-accent) 38%, #0a0a0a);
+  color: var(--on-accent);
 }
 
+/* The black key has room to lift its top a long way on hover; this one does not,
+because the amber and the cyan are already close to the 4.5:1 floor. It lifts
+what it can and leaves the rest of the hover to the sheen and the shadow. */
+.svc-cta .btn:hover {
+  --btn-top: color-mix(in srgb, var(--panel-accent) 62%, #0a0a0a);
+}
+
+/* 23. FAQ — half image, half list ------------------------------------------ */
 .faq-grid {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -2503,20 +2937,34 @@ body.lock {
   margin-bottom: var(--sp-6);
 }
 
-/* 24. Footer branding ------------------------------------------------------ */
-.foot-brand {
-  max-width: var(--wrap);
-  margin: 0 auto var(--sp-7);
-  color: #fff;
-}
-
-.foot-brand .logo-mark {
-  height: clamp(40px, 6vw, 68px);
-  width: auto;
-  opacity: 0.95;
-}
-
 /* 21. Responsive ----------------------------------------------------------- */
+
+/* The row layout of the pricing sheet. script.js decides whether the viewport
+can hold a card per plan and writes data-row for it, so this only has to lay the
+row out. The flag is closed when the plans go back behind the switcher. */
+.svc-price[data-row] .svc-plans {
+  grid-template-columns: repeat(var(--plans, 1), minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+/* The popular flag sits above the plan name, so the one card that carries it
+starts lower than the others and its price — the first thing anyone compares —
+falls out of line with theirs. The flag is given a definite height and the cards
+without one reserve the same space in front of the name.
+A sibling of the name, not a ::before on it: inside the heading the spacer would
+sit in the name's own box and just push the text down. */
+.svc-price[data-row] .pop-badge {
+  height: 24px;
+  line-height: 16px;
+}
+
+.svc-price[data-row] .plan:not(:has(.pop-badge))::before {
+  content: '';
+  display: block;
+  height: 24px;
+  margin-bottom: var(--sp-3);
+}
+
 @media (max-width: 1024px) {
   /* stacked: the portrait drops below the copy and stops bleeding */
   .hero-grid {
@@ -2527,10 +2975,6 @@ body.lock {
   .hero-figure {
     margin-right: 0;
     max-width: 420px;
-  }
-
-  .foot-grid {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -2583,17 +3027,36 @@ body.lock {
     display: none;
   }
 
+  /* On a phone the rail turns into a row of pills above the panels. It carries
+  the service names — the only way to tell the services apart now that the
+  prices have gone from it — so the pills cannot be the icon-only stubs they
+  were when the price was the label. The active one takes the accent edge, the
+  way the pills in the plan switcher do. */
   .rail-item {
     flex: none;
-    padding: var(--sp-2) var(--sp-3);
+    padding: var(--sp-2) var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--pill);
+    white-space: nowrap;
+    /* the blur and the dimming are for a column of items at a distance; in a
+    row of small pills they only cost legibility */
+    filter: none;
+    opacity: 1;
   }
 
-  .rail-item span {
-    display: none;
+  .rail-item:hover {
+    opacity: 1;
   }
 
-  .rail-item b {
-    margin-left: 0;
+  .rail-item.on {
+    transform: none;
+    border-color: var(--svc-accent);
+    background: var(--card);
+    box-shadow: var(--shadow-sm);
+    /* The active service is pulled to the front of the row, so whichever panel
+    you are on is the first pill you see; the others keep their order behind it.
+    `order` rather than moving the element, so the tab order stays put. */
+    order: -1;
   }
 
   .svc-panels {
@@ -2609,7 +3072,7 @@ body.lock {
     display: none;
   }
 
-  /* one service per screen; details above, pricing card below */
+  /* one service per screen; the body, then its checklist */
   .svc-panel {
     flex: 0 0 88%;
     grid-template-columns: 1fr;
@@ -2617,7 +3080,8 @@ body.lock {
     opacity: 1;
   }
 
-  .svc-price {
+  /* the checklist is a card under the body now, so it must not pin */
+  .svc-list {
     position: static;
   }
 
@@ -2625,18 +3089,25 @@ body.lock {
     aspect-ratio: 16 / 10;
   }
 
-  .foot-grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-5);
-  }
-
   .faq-grid {
     grid-template-columns: 1fr;
   }
 
-  .faq-art {
-    max-height: 220px;
-  }
+  /* Stacked, the art is the first row and the body follows it — so the sticky
+  offset that pins the art beside the questions on desktop instead pushes it
+   *down* over the heading below. Drop the pin and let it take its own row. */
+.faq-art {
+  position: static;
+  max-height: none;
+  border-radius: var(--radius);
+}
+
+/* 4:5 is a portrait composition; in a stacked row it cropped to an arbitrary
+slice, so the art becomes a banner and shows its whole width instead */
+.faq-art img {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
 }
 
 @media (max-width: 560px) {
@@ -2657,32 +3128,32 @@ body.lock {
   }
 
   /* a long specialty like "Full-Cycle Media Specialist" wraps at this width,
-     so reserve both lines to keep the hero from jumping between phrases */
-  .hero-role {
-    min-height: 2.4em;
-  }
+  so reserve both lines to keep the hero from jumping between phrases */
+.hero-role {
+  min-height: 2.4em;
+}
 
-  .track .tile {
-    flex-basis: 240px;
-    height: 160px;
-  }
+.track .tile {
+  flex-basis: 240px;
+  height: 160px;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
 
-  html {
-    scroll-behavior: auto;
-  }
+    html {
+      scroll-behavior: auto;
+    }
 
-  .rise,
-  .reveal {
-    opacity: 1;
-    transform: none;
+    .rise,
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
   }
-}

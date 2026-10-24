@@ -1,6 +1,7 @@
 {
   "email": "hello@abdulkaiz.com",
-  "bookCall": "",
+  "bookCall": "https://cal.com/abdulkaiz-khatri",
+  "whatsapp": "https://wa.me/qr/23T2H7T6KPADN1",
   "photo": "assets/uploads/Abdulkaiz%20Potrait.png",
   "video": {
     "src": "",
@@ -31,7 +32,7 @@
       "id": "websites",
       "title": "Website Design & Development",
       "icon": "monitor",
-      "cta": "Start my site",
+      "cta": "See what a website costs",
       "summary": "Fast, conversion-focused websites in Framer, Webflow, WordPress or custom code.",
       "details": "From structure and copy direction to a live, responsive site. Built fast by default, with clean SEO foundations and an editing setup you can actually use.",
       "features": [
@@ -98,7 +99,7 @@
       "id": "shopify",
       "title": "Shopify & E-commerce",
       "icon": "cart",
-      "cta": "Start my store",
+      "cta": "See what a store costs",
       "summary": "Online stores built to sell: themes, product pages, checkout polish and speed.",
       "details": "Custom Shopify stores and e-commerce setups, from first launch to growth. I design the store experience and handle the technical setup so you can focus on products.",
       "features": [
@@ -134,7 +135,7 @@
       "id": "automation",
       "title": "Automation Tools",
       "icon": "bolt",
-      "cta": "Automate it",
+      "cta": "See what automation costs",
       "summary": "Lead capture, follow-ups and workflows that save teams hours every week.",
       "details": "I connect your forms, inbox, CRM, store and spreadsheets so repetitive tasks run themselves, using no-code tools or custom scripts where needed.",
       "features": [
@@ -197,7 +198,7 @@
       "id": "ui-ux",
       "title": "Product Design",
       "icon": "layers",
-      "cta": "Design my product",
+      "cta": "See what design costs",
       "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
       "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
       "features": [
@@ -230,7 +231,7 @@
       "id": "graphic-design",
       "title": "Graphic Design",
       "icon": "palette",
-      "cta": "Build my brand",
+      "cta": "See what branding costs",
       "summary": "Logos, brand kits and marketing visuals that look consistent everywhere.",
       "details": "A cohesive visual identity and the everyday assets your business needs, from brand guidelines to ad and print creatives.",
       "features": [
@@ -278,7 +279,7 @@
       "id": "cloud",
       "title": "Cloud & Hosting",
       "icon": "cloud",
-      "cta": "Move my hosting",
+      "cta": "See what hosting costs",
       "summary": "Reliable hosting, deployment and cloud setup for your site or app.",
       "details": "Secure, fast infrastructure without the headaches: hosting, DNS, deployments and monitoring set up properly on Cloudflare, AWS or similar platforms.",
       "features": [
@@ -328,7 +329,7 @@
       "id": "social-media",
       "title": "Social Media Management",
       "icon": "share",
-      "cta": "Plan my content",
+      "cta": "See what social costs",
       "summary": "Planning, creative and publishing so your brand shows up consistently.",
       "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
       "features": [
@@ -361,7 +362,7 @@
       "id": "care",
       "title": "Website Care & Maintenance",
       "icon": "shield",
-      "cta": "Keep it running",
+      "cta": "See what maintenance costs",
       "summary": "Updates, backups, security checks and small improvements, handled monthly.",
       "details": "Keep your site or store fast, secure and current without thinking about it. Choose a monthly plan that fits how often it changes.",
       "features": [

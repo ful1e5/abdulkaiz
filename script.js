@@ -50,6 +50,11 @@
       '<path d="M12 3l7 3v5.5c0 4.2-2.9 8-7 9.5-4.1-1.5-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7"/>',
     ban: '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+    // the contact dialog's marks
+    mail: '<rect x="2.5" y="4.75" width="19" height="14.5" rx="3"/><path d="M3.2 7.4l7.5 5.2a2.4 2.4 0 0 0 2.6 0l7.5-5.2"/>',
+    calendar:
+      '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    chevron: '<path d="M6 9.5l6 6 6-6"/>',
   };
   const icon = (k, cls = 'svc-icon') =>
     `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.check}</svg>`;
@@ -66,17 +71,6 @@
   ];
   const A = ([h, t]) =>
     `<a href="${h}" ${h === page ? 'class="on"' : ''}>${t}</a>`;
-  const soc = [
-    ['GitHub', GH],
-    ['LinkedIn', LI],
-    ['Reddit', RD],
-    ['Upwork', UP],
-  ]
-    .map(
-      ([n, h]) =>
-        `<a class="soc" href="${h}" target="_blank" rel="noopener" aria-label="${n}">${n === 'Upwork' ? UPI : ''}${n}</a>`,
-    )
-    .join('');
   document.body.insertAdjacentHTML(
     'afterbegin',
     `<header class="nav-wrap"><nav class="nav" aria-label="Main"><a class="logo" href="index.html" aria-label="Abdulkaiz Khatri — home">${LOGO}</a><ul class="links">${nav.map((n) => `<li>${A(n)}</li>`).join('')}</ul><div class="nav-cta"><a class="uplink" href="${UP}" target="_blank" rel="noopener">${UPI}<span>Hire on Upwork</span></a><button class="btn btn-sm" data-contact>Let's Build</button><button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button></div></nav><div class="mobile" id="mobile">${nav.map(A).join('')}<a href="${UP}" target="_blank" rel="noopener">Hire on Upwork</a></div></header>`,
@@ -85,12 +79,131 @@
   if ($('.hero.dark')) document.body.classList.add('has-hero-dark');
   document.body.insertAdjacentHTML(
     'beforeend',
-    `<footer class="footer"><div class="foot-brand">${LOGO}</div><div class="foot-grid"><div><b>Abdulkaiz Khatri</b><p>Design engineer and automation specialist.</p><div class="socials">${soc}</div></div><div><b>Contact</b><p><a href="mailto:${esc(mail)}">${esc(mail)}</a></p><p>Gujarat, India</p></div><div><b>Pages</b>${[nav[2], nav[3], nav[4]].map(([h, t]) => `<p><a href="${h}">${t}</a></p>`).join('')}</div></div><p class="copy">© ${new Date().getFullYear()} Abdulkaiz Khatri. All rights reserved.</p></footer>
-<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Contact"><div class="modal"><button class="x" aria-label="Close">×</button><h2>Let's build something great</h2><p>Pick whatever is easiest for you.</p><div class="opts">
-<a class="opt" style="--i:0" href="mailto:${esc(mail)}"><i>✉</i><span><b>Email</b><small>${esc(mail)}</small></span></a>
-${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(S.bookCall)}" target="_blank" rel="noopener"><i>◷</i><span><b>Book a call</b><small>Pick a time that suits you</small></span></a>` : ''}</div>
-<p class="or">or send a quick message</p><form class="mform" style="--i:2" novalidate><input name="n" placeholder="Your name" required aria-label="Name" maxlength="100"><input name="e" type="email" placeholder="Your email" required aria-label="Email" maxlength="200"><textarea name="m" rows="3" placeholder="Your site link and one line about your goal" required aria-label="Message" maxlength="4000"></textarea><input class="hp" name="w" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send message</button><p class="fst" id="fst" role="status"></p></form></div></div>`,
+    // one black surface: the mark blooms behind the hairline social grid, the
+    // link columns and the sign-off ride above it, and a blue grain sits over
+    // the whole thing
+    `<footer class="footer">
+<div class="foot-mark" aria-hidden="true">
+  <span class="foot-mark__blur">${LOGO}</span>
+  <span class="foot-mark__sharp">${LOGO}</span>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<nav class="social-row" aria-label="Social profiles">
+  <a class="social-cell" href="${GH}" target="_blank" rel="noopener" aria-label="GitHub — opens in a new tab">
+    <span class="social-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span>
+    <span class="social-name">GitHub</span>
+    <span class="social-go" aria-hidden="true">→</span>
+  </a>
+  <a class="social-cell" href="${LI}" target="_blank" rel="noopener" aria-label="LinkedIn — opens in a new tab">
+    <span class="social-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+    <span class="social-name">LinkedIn</span>
+    <span class="social-go" aria-hidden="true">→</span>
+  </a>
+  <a class="social-cell" href="${RD}" target="_blank" rel="noopener" aria-label="Reddit — opens in a new tab">
+    <span class="social-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286C.775 23.225 1.097 24 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0Zm4.388 3.199c1.104 0 1.999.895 1.999 1.999 0 1.105-.895 2-1.999 2-.946 0-1.739-.657-1.947-1.539v.002c-1.147.162-2.032 1.15-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363.473-.363 1.064-.58 1.707-.58 1.547 0 2.802 1.254 2.802 2.802 0 1.117-.655 2.081-1.601 2.531-.088 3.256-3.637 5.876-7.997 5.876-4.361 0-7.905-2.617-7.998-5.87-.954-.447-1.614-1.415-1.614-2.538 0-1.548 1.255-2.802 2.803-2.802.645 0 1.239.218 1.712.585 1.275-.79 2.881-1.291 4.64-1.365v-.01c0-1.663 1.263-3.034 2.88-3.207.188-.911.993-1.595 1.959-1.595Zm-8.085 8.376c-.784 0-1.459.78-1.506 1.797-.047 1.016.64 1.429 1.426 1.429.786 0 1.371-.369 1.418-1.385.047-1.017-.553-1.841-1.338-1.841Zm7.406 0c-.786 0-1.385.824-1.338 1.841.047 1.017.634 1.385 1.418 1.385.785 0 1.473-.413 1.426-1.429-.046-1.017-.721-1.797-1.506-1.797Zm-3.703 4.013c-.974 0-1.907.048-2.77.135-.147.015-.241.168-.183.305.483 1.154 1.622 1.964 2.953 1.964 1.33 0 2.47-.81 2.953-1.964.057-.137-.037-.29-.184-.305-.863-.087-1.795-.135-2.769-.135Z"/></svg></span>
+    <span class="social-name">Reddit</span>
+    <span class="social-go" aria-hidden="true">→</span>
+  </a>
+  <a class="social-cell" href="${UP}" target="_blank" rel="noopener" aria-label="Upwork — opens in a new tab">
+    <span class="social-badge"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3.002-2.439-5.453-5.439-5.453z"/></svg></span>
+    <span class="social-name">Upwork</span>
+    <span class="social-go" aria-hidden="true">→</span>
+  </a>
+</nav>
+<div class="foot-cols">
+  <nav class="foot-col" aria-label="Footer pages">
+    <h2 class="foot-col__h">Pages</h2>
+    <ul class="foot-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="testimonials.html">Reviews</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <nav class="foot-col" aria-label="Services">
+    <h2 class="foot-col__h">Services</h2>
+    <ul class="foot-list">
+      <li><a href="index.html#service-websites">Website Design &amp; Development</a></li>
+      <li><a href="index.html#service-shopify">Shopify &amp; E-commerce</a></li>
+      <li><a href="index.html#service-automation">Automation Tools</a></li>
+      <li><a href="index.html#service-ui-ux">Product Design</a></li>
+      <li><a href="index.html#service-graphic-design">Graphic Design</a></li>
+      <li><a href="index.html#service-cloud">Cloud &amp; Hosting</a></li>
+    </ul>
+  </nav>
+
+  
+  <div class="foot-col">
+    <h2 class="foot-col__h">Contact</h2>
+    <ul class="foot-list">
+      <li><a href="mailto:${esc(mail)}">${esc(mail)}</a></li>
+      <li><span class="foot-note">Gujarat, India</span></li>
+      <li><a href="https://www.upwork.com/freelancers/abdulkaizk" target="_blank" rel="noopener">Upwork profile</a></li>
+    </ul>
+  </div>
+
+  <nav class="foot-col" aria-label="Social">
+    <h2 class="foot-col__h">Social</h2>
+    <ul class="foot-list">
+      <li><a href="https://github.com/ful1e5" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/ful1e5/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://www.reddit.com/user/ful1e5" target="_blank" rel="noopener">Reddit</a></li>
+      <li><a href="https://www.upwork.com/freelancers/abdulkaizk" target="_blank" rel="noopener">Upwork</a></li>
+    </ul>
+  </nav>
+</div>
+
+
+<div class="foot-bottom">
+  <div class="foot-sign">
+    <span class="foot-sign__mark">${LOGO}</span>
+    <p class="foot-tag">I design it, then I build it — one person, start to finish.</p>
+  </div>
+  <button class="btn btn-on-dark" data-contact>Book a Call</button>
+</div>
+
+<p class="foot-legal">© ${new Date().getFullYear()} Abdulkaiz Khatri. All rights reserved.</p>
+</footer>
+`,
   );
+  // The dialog is a ladder of effort: scan my LinkedIn and see who you'd be
+  // hiring, email, book a call or hire through Upwork, and — folded away, since
+  // it is the least formal of the four — a WhatsApp QR for a quick message. The
+  // code is a link as well as a code: whoever is on a phone is holding the thing
+  // that would otherwise read it.
+  const wa = /^https?:/.test(S.whatsapp || '') ? S.whatsapp : '',
+    liHandle = (LI.match(/\/in\/[^/]+/) || [''])[0];
+  document.body.insertAdjacentHTML(
+    'beforeend',
+    `<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Contact"><div class="modal"><button class="x" aria-label="Close">×</button><h2>Let's build something great</h2><p>Pick whatever is easiest for you.</p><div class="opts">
+<a class="opt opt-qr" style="--i:0" href="${esc(LI)}" target="_blank" rel="noopener"><img src="assets/uploads/qr-linkedin.svg" alt="" width="120" height="120"><span><b>LinkedIn</b>${
+      liHandle ? `<small>${esc(liHandle)}</small>` : ''
+    }</span></a>
+<a class="opt" style="--i:1" href="mailto:${esc(mail)}"><i>${icon('mail', 'opt-icon')}</i><span><b>Email</b><small>${esc(mail)}</small></span></a>
+${
+  /^https?:/.test(S.bookCall || '')
+    ? `<div class="pair" style="--i:2"><a class="btn" href="${esc(S.bookCall)}" target="_blank" rel="noopener">${icon('calendar', 'btn-icon')}Book a call</a><a class="btn btn-ghost" href="${UP}" target="_blank" rel="noopener">Hire me on Upwork</a></div>`
+    : ''
+}
+</div>
+${
+  wa
+    ? `<p class="quick" style="--i:3"><button type="button" class="quick-toggle" aria-expanded="false" aria-controls="waBlock">or send me a quick message${icon('chevron', 'quick-caret')}</button></p><div class="qr" id="waBlock" hidden><a class="qr-card" href="${esc(wa)}" target="_blank" rel="noopener" aria-label="Open WhatsApp to send a quick message"><img src="assets/uploads/qr-whatsapp.svg" alt="" width="164" height="164" loading="lazy"></a><p class="qr-note">Scan to message me on WhatsApp. On a phone, just tap the code.</p></div>`
+    : ''
+}
+</div></div>`,
+  );
+  // the quick-message line is a disclosure, not a second contact list: it opens
+  // the WhatsApp code and folds it away again
+  const waToggle = $('.quick-toggle'),
+    waBlock = $('#waBlock');
+  waToggle.onclick = () => {
+    const open = waToggle.getAttribute('aria-expanded') === 'true';
+    waToggle.setAttribute('aria-expanded', String(!open));
+    waBlock.hidden = open;
+  };
   const openOv = (id, f) => {
     $(id).classList.add('open');
     document.body.classList.add('lock');
@@ -116,7 +229,11 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       $('#mobile').classList.remove('open');
       openOv(
         '#ov',
-        c.dataset.contact === 'message' ? 'textarea,input' : '.opt',
+        // "send me a message" points at the email row; everything else at the
+        // booking button, which is the strongest way in
+        c.dataset.contact === 'message'
+          ? '.opt[href^="mailto:"]'
+          : '.modal .btn',
       );
     } else if (e.target.classList.contains('ov') || e.target.closest('.x'))
       closeAll();
@@ -124,63 +241,6 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAll();
   });
-  // contact form -> /api/contact (stores lead + emails you); errors are shown inline
-  const say = (h, err) => {
-    const s = $('#fst');
-    s.className = 'fst ' + (err ? 'err' : 'ok');
-    s.innerHTML = h;
-  };
-  $('.mform').onsubmit = async (e) => {
-    e.preventDefault();
-    const f = e.target,
-      b = f.querySelector('button.btn');
-    const body = {
-      name: f.n.value.trim(),
-      email: f.e.value.trim(),
-      message: f.m.value.trim(),
-      website: f.w.value,
-    };
-    if (!body.name || !body.message)
-      return say('Please fill in your name and message.', 1);
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(body.email))
-      return say('Please enter a valid email address.', 1);
-    // Works on both Cloudflare Pages (api/contact) and static hosts such as GitHub Pages,
-    // where the API does not exist: the visitor's mail app opens with the message ready.
-    const mailto =
-      `mailto:${mail}?subject=` +
-      encodeURIComponent('Project enquiry from ' + body.name) +
-      '&body=' +
-      encodeURIComponent(
-        body.message + '\n\n— ' + body.name + ' (' + body.email + ')',
-      );
-    b.disabled = true;
-    b.textContent = 'Sending…';
-    say('', 0);
-    let delivered = false;
-    try {
-      const r = await fetch('api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const j = await r.json().catch(() => ({}));
-      if (!r.ok || !j.ok) throw new Error(j.error || 'Something went wrong.');
-      delivered = true;
-      f.reset();
-      say('✓ Thank you! Your message is in, and I will reply soon.', 0);
-    } catch (err) {
-      const msg =
-        err.message && err.message !== 'Failed to fetch' ? err.message : '';
-      say(
-        (msg ? esc(msg) + '. ' : '') +
-          `No problem — <a href="${esc(mailto)}">open this message in your email app</a> and hit send. It goes straight to ${esc(mail)}.`,
-        1,
-      );
-    } finally {
-      b.disabled = false;
-      b.textContent = delivered ? 'Sent' : 'Send message';
-    }
-  };
   const bg = $('.burger');
   bg.onclick = () =>
     bg.setAttribute('aria-expanded', $('#mobile').classList.toggle('open'));
@@ -362,18 +422,15 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
     const s = n >= 1000 ? 50 : n >= 100 ? 10 : 5;
     return '$' + (Math.round(n / s) * s).toLocaleString('en-US');
   };
-  const cheapest = (s) => {
-    const a = (s.plans || []).map((p) => +p.amount).filter((n) => isFinite(n));
-    return a.length ? Math.min(...a) : null;
-  };
-  // A plan card. In the services section each card is a tab panel behind the
-  // plan switcher, so it can be given its tab ids and start hidden.
+  // A plan card: what the plan costs, what it covers, and what is in it. The
+  // actions live in the contact dialog, so the cards stay a price comparison
+  // and nothing here competes with the panel's own way in.
   const planCard = (p, tab) =>
     `<article class="plan ${p.popular ? 'featured-glow' : ''}"${
       tab
         ? ` role="tabpanel" id="${tab.id}" aria-labelledby="${tab.lab}"${tab.hidden ? ' hidden' : ''}`
         : ''
-    }>${p.popular ? '<span class="pop-badge">Most popular</span>' : ''}<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div><p class="plan-desc">${esc(p.desc || '')}</p><p class="pnote">${esc(p.note || '')}</p><button class="btn" data-contact>Book a call</button><button class="more" data-contact="message">Send me a message</button><ul>${(p.features || []).map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`).join('')}</ul></article>`;
+    }>${p.popular ? '<span class="pop-badge">Most popular</span>' : ''}<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div><p class="plan-desc">${esc(p.desc || '')}</p><p class="pnote">${esc(p.note || '')}</p><ul>${(p.features || []).map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`).join('')}</ul></article>`;
   // "What I do" — one scroll-driven section. The rail on the left tracks which
   // service panel is in view; the active service sets the section's accent colour.
   const sv = S.services || [];
@@ -382,42 +439,21 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
     svcSec = $('#services'),
     svcGlow = $('#svcGlow');
   if (rail && panels && sv.length) {
-    const from = (s) => {
-      const p = cheapest(s);
-      return p != null ? 'from ' + fmt(p * mult) : '';
-    };
+    // The rail is the section's contents, not a price list: a service is picked
+    // by name, and the panel it opens carries a way to see what it costs.
     rail.innerHTML = sv
       .map(
         (s, i) =>
-          `<button class="rail-item" data-rail="${i}" aria-label="${esc(s.title)}">${icon(s.icon)}<span>${esc(s.title)}</span><b>${from(s)}</b></button>`,
+          `<button class="rail-item" data-rail="${i}" aria-label="${esc(s.title)}">${icon(s.icon)}<span>${esc(s.title)}</span></button>`,
       )
       .join('');
-    // Details on the left, one compact pricing card on the right. The card swaps
-    // between plans instead of stacking them, so every service is the same height
-    // and the colour change lands on an even scroll rhythm.
+    // Details on the left, the checklist of what is included on the right.
+    // Pricing used to hold that column; it now opens from the call to action
+    // instead, so the two are never competing for the same space.
     panels.innerHTML = sv
       .map((s, i) => {
         const sid = esc(s.id || i),
-          plans = s.plans || [];
-        // one plan means there is nothing to switch between, so no control
-        const switcher =
-          plans.length > 1
-            ? `<div class="plan-switch" role="tablist" aria-label="${esc(s.title)} plans">${plans
-                .map(
-                  (p, k) =>
-                    `<button type="button" class="plan-tab${k ? '' : ' on'}" role="tab" id="ptab-${sid}-${k}" aria-controls="ppanel-${sid}-${k}" aria-selected="${k ? 'false' : 'true'}" tabindex="${k ? '-1' : '0'}">${esc(p.name)}</button>`,
-                )
-                .join('')}</div>`
-            : '';
-        const cards = plans
-          .map((p, k) =>
-            planCard(p, {
-              id: `ppanel-${sid}-${k}`,
-              lab: `ptab-${sid}-${k}`,
-              hidden: k > 0,
-            }),
-          )
-          .join('');
+          priced = (s.plans || []).length > 0;
         return `<article class="svc-panel" id="service-${sid}" data-panel="${i}" style="--panel-accent:${esc(s.accent || '#4F6BFF')}">
             <div class="svc-body">
               <div class="svc-media">${
@@ -427,26 +463,73 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
               <p class="eyebrow">${icon(s.icon, 'icon-inline')}${esc(s.title)}</p>
               <h3>${esc(s.title)}</h3>
               <p class="svc-lead">${esc(s.details || s.summary)}</p>
+              <div class="svc-cta"><button class="btn" ${
+                priced
+                  ? `data-price="${i}" aria-haspopup="dialog"`
+                  : 'data-contact'
+              }>${esc(s.cta || 'See pricing')}</button></div>
+            </div>
+            <div class="svc-list">
               <h4 class="svc-sub">What's included</h4>
-              <ul class="svc-list">${(s.features || [])
+              <ul>${(s.features || [])
                 .map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`)
                 .join('')}</ul>
-              <div class="svc-cta"><button class="btn" data-contact>${esc(s.cta || 'Start a project')}</button></div>
             </div>
-            ${
-              plans.length
-                ? `<aside class="svc-price" aria-label="Pricing for ${esc(s.title)}">
-              <h4 class="svc-sub">Pricing</h4>
-              ${switcher}
-              <div class="svc-plans">${cards}</div>
-            </aside>`
-                : ''
-            }
           </article>`;
       })
       .join('');
-    // plan switcher — a roving-tabindex tablist, one card visible at a time
-    panels.querySelectorAll('.plan-switch').forEach((sw) => {
+    // The pricing sheet. One dialog serves every service — its plans are written
+    // in when it opens, so the markup exists once rather than once per panel.
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<div class="ov" id="svcPrice" role="dialog" aria-modal="true" aria-labelledby="svcPriceTitle"><div class="modal svc-price"><button class="x" aria-label="Close">×</button><h2 id="svcPriceTitle"></h2><div class="svc-price-body"></div></div></div>`,
+    );
+    const priceOv = $('#svcPrice'),
+      priceTitle = $('#svcPriceTitle'),
+      priceModal = priceOv.querySelector('.modal'),
+      priceBody = priceOv.querySelector('.svc-price-body');
+    // Whether the sheet can lay its plans out in a row. A row is worth having —
+    // every plan is on screen and comparable — but only while the cards are
+    // still comfortable: 340px each, plus 64px of dialog padding and 32px of
+    // overlay, and the gaps come out of the same budget. Under that the plans go
+    // back behind the switcher and stay one card at a time.
+    // script.js owns this rather than a media query, because the markup has to
+    // agree with it: hiding a tablist in CSS would still leave tabpanel roles on
+    // cards whose tabs nobody can see and a one-card grid taking a third of the
+    // dialog. The flag it writes is what the stylesheet keys off.
+    const rowFits = (n) => innerWidth >= n * 340 + 96;
+    // a service's plans, as a row of cards or as a switcher over them
+    const priceMarkup = (s, row, sid) => {
+      const plans = s.plans || [];
+      // one plan means there is nothing to switch between, so no control
+      const tabs = plans.length > 1 && !row;
+      const switcher = tabs
+        ? `<div class="plan-switch" role="tablist" aria-label="${esc(s.title)} plans">${plans
+            .map(
+              (p, k) =>
+                `<button type="button" class="plan-tab${k ? '' : ' on'}" role="tab" id="ptab-${sid}-${k}" aria-controls="ppanel-${sid}-${k}" aria-selected="${k ? 'false' : 'true'}" tabindex="${k ? '-1' : '0'}">${esc(p.name)}</button>`,
+            )
+            .join('')}</div>`
+        : '';
+      const cards = plans
+        .map((p, k) =>
+          planCard(
+            p,
+            tabs
+              ? {
+                  id: `ppanel-${sid}-${k}`,
+                  lab: `ptab-${sid}-${k}`,
+                  hidden: k > 0,
+                }
+              : null,
+          ),
+        )
+        .join('');
+      return switcher + `<div class="svc-plans">${cards}</div>`;
+    };
+    // plan switcher — a roving-tabindex tablist, one card visible at a time.
+    // Still wired rather than baked in: the sheet rebuilds its tablist per open.
+    const wireSwitcher = (sw) => {
       const tabs = [...sw.querySelectorAll('.plan-tab')],
         cards = [...sw.parentElement.querySelectorAll('.svc-plans > .plan')],
         last = tabs.length - 1;
@@ -478,10 +561,85 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
           sel(to, true);
         };
       });
+    };
+    // Closing the sheet hands focus back to the button that opened it, so a
+    // keyboard visitor is not dropped at the top of the page. Watching the class
+    // catches every way out — Escape, the backdrop and the close button all
+    // funnel through closeAll, which is shared with the contact dialog.
+    let opener = null;
+    new MutationObserver(() => {
+      if (opener && !priceOv.classList.contains('open')) {
+        const o = opener;
+        opener = null;
+        o.focus({ preventScroll: true });
+      }
+    }).observe(priceOv, { attributes: true, attributeFilter: ['class'] });
+    // Which service is on screen, so the sheet can be laid out again when the
+    // viewport changes the row into a switcher or back.
+    let showing = null;
+    const fillSheet = (i) => {
+      const s = sv[i];
+      if (!s) return null;
+      const plans = s.plans || [],
+        row = rowFits(plans.length);
+      priceTitle.textContent = s.title;
+      priceOv.style.setProperty('--svc-accent', s.accent || '#4F6BFF');
+      priceOv.style.setProperty('--plans', plans.length || 1);
+      priceBody.innerHTML = priceMarkup(s, row, esc(s.id || i));
+      priceModal.toggleAttribute('data-row', row);
+      const sw = priceBody.querySelector('.plan-switch');
+      if (sw) wireSwitcher(sw);
+      return sw;
+    };
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-price]');
+      if (!b) return;
+      e.preventDefault();
+      const s = sv[+b.dataset.price];
+      if (!s) return;
+      closeAll();
+      $('#mobile').classList.remove('open');
+      const sw = fillSheet(+b.dataset.price);
+      showing = +b.dataset.price;
+      opener = b;
+      // the plans are a price comparison now, so the only control in the sheet
+      // is its close button — focus that rather than leave it on nothing
+      openOv('#svcPrice', sw ? '.plan-tab' : '.x');
     });
+    // A resize can turn the row into a switcher and back, so the open sheet is
+    // rebuilt — but only when the layout actually has to change, not on every
+    // resize. The rebuild drops whatever had focus, which on the way down is a
+    // plan tab, so focus is handed to the equivalent control.
+    addEventListener(
+      'resize',
+      () => {
+        if (showing === null || !priceOv.classList.contains('open')) return;
+        const plans = (sv[showing] || {}).plans || [];
+        if (rowFits(plans.length) === priceModal.hasAttribute('data-row'))
+          return;
+        const sw = fillSheet(showing);
+        (sw
+          ? sw.querySelector('.plan-tab')
+          : priceOv.querySelector('.x')
+        )?.focus({ preventScroll: true });
+      },
+      { passive: true },
+    );
     const railItems = [...rail.children],
       els = [...panels.children];
     let current = -1;
+    // Whether the rail is on screen. The URL only mirrors the active service
+    // while it is: a visitor who simply scrolls past the section should not be
+    // left carrying a #service-… anchor, because refreshing on one drops them
+    // into the rail instead of at the top of the page.
+    const inView = () => {
+      const r = svcSec.getBoundingClientRect();
+      return r.bottom > 0 && r.top < innerHeight;
+    };
+    const clearHash = () => {
+      if (history.replaceState && /^#service-/.test(location.hash || ''))
+        history.replaceState(null, '', location.pathname + location.search);
+    };
     // `sync` is false for the initial pick: rewriting the URL with a hash on load
     // makes the browser jump to that anchor before the visitor has scrolled.
     const activate = (i, sync = true) => {
@@ -492,7 +650,12 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       const acc = sv[i].accent || '#4F6BFF';
       svcSec.style.setProperty('--svc-accent', acc);
       if (svcGlow) svcGlow.dataset.side = i % 2 ? 'right' : 'left';
-      if (sync && history.replaceState)
+      // On a phone the rail is a sideways scroller and the active pill has just
+      // been pulled to its front, so the rail returns to its start — otherwise
+      // the row would stay scrolled to wherever it was and the pill that moved
+      // would be off the edge.
+      if (rail.scrollWidth > rail.clientWidth) rail.scrollLeft = 0;
+      if (sync && inView() && history.replaceState)
         history.replaceState(null, '', '#service-' + sv[i].id);
     };
     railItems.forEach(
@@ -503,16 +666,25 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
             block: 'center',
           })),
     );
-    // the panel nearest the viewport centre wins
     let hold = false; // set while a deep link is settling, so scroll can't override it
+    // Which panel is being read. Stacked, that is the one nearest the middle of
+    // the viewport. Sideways — which is what the panels become on a phone — it is
+    // the one nearest the middle of their scroller, because every panel sits at
+    // the same height and the viewport test would pick the same one forever.
+    const sideways = () => panels.scrollWidth > panels.clientWidth + 1;
     const pick = (sync = true) => {
       if (hold) return;
-      const mid = innerHeight / 2;
+      const across = sideways(),
+        mid = across
+          ? panels.getBoundingClientRect().left + panels.clientWidth / 2
+          : innerHeight / 2;
       let best = 0,
         dist = Infinity;
       els.forEach((e, i) => {
         const r = e.getBoundingClientRect();
-        const d = Math.abs(r.top + r.height / 2 - mid);
+        const d = Math.abs(
+          (across ? r.left + r.width / 2 : r.top + r.height / 2) - mid,
+        );
         if (d < dist) {
           dist = d;
           best = i;
@@ -526,10 +698,16 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       ticking = requestAnimationFrame(() => {
         ticking = 0;
         pick();
+        // once the section is behind or ahead of the viewport the mirror is
+        // stale, so drop it rather than leave it to hijack a refresh
+        if (!hold && !inView()) clearHash();
       });
     };
     addEventListener('scroll', onScroll, { passive: true });
     addEventListener('resize', onScroll, { passive: true });
+    // the panels' own sideways scroll does not bubble, so it is listened for
+    // where it happens
+    panels.addEventListener('scroll', onScroll, { passive: true });
     pick(false);
     // #service-<id> deep links scroll to and select that service. The jump is
     // instant and holds the scroll-driven pick off briefly, so the landing
