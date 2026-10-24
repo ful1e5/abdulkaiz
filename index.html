@@ -9,11 +9,11 @@
     </title>
     <meta
       name="description"
-      content="Licensed design engineer and automation expert with a Computer Science degree. Websites, Shopify and e-commerce, cloud services, UI/UX, graphic design, social media and automation."
+      content="Licensed design engineer and automation expert with a Computer Science degree. Websites, Shopify and e-commerce, cloud services, product design, graphic design, social media and automation."
     />
     <meta
       name="keywords"
-      content="Licensed Design Engineer, Automation Expert, Computer Science, web design, Shopify, e-commerce, cloud, UI/UX, automation"
+      content="Licensed Design Engineer, Automation Expert, Computer Science, web design, Shopify, e-commerce, cloud, product design, automation"
     />
     <link rel="canonical" href="https://abdulkaiz.com/" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -25,7 +25,7 @@
     />
     <meta
       property="og:description"
-      content="Licensed design engineer and automation expert with a Computer Science degree. Websites, Shopify and e-commerce, cloud services, UI/UX, graphic design, social media and automation."
+      content="Licensed design engineer and automation expert with a Computer Science degree. Websites, Shopify and e-commerce, cloud services, product design, graphic design, social media and automation."
     />
     <meta property="og:url" content="https://abdulkaiz.com/" />
     <meta property="og:image" content="https://abdulkaiz.com/assets/og.png" />
@@ -61,7 +61,7 @@
             "jobTitle": "Licensed Design Engineer",
             "description": "Design engineer and automation expert with a Bachelor of Engineering in Computer Science.",
             "knowsAbout": [
-              "UI/UX design",
+              "Product design",
               "Web design",
               "Shopify",
               "E-commerce",
@@ -98,52 +98,54 @@
   </head>
   <body>
     <main>
-      <section class="hero dark">
+      <section class="hero">
+        <div class="grain" aria-hidden="true"></div>
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="status rise" data-t="hero_status">
-              Available for new projects
-            </p>
             <h1 class="rise" style="--d: 0.08s" data-t="hero_title">
-              I design and build websites that turn visitors into customers
+              I'm Abdulkaiz
             </h1>
-            <p class="lead rise" style="--d: 0.16s" data-t="hero_lead">
-              I'm Abdulkaiz Khatri, a design engineer from Gujarat, India. I
-              handle the whole thing — the UI/UX, the build, and the automation
-              behind it — so you get one person instead of a hand-off chain.
+            <p class="hero-role rise" style="--d: 0.16s">
+              <span class="hero-star" aria-hidden="true">✱</span>
+              <!-- each phrase completes "I'm Abdulkaiz …" and arrives on the
+                   same slide-up-and-unblur the tool tiles use; the plain list
+                   below carries the same words for anyone the animation
+                   doesn't reach -->
+              <span class="hero-write" id="heroWrite" aria-hidden="true"></span>
+              <span class="vh" id="heroRoles"
+                >Automation Expert, Product Designer, Design Engineer,
+                Full-Cycle Media Specialist, Computer Science Graduate</span
+              >
             </p>
-            <div class="cta-row left rise" style="--d: 0.24s">
+            <p class="lead rise" style="--d: 0.24s" data-t="hero_lead">
+              I'm a licensed design engineer from Gujarat, India. I handle the
+              whole thing: the product design, the build, and the automation
+              behind it, so you get one person instead of a hand-off chain.
+            </p>
+            <div class="cta-row left rise" style="--d: 0.32s">
               <button class="btn" data-contact data-t="hero_cta">
                 Start a project
               </button>
-              <a class="btn btn-outline" href="#work">See my work</a>
+              <a class="btn btn-ghost" href="#work">See my work</a>
             </div>
-            <p class="small rise" style="--d: 0.32s" data-t="hero_note">
+            <p class="small rise" style="--d: 0.4s" data-t="hero_note">
               Message me "Hi." No form, no brief, no 12-slide deck.
             </p>
             <div
               class="hero-proof rise"
-              style="--d: 0.4s"
+              style="--d: 0.48s"
               id="heroProof"
             ></div>
           </div>
-          <div class="hero-photo rise" style="--d: 0.2s">
-            <div class="portrait px" data-px=".05" id="heroPhoto">
-              <span>AK</span>
+          <!-- the largest thing on the page: bleeds into the page gutter and
+               drifts on scroll, so the portrait reads as the hero itself -->
+          <div class="hero-figure rise" style="--d: 0.2s">
+            <!-- .rise animates transform with fill:forwards, which would
+                 override the parallax transform, so the drift gets its own
+                 element to live on -->
+            <div class="hero-drift px" data-px=".08">
+              <div class="portrait" id="heroPhoto"><span>AK</span></div>
             </div>
-            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
-              <defs>
-                <path
-                  id="rc"
-                  d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"
-                />
-              </defs>
-              <text>
-                <textPath href="#rc">
-                  DESIGN ENGINEER · UI/UX · AUTOMATION ·
-                </textPath>
-              </text>
-            </svg>
           </div>
         </div>
         <div class="marquee" id="marquee" aria-label="Project previews">
@@ -163,21 +165,22 @@
         ></div>
       </section>
 
-      <section id="services" class="section reveal">
-        <div class="section-head">
+      <section id="services" class="svc-sec">
+        <div class="grain" aria-hidden="true"></div>
+        <div class="svc-glow" id="svcGlow" aria-hidden="true"></div>
+        <div class="svc-head">
           <p class="eyebrow" data-t="services_eyebrow">What I do</p>
           <h2 class="left" data-t="services_title">
             Everything your brand needs to grow online
           </h2>
           <p data-t="services_intro">
             Websites, stores, design and the automation behind them — handled by
-            one person, start to finish.
+            one person, start to finish. Scroll to see what each one costs.
           </p>
         </div>
-        <div class="svc-grid" id="services-grid"></div>
-        <div class="section-cta">
-          <button class="btn" data-contact>Plan my project</button>
-          <a class="btn btn-ghost" href="#prices">See prices</a>
+        <div class="svc-layout">
+          <nav class="svc-rail" id="svcRail" aria-label="Services"></nav>
+          <div class="svc-panels" id="svcPanels"></div>
         </div>
       </section>
 
@@ -218,43 +221,41 @@
       <section id="reviews" class="section reveal">
         <div class="section-head">
           <p class="eyebrow" data-t="reviews_eyebrow">Reviews</p>
-          <h2 class="left" data-t="reviews_title">
-            What clients actually say
-          </h2>
+          <h2 class="left" data-t="reviews_title">What clients actually say</h2>
+          <p data-t="reviews_lead">
+            Every review is five stars and unedited. These are the six most
+            recent.
+          </p>
         </div>
-        <div class="review" id="review"></div>
-        <div class="review-nav">
-          <button class="sq" id="prev" aria-label="Previous review">←</button>
-          <button class="sq" id="next" aria-label="Next review">→</button>
-          <a class="btn btn-ghost btn-sm" href="testimonials.html"
-            >Read all reviews</a
-          >
+        <div class="tgrid" id="reviewGrid" data-limit="6"></div>
+        <div class="section-cta cta-row">
+          <a class="btn" href="testimonials.html">See all reviews</a>
+          <button class="btn btn-ghost" data-contact>Be my next review</button>
         </div>
       </section>
 
-      <section id="prices" class="section reveal">
-        <div class="section-head">
-          <p class="eyebrow" data-t="prices_eyebrow">Prices</p>
-          <h2 class="left" data-t="pricing_cta_title">
-            Every price, up front
-          </h2>
-          <p data-t="pricing_cta_lead">
-            Tap a service to see exactly what's included and what it costs.
-            Monthly plans start at $99.
-          </p>
-        </div>
-        <div class="prices-grid">
-          <div class="prices-col">
-            <h3 class="prices-sub">One-off work</h3>
-            <div class="prices-list" id="prices-list"></div>
-            <p class="muted small" id="prices-note"></p>
+      <section id="faq" class="section faq-sec reveal">
+        <div class="faq-grid">
+          <div class="faq-art">
+            <img
+              src="assets/img/s4.svg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
           </div>
-          <div class="prices-col">
-            <h3 class="prices-sub">Monthly plans</h3>
-            <div class="pgrid pgrid-single" id="prices-monthly"></div>
+          <div class="faq-body">
+            <p class="eyebrow" data-t="faq_eyebrow">Good to know</p>
+            <h2 class="left" data-t="faq_title">
+              The questions I get asked before we start
+            </h2>
+            <p class="faq-note muted" data-t="faq_lead">
+              Everything you'd normally have to email me about. If yours isn't
+              here, just ask.
+            </p>
+            <div class="faq" id="faqList"></div>
           </div>
         </div>
-        <div class="faq" id="faq"></div>
       </section>
 
       <section class="section reveal">

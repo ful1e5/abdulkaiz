@@ -1,7 +1,7 @@
 {
   "email": "hello@abdulkaiz.com",
   "bookCall": "",
-  "photo": "",
+  "photo": "assets/uploads/Abdulkaiz%20Potrait.png",
   "video": {
     "src": "",
     "poster": "",
@@ -11,24 +11,19 @@
   "bio": "I'm a design engineer based in Bhuj, India. I work in the overlap between design and front-end development — usually starting in Figma and finishing in Webflow, WordPress, Framer or plain code, depending on what the project actually needs.\n\nThe open-source work is the part I'm proudest of. Alongside Bibata I maintain github-nvim-theme, apple_cursor and clickgen, a Python toolbox for building cursor themes. Between them that's a few thousand stars and a lot of strangers trusting my work on their own machines, which is a strange and lovely thing to think about.\n\nOn Upwork I'm Top Rated with a 98% job success score across 45 five-star reviews. Most of that work is the same thing I do here: taking a design from a Figma file to a live, fast site.\n\nI care about the details you only notice when they're missing — load times, empty states, error messages, and what happens on a slow phone. I work directly with founders and small teams: clear scope, steady updates, and something that's fast by default.",
   "stats": [
     {
-      "n": 1.4,
-      "suf": "M+",
-      "label": "Bibata downloads"
-    },
-    {
-      "n": 4.2,
-      "suf": "K",
-      "label": "Stars on Bibata"
-    },
-    {
-      "n": 98,
+      "n": 100,
       "suf": "%",
-      "label": "Upwork job success"
+      "label": "Job success score"
+    },
+    {
+      "n": 45,
+      "suf": "",
+      "label": "Five-star reviews"
     },
     {
       "n": 8,
       "suf": "+",
-      "label": "Years in open source"
+      "label": "Years designing and building"
     }
   ],
   "services": [
@@ -96,7 +91,8 @@
           ],
           "popular": true
         }
-      ]
+      ],
+      "accent": "#4F6BFF"
     },
     {
       "id": "shopify",
@@ -131,39 +127,8 @@
           ],
           "popular": true
         }
-      ]
-    },
-    {
-      "id": "ui-ux",
-      "title": "UI/UX & Product Design",
-      "icon": "layers",
-      "cta": "Design my product",
-      "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
-      "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
-      "features": [
-        "User flows and wireframes",
-        "Clickable prototypes",
-        "Design systems",
-        "Developer-ready handoff"
       ],
-      "media": "assets/img/s4.svg",
-      "plans": [
-        {
-          "name": "UI/UX Design",
-          "amount": 1800,
-          "unit": "one-off",
-          "from": true,
-          "desc": "Web app, dashboard or mobile screens, developer-ready.",
-          "note": "Priced by screen count",
-          "features": [
-            "User flows and wireframes",
-            "Clickable prototype",
-            "High-fidelity screens in Figma",
-            "Developer handoff notes"
-          ],
-          "popular": true
-        }
-      ]
+      "accent": "#2FB344"
     },
     {
       "id": "automation",
@@ -225,7 +190,41 @@
           ],
           "popular": false
         }
-      ]
+      ],
+      "accent": "#F5A524"
+    },
+    {
+      "id": "ui-ux",
+      "title": "Product Design",
+      "icon": "layers",
+      "cta": "Design my product",
+      "summary": "Web apps, dashboards and mobile interfaces designed around real user goals.",
+      "details": "User flows, wireframes, prototypes and polished interface design, delivered as developer-ready Figma files.",
+      "features": [
+        "User flows and wireframes",
+        "Clickable prototypes",
+        "Design systems",
+        "Developer-ready handoff"
+      ],
+      "media": "assets/img/s4.svg",
+      "plans": [
+        {
+          "name": "Product Design",
+          "amount": 1800,
+          "unit": "one-off",
+          "from": true,
+          "desc": "Web app, dashboard or mobile screens, developer-ready.",
+          "note": "Priced by screen count",
+          "features": [
+            "User flows and wireframes",
+            "Clickable prototype",
+            "High-fidelity screens in Figma",
+            "Developer handoff notes"
+          ],
+          "popular": true
+        }
+      ],
+      "accent": "#8B5CF6"
     },
     {
       "id": "graphic-design",
@@ -272,39 +271,8 @@
           ],
           "popular": true
         }
-      ]
-    },
-    {
-      "id": "social-media",
-      "title": "Social Media Management",
-      "icon": "share",
-      "cta": "Plan my content",
-      "summary": "Planning, creative and publishing so your brand shows up consistently.",
-      "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
-      "features": [
-        "Content calendar",
-        "Post, story and reel creatives",
-        "Scheduling and publishing",
-        "Monthly performance summary"
       ],
-      "media": "assets/img/s7.svg",
-      "plans": [
-        {
-          "name": "Social Media Kit",
-          "amount": 450,
-          "unit": "one-off",
-          "from": true,
-          "desc": "A month of on-brand posts, designed and ready to schedule.",
-          "note": "12 post templates",
-          "features": [
-            "12 editable post templates",
-            "Story and reel covers",
-            "Caption starter copy",
-            "Editable in Canva or Figma"
-          ],
-          "popular": false
-        }
-      ]
+      "accent": "#EC4899"
     },
     {
       "id": "cloud",
@@ -353,7 +321,41 @@
           ],
           "popular": true
         }
-      ]
+      ],
+      "accent": "#06B6D4"
+    },
+    {
+      "id": "social-media",
+      "title": "Social Media Management",
+      "icon": "share",
+      "cta": "Plan my content",
+      "summary": "Planning, creative and publishing so your brand shows up consistently.",
+      "details": "A content calendar, on-brand post and story designs, and scheduled publishing across your main platforms.",
+      "features": [
+        "Content calendar",
+        "Post, story and reel creatives",
+        "Scheduling and publishing",
+        "Monthly performance summary"
+      ],
+      "media": "assets/img/s7.svg",
+      "plans": [
+        {
+          "name": "Social Media Kit",
+          "amount": 450,
+          "unit": "one-off",
+          "from": true,
+          "desc": "A month of on-brand posts, designed and ready to schedule.",
+          "note": "12 post templates",
+          "features": [
+            "12 editable post templates",
+            "Story and reel covers",
+            "Caption starter copy",
+            "Editable in Canva or Figma"
+          ],
+          "popular": false
+        }
+      ],
+      "accent": "#F43F5E"
     },
     {
       "id": "care",
@@ -415,7 +417,8 @@
           ],
           "popular": false
         }
-      ]
+      ],
+      "accent": "#14B8A6"
     }
   ],
   "process": [
@@ -455,7 +458,7 @@
       "when": "2024 – Present",
       "place": "Bhuj, India · Remote",
       "text": "Websites and product interfaces for founders and small teams, mostly Figma to code. Top Rated with a 98% job success score across 45 five-star reviews.",
-      "skills": "UI/UX Design, Front-End Development, Figma, Webflow, WordPress, Framer, Wix"
+      "skills": "Product Design, Front-End Development, Figma, Webflow, WordPress, Framer, Wix"
     },
     {
       "title": "Open-Source Maintainer",
@@ -475,7 +478,13 @@
       "skills": "Framer, Graphic Design +12 skills"
     }
   ],
-  "heroPhoto": "",
+  "heroRoles": [
+    "Automation Expert",
+    "Product Designer",
+    "Design Engineer",
+    "Full-Cycle Media Specialist",
+    "Computer Science Graduate"
+  ],
   "heroLogos": [
     {
       "name": "Figma",
@@ -563,9 +572,8 @@
     }
   ],
   "text": {
-    "hero_status": "Available for new projects",
-    "hero_title": "I design and build websites that turn visitors into customers",
-    "hero_lead": "I'm Abdulkaiz Khatri, a design engineer from Gujarat, India. I handle the whole thing — the UI/UX, the build, and the automation behind it — so you get one person instead of a hand-off chain.",
+    "hero_title": "I'm Abdulkaiz",
+    "hero_lead": "I'm a licensed design engineer from Gujarat, India. I handle the whole thing: the product design, the build, and the automation behind it, so you get one person instead of a hand-off chain.",
     "hero_cta": "Start a project",
     "hero_note": "Message me \"Hi.\" No form, no brief, no 12-slide deck.",
     "logos_title": "I work in these every day — from the first Figma frame to the deploy button.",
@@ -583,6 +591,7 @@
     "process_intro": "No mystery and no silence. You always know what stage we're at and what happens next.",
     "reviews_eyebrow": "Reviews",
     "reviews_title": "What clients actually say",
+    "reviews_lead": "Every review is five stars and unedited. These are the six most recent.",
     "prices_eyebrow": "Prices",
     "pricing_cta_title": "Every price, up front",
     "pricing_cta_lead": "Tap a service to see exactly what's included and what it costs. Monthly plans start at $99.",
@@ -590,7 +599,14 @@
     "about_bio_title": "Where I come from",
     "about_h1": "I'm Abdulkaiz. I design it, then I build it.",
     "pricing_title": "Clear prices, agreed before we start",
-    "pricing_lead": "Pick the service you need and you'll see the price right there — no \"contact us for a quote\" for the basics. Every project begins with a fixed price in writing."
+    "pricing_lead": "Pick the service you need and you'll see the price right there — no \"contact us for a quote\" for the basics. Every project begins with a fixed price in writing.",
+    "faq_eyebrow": "Good to know",
+    "faq_title": "The questions I get asked before we start",
+    "faq_lead": "Everything you'd normally have to email me about. If yours isn't here, just ask.",
+    "ethics_eyebrow": "Before you ask",
+    "ethics_title": "What I don't take on",
+    "ethics_lead": "Some work I turn down whatever the budget, because of my faith. Better to say it here than three emails into a project.",
+    "ethics_note": "If your project is built on any of those, I'm not the right fit. Anything else — ask."
   },
   "approach": [
     {
@@ -605,5 +621,11 @@
       "title": "Automate the rest",
       "text": "Forms, follow-ups, inventory and reporting wired together so your team does less manual work."
     }
+  ],
+  "ethicsExcluded": [
+    "Gambling and betting",
+    "Alcohol",
+    "Adult content",
+    "Interest-based (riba) lending"
   ]
 }

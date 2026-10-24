@@ -28,16 +28,17 @@
   const mail = S.email || 'hello@abdulkaiz.com';
   const UPI =
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3.002-2.439-5.453-5.439-5.453z"/></svg>';
+  // rating star: the fill carries the shape, the stroke rounds every point off
+  // (paint-order keeps the stroke underneath, so the star grows evenly)
   const STAR =
-    '<svg class="icon-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.45l-5.81 3.05 1.11-6.47-4.7-4.58 6.5-.95L12 2.6z"/></svg>';
+    '<svg class="icon-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>';
   const STARS = STAR.repeat(5);
   // inline stroke icons for services and feature bullets
   const ICONS = {
     monitor:
       '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>',
     cart: '<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 7H6"/>',
-    layers:
-      '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13.5l9 5 9-5"/>',
+    layers: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13.5l9 5 9-5"/>',
     bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>',
     palette:
       '<circle cx="12" cy="12" r="9"/><circle cx="9" cy="9.5" r="1.1"/><circle cx="15" cy="9.5" r="1.1"/><circle cx="9.5" cy="15" r="1.1"/><circle cx="15" cy="15" r="1.1"/>',
@@ -48,6 +49,7 @@
     shield:
       '<path d="M12 3l7 3v5.5c0 4.2-2.9 8-7 9.5-4.1-1.5-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7"/>',
+    ban: '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
   };
   const icon = (k, cls = 'svc-icon') =>
     `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.check}</svg>`;
@@ -59,7 +61,6 @@
     ['index.html', 'Home'],
     ['index.html#services', 'Services'],
     ['portfolio.html', 'Portfolio'],
-    ['#prices', 'Prices'],
     ['testimonials.html', 'Reviews'],
     ['about.html', 'About'],
   ];
@@ -84,12 +85,11 @@
   if ($('.hero.dark')) document.body.classList.add('has-hero-dark');
   document.body.insertAdjacentHTML(
     'beforeend',
-    `<footer class="footer"><div class="foot-grid"><div><b>Abdulkaiz Khatri</b><p>Licensed design engineer and automation expert.</p><div class="socials">${soc}</div></div><div><b>Contact</b><p><a href="mailto:${esc(mail)}">${esc(mail)}</a></p><p>Gujarat, India</p></div><div><b>Pages</b>${[nav[2], nav[3], nav[5]].map(([h, t]) => `<p><a href="${h}">${t}</a></p>`).join('')}</div></div><p class="copy">© ${new Date().getFullYear()} Abdulkaiz Khatri. All rights reserved.</p></footer>
+    `<footer class="footer"><div class="foot-brand">${LOGO}</div><div class="foot-grid"><div><b>Abdulkaiz Khatri</b><p>Design engineer and automation specialist.</p><div class="socials">${soc}</div></div><div><b>Contact</b><p><a href="mailto:${esc(mail)}">${esc(mail)}</a></p><p>Gujarat, India</p></div><div><b>Pages</b>${[nav[2], nav[3], nav[4]].map(([h, t]) => `<p><a href="${h}">${t}</a></p>`).join('')}</div></div><p class="copy">© ${new Date().getFullYear()} Abdulkaiz Khatri. All rights reserved.</p></footer>
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Contact"><div class="modal"><button class="x" aria-label="Close">×</button><h2>Let's build something great</h2><p>Pick whatever is easiest for you.</p><div class="opts">
 <a class="opt" style="--i:0" href="mailto:${esc(mail)}"><i>✉</i><span><b>Email</b><small>${esc(mail)}</small></span></a>
 ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(S.bookCall)}" target="_blank" rel="noopener"><i>◷</i><span><b>Book a call</b><small>Pick a time that suits you</small></span></a>` : ''}</div>
-<p class="or">or send a quick message</p><form class="mform" style="--i:2" novalidate><input name="n" placeholder="Your name" required aria-label="Name" maxlength="100"><input name="e" type="email" placeholder="Your email" required aria-label="Email" maxlength="200"><textarea name="m" rows="3" placeholder="Your site link and one line about your goal" required aria-label="Message" maxlength="4000"></textarea><input class="hp" name="w" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send message</button><p class="fst" id="fst" role="status"></p></form></div></div>
-<div class="ov" id="sv" role="dialog" aria-modal="true" aria-label="Service details"><div class="sview-shell"><button class="sview-nav sview-nav--side" data-sv-nav="-1" aria-label="Previous service">←</button><div class="sviewer"><button class="x" aria-label="Close">×</button><div class="sview-card" id="svb"></div><div class="sview-bar"><span class="sview-count" id="sv-count"></span><button class="sview-nav sview-nav--bar" data-sv-nav="-1" aria-label="Previous service">←</button><button class="sview-nav sview-nav--bar" data-sv-nav="1" aria-label="Next service">→</button></div></div><button class="sview-nav sview-nav--side" data-sv-nav="1" aria-label="Next service">→</button></div></div>`,
+<p class="or">or send a quick message</p><form class="mform" style="--i:2" novalidate><input name="n" placeholder="Your name" required aria-label="Name" maxlength="100"><input name="e" type="email" placeholder="Your email" required aria-label="Email" maxlength="200"><textarea name="m" rows="3" placeholder="Your site link and one line about your goal" required aria-label="Message" maxlength="4000"></textarea><input class="hp" name="w" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send message</button><p class="fst" id="fst" role="status"></p></form></div></div>`,
   );
   const openOv = (id, f) => {
     $(id).classList.add('open');
@@ -195,12 +195,59 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       : /\.(mp4|webm)(\?|$)/i.test(m)
         ? `<video src="${esc(m)}" autoplay muted loop playsinline></video>`
         : `<img src="${esc(m)}" alt="${esc(alt)}" loading="lazy">`;
-  // hero: photo, proof row, rotating logo slots
-  const hp = S.heroPhoto || S.photo;
-  if (hp)
+  // Hero: the specialty line cycles through the list, each phrase arriving on
+  // the same slide-up-and-unblur the tool tiles use — up from below, blurring
+  // off as it settles, then blurring out upward as the next one comes.
+  // #heroRoles carries the same words as plain text for assistive tech and for
+  // anyone whose JS never arrives.
+  const heroWrite = $('#heroWrite'),
+    heroRoles = S.heroRoles || [];
+  if (heroWrite && heroRoles.length) {
+    const OUT = {
+        opacity: [1, 0],
+        transform: ['translateY(0)', 'translateY(-16px)'],
+        filter: ['blur(0)', 'blur(8px)'],
+      },
+      IN = {
+        opacity: [0, 1],
+        transform: ['translateY(16px)', 'translateY(0)'],
+        filter: ['blur(8px)', 'blur(0)'],
+      };
+    const HOLD = 2200; // how long a settled phrase stays up
+    let i = 0;
+    // one animation at a time: the previous fill would otherwise keep applying
+    const play = (kf) => {
+      heroWrite.getAnimations().forEach((a) => a.cancel());
+      return heroWrite.animate(kf, {
+        duration: reduced ? 0 : 620,
+        easing: 'ease',
+        fill: 'both',
+      });
+    };
+    const cycle = () => {
+      heroWrite.textContent = heroRoles[i % heroRoles.length];
+      play(IN);
+      setTimeout(
+        () => {
+          play(OUT);
+          setTimeout(
+            () => {
+              i++;
+              cycle();
+            },
+            reduced ? 0 : 620,
+          );
+        },
+        (reduced ? 0 : 620) + HOLD,
+      );
+    };
+    cycle();
+  }
+  // hero portrait
+  if (S.photo)
     set(
       '#heroPhoto',
-      `<img src="${esc(hp)}" alt="Portrait of Abdulkaiz Khatri">`,
+      `<img src="${esc(S.photo)}" alt="Portrait of Abdulkaiz Khatri">`,
     );
   const st = S.stats || [];
   // headline numbers sit directly under the hero CTA
@@ -242,9 +289,7 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       `<img src="${esc(t.logo)}" alt="${esc(t.name)}" loading="lazy">`;
     // spread the starting logos so nothing duplicates on first paint
     cells.forEach((c, i) => {
-      c.dataset.i = String(
-        (i * Math.ceil(pool.length / N)) % pool.length,
-      );
+      c.dataset.i = String((i * Math.ceil(pool.length / N)) % pool.length);
       c.innerHTML = mark(pool[+c.dataset.i]);
     });
     if (!reduced) {
@@ -290,7 +335,7 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       );
     }
   }
-  // region-scaled pricing — used by the service cards, the viewer and #prices
+  // region-scaled pricing — used by the service rail, panels and plan cards
   const REG = PR.regions || {};
   const country = async () => {
     try {
@@ -321,132 +366,190 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
     const a = (s.plans || []).map((p) => +p.amount).filter((n) => isFinite(n));
     return a.length ? Math.min(...a) : null;
   };
-  const planCard = (p) =>
-    `<article class="plan ${p.popular ? 'featured-glow' : ''}">${
-      p.popular ? '<span class="pop-badge">Most popular</span>' : ''
-    }<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div><p class="plan-desc">${esc(p.desc || '')}</p><p class="pnote">${esc(p.note || '')}</p><button class="btn" data-contact>Book a call</button><button class="more" data-contact="message">Send me a message</button><ul>${(p.features || []).map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`).join('')}</ul></article>`;
-  // services
+  // A plan card. In the services section each card is a tab panel behind the
+  // plan switcher, so it can be given its tab ids and start hidden.
+  const planCard = (p, tab) =>
+    `<article class="plan ${p.popular ? 'featured-glow' : ''}"${
+      tab
+        ? ` role="tabpanel" id="${tab.id}" aria-labelledby="${tab.lab}"${tab.hidden ? ' hidden' : ''}`
+        : ''
+    }>${p.popular ? '<span class="pop-badge">Most popular</span>' : ''}<h3 class="tagp">${esc(p.name)}</h3><div class="price"><b>${fmt(p.amount * mult)}</b><small>${p.from ? 'starting at<br>' : ''}${esc(p.unit)}</small></div><p class="plan-desc">${esc(p.desc || '')}</p><p class="pnote">${esc(p.note || '')}</p><button class="btn" data-contact>Book a call</button><button class="more" data-contact="message">Send me a message</button><ul>${(p.features || []).map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`).join('')}</ul></article>`;
+  // "What I do" — one scroll-driven section. The rail on the left tracks which
+  // service panel is in view; the active service sets the section's accent colour.
   const sv = S.services || [];
-  set(
-    '#services-grid',
-    sv
-      .map((s, i) => {
-        const p = cheapest(s);
-        return `<button class="scard" data-svc="${esc(s.id || i)}" aria-label="Open ${esc(s.title)}"><div class="smedia">${media(s.media, s.title) || icon(s.icon, 'svc-icon smedia-icon')}<span class="smedia-badge">${icon(s.icon)}</span></div><div class="sbody"><h3>${esc(s.title)}</h3><p>${esc(s.summary)}</p><div class="scard-foot">${
-          p != null
-            ? `<span class="scard-from">from ${fmt(p * mult)}</span>`
-            : ''
-        }<b>See details →</b></div></div></button>`;
-      })
-      .join(''),
-  );
-
-  // ---- service viewer: photo + sub-services + prices, swipeable & shareable ----
-  let svIndex = 0;
-  const svHash = (id) => '#service-' + id;
-  const renderService = (i, dir) => {
-    if (!sv.length) return;
-    svIndex = (i + sv.length) % sv.length;
-    const s = sv[svIndex];
-    const box = $('#svb');
-    box.classList.remove('swipe-next', 'swipe-prev');
-    box.innerHTML = `<article class="sview-intro">
-      <div class="sview-media">${
-        media(s.media, s.title) ||
-        `<span class="sview-glyph">${icon(s.icon)}</span>`
-      }</div>
-      <div class="sview-info">
-        <p class="eyebrow">${icon(s.icon, 'icon-inline')}${esc(s.title)}</p>
-        <h2>${esc(s.title)}</h2>
-        <p class="sview-lead">${esc(s.details || s.summary)}</p>
-        <h4 class="sview-sub">What's included</h4>
-        <ul class="sview-list">${(s.features || [])
-          .map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`)
-          .join('')}</ul>
-      </div>
-    </article>
-    <article class="sview-pricing">
-      <h4 class="sview-sub">Pricing</h4>
-      <div class="sview-plans">${(s.plans || []).map(planCard).join('')}</div>
-      <div class="sview-cta">
-        <button class="btn" data-contact>${esc(s.cta || 'Start a project')}</button>
-        <button class="btn btn-ghost" data-share>Copy link</button>
-      </div>
-    </article>`;
-    if (dir) {
-      void box.offsetWidth; // restart the animation
-      box.classList.add(dir > 0 ? 'swipe-next' : 'swipe-prev');
-    }
-    const n = $('#sv-count');
-    if (n) n.textContent = `${svIndex + 1} / ${sv.length}`;
-    if (history.replaceState)
-      history.replaceState(null, '', svHash(s.id || svIndex));
-  };
-  const openService = (i, dir) => {
-    renderService(i, dir);
-    openOv('#sv', '.sview-cta .btn');
-  };
-  const step = (d) => renderService(svIndex + d, d);
-
-  // open from a card
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('[data-svc]');
-    if (!card) return;
-    e.preventDefault();
-    const i = sv.findIndex((s) => (s.id || '') === card.dataset.svc);
-    openService(i < 0 ? +card.dataset.svc || 0 : i);
-  });
-  // prev / next
-  $$('[data-sv-nav]').forEach(
-    (b) => (b.onclick = () => step(+b.dataset.svNav)),
-  );
-  // keyboard
-  document.addEventListener('keydown', (e) => {
-    if (!$('#sv')?.classList.contains('open')) return;
-    if (e.key === 'ArrowRight') step(1);
-    if (e.key === 'ArrowLeft') step(-1);
-  });
-  // touch / pointer swipe
-  const viewer = $('.sviewer');
-  if (viewer) {
-    let x0 = null;
-    viewer.addEventListener('pointerdown', (e) => (x0 = e.clientX));
-    viewer.addEventListener('pointerup', (e) => {
-      if (x0 === null) return;
-      const dx = e.clientX - x0;
-      x0 = null;
-      if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
-    });
-  }
-  // copy a shareable link to the current service
-  document.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-share]');
-    if (!b) return;
-    e.preventDefault();
-    const url = location.href;
-    const done = () => {
-      b.textContent = 'Link copied ✓';
-      setTimeout(() => (b.textContent = 'Copy link'), 1800);
+  const rail = $('#svcRail'),
+    panels = $('#svcPanels'),
+    svcSec = $('#services'),
+    svcGlow = $('#svcGlow');
+  if (rail && panels && sv.length) {
+    const from = (s) => {
+      const p = cheapest(s);
+      return p != null ? 'from ' + fmt(p * mult) : '';
     };
-    if (navigator.clipboard?.writeText)
-      navigator.clipboard.writeText(url).then(done).catch(() => {});
-    else done();
-  });
-  // deep links: index.html#service-shopify opens straight onto that service
-  const svFromHash = () => {
-    const m = (location.hash || '').match(/^#service-(.+)$/);
-    if (!m) return -1;
-    return sv.findIndex((s) => String(s.id) === m[1]);
-  };
-  const openFromHash = () => {
-    const i = svFromHash();
-    if (i >= 0) openService(i);
-  };
-  addEventListener('hashchange', () => {
-    const i = svFromHash();
-    if (i >= 0) openService(i);
-  });
-  openFromHash();
+    rail.innerHTML = sv
+      .map(
+        (s, i) =>
+          `<button class="rail-item" data-rail="${i}" aria-label="${esc(s.title)}">${icon(s.icon)}<span>${esc(s.title)}</span><b>${from(s)}</b></button>`,
+      )
+      .join('');
+    // Details on the left, one compact pricing card on the right. The card swaps
+    // between plans instead of stacking them, so every service is the same height
+    // and the colour change lands on an even scroll rhythm.
+    panels.innerHTML = sv
+      .map((s, i) => {
+        const sid = esc(s.id || i),
+          plans = s.plans || [];
+        // one plan means there is nothing to switch between, so no control
+        const switcher =
+          plans.length > 1
+            ? `<div class="plan-switch" role="tablist" aria-label="${esc(s.title)} plans">${plans
+                .map(
+                  (p, k) =>
+                    `<button type="button" class="plan-tab${k ? '' : ' on'}" role="tab" id="ptab-${sid}-${k}" aria-controls="ppanel-${sid}-${k}" aria-selected="${k ? 'false' : 'true'}" tabindex="${k ? '-1' : '0'}">${esc(p.name)}</button>`,
+                )
+                .join('')}</div>`
+            : '';
+        const cards = plans
+          .map((p, k) =>
+            planCard(p, {
+              id: `ppanel-${sid}-${k}`,
+              lab: `ptab-${sid}-${k}`,
+              hidden: k > 0,
+            }),
+          )
+          .join('');
+        return `<article class="svc-panel" id="service-${sid}" data-panel="${i}" style="--panel-accent:${esc(s.accent || '#4F6BFF')}">
+            <div class="svc-body">
+              <div class="svc-media">${
+                media(s.media, s.title) ||
+                `<span class="svc-glyph">${icon(s.icon)}</span>`
+              }</div>
+              <p class="eyebrow">${icon(s.icon, 'icon-inline')}${esc(s.title)}</p>
+              <h3>${esc(s.title)}</h3>
+              <p class="svc-lead">${esc(s.details || s.summary)}</p>
+              <h4 class="svc-sub">What's included</h4>
+              <ul class="svc-list">${(s.features || [])
+                .map((f) => `<li>${icon('check', 'icon-check')}${esc(f)}</li>`)
+                .join('')}</ul>
+              <div class="svc-cta"><button class="btn" data-contact>${esc(s.cta || 'Start a project')}</button></div>
+            </div>
+            ${
+              plans.length
+                ? `<aside class="svc-price" aria-label="Pricing for ${esc(s.title)}">
+              <h4 class="svc-sub">Pricing</h4>
+              ${switcher}
+              <div class="svc-plans">${cards}</div>
+            </aside>`
+                : ''
+            }
+          </article>`;
+      })
+      .join('');
+    // plan switcher — a roving-tabindex tablist, one card visible at a time
+    panels.querySelectorAll('.plan-switch').forEach((sw) => {
+      const tabs = [...sw.querySelectorAll('.plan-tab')],
+        cards = [...sw.parentElement.querySelectorAll('.svc-plans > .plan')],
+        last = tabs.length - 1;
+      const sel = (k, focus) => {
+        tabs.forEach((t, j) => {
+          const on = j === k;
+          t.classList.toggle('on', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+        });
+        cards.forEach((c, j) => (c.hidden = j !== k));
+        if (focus) tabs[k].focus();
+      };
+      tabs.forEach((t, k) => {
+        t.onclick = () => sel(k);
+        t.onkeydown = (e) => {
+          const to =
+            e.key === 'ArrowRight'
+              ? (k + 1) % tabs.length
+              : e.key === 'ArrowLeft'
+                ? (k - 1 + tabs.length) % tabs.length
+                : e.key === 'Home'
+                  ? 0
+                  : e.key === 'End'
+                    ? last
+                    : -1;
+          if (to < 0) return;
+          e.preventDefault();
+          sel(to, true);
+        };
+      });
+    });
+    const railItems = [...rail.children],
+      els = [...panels.children];
+    let current = -1;
+    // `sync` is false for the initial pick: rewriting the URL with a hash on load
+    // makes the browser jump to that anchor before the visitor has scrolled.
+    const activate = (i, sync = true) => {
+      if (i === current || !els[i]) return;
+      current = i;
+      railItems.forEach((b, k) => b.classList.toggle('on', k === i));
+      els.forEach((e, k) => e.classList.toggle('on', k === i));
+      const acc = sv[i].accent || '#4F6BFF';
+      svcSec.style.setProperty('--svc-accent', acc);
+      if (svcGlow) svcGlow.dataset.side = i % 2 ? 'right' : 'left';
+      if (sync && history.replaceState)
+        history.replaceState(null, '', '#service-' + sv[i].id);
+    };
+    railItems.forEach(
+      (b, i) =>
+        (b.onclick = () =>
+          els[i].scrollIntoView({
+            behavior: reduced ? 'auto' : 'smooth',
+            block: 'center',
+          })),
+    );
+    // the panel nearest the viewport centre wins
+    let hold = false; // set while a deep link is settling, so scroll can't override it
+    const pick = (sync = true) => {
+      if (hold) return;
+      const mid = innerHeight / 2;
+      let best = 0,
+        dist = Infinity;
+      els.forEach((e, i) => {
+        const r = e.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < dist) {
+          dist = d;
+          best = i;
+        }
+      });
+      activate(best, sync);
+    };
+    let ticking;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = requestAnimationFrame(() => {
+        ticking = 0;
+        pick();
+      });
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    pick(false);
+    // #service-<id> deep links scroll to and select that service. The jump is
+    // instant and holds the scroll-driven pick off briefly, so the landing
+    // position can't immediately override the service that was asked for.
+    const goHash = () => {
+      const m = (location.hash || '').match(/^#service-(.+)$/);
+      if (!m) return;
+      const i = sv.findIndex((s) => String(s.id) === m[1]);
+      if (i < 0) return;
+      hold = true;
+      activate(i);
+      els[i].scrollIntoView({ behavior: 'auto', block: 'center' });
+      setTimeout(() => {
+        hold = false;
+      }, 500);
+    };
+    goHash();
+    addEventListener('hashchange', goHash);
+  }
+
   // portfolio, marquee, gallery
   const ps = P.projects || [],
     tone = (i) => ['#fff', '#111', '#e9e9e9', '#333'][i % 4],
@@ -497,30 +600,16 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       )
       .join(''),
   );
-  // home "Prices" section: every service's starting price, plus monthly plans + FAQ
-  if ($('#prices')) {
-    set(
-      '#prices-list',
-      sv
-        .map((s) => {
-          const p = cheapest(s);
-          return `<button class="price-row" data-svc="${esc(s.id)}" aria-label="Open ${esc(s.title)}">${icon(s.icon)}<span class="price-row-name">${esc(s.title)}</span><b>${p != null ? 'from ' + fmt(p * mult) : 'On request'}</b></button>`;
-        })
-        .join(''),
-    );
-    const monthly = sv.find((s) => s.id === 'care')?.plans || [];
-    set('#prices-monthly', monthly.map(planCard).join(''));
-    set(
-      '#faq',
-      (PR.faq || [])
-        .map(
-          (f) =>
-            `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`,
-        )
-        .join(''),
-    );
-    set('#prices-note', PR.note ? esc(PR.note) : '');
-  }
+  // FAQ — half image, half list
+  set(
+    '#faqList',
+    (PR.faq || [])
+      .map(
+        (f) =>
+          `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`,
+      )
+      .join(''),
+  );
   // about text, timelines
   const paras = (t) =>
     (t || '')
@@ -535,6 +624,13 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       '#photo',
       `<img src="${esc(S.photo)}" alt="Portrait of Abdulkaiz Khatri" loading="lazy">`,
     );
+  // the work I turn down — each row marked so the list reads as a boundary
+  set(
+    '#ethicsList',
+    (S.ethicsExcluded || [])
+      .map((x) => `<li>${icon('ban', 'icon-ban')}${esc(x)}</li>`)
+      .join(''),
+  );
   const tl = (a) =>
     (a || [])
       .map(
@@ -558,44 +654,26 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
       .filter(Boolean)
       .join(' · ');
   const rv = (T.reviews || []).filter(
-      (r) => Number(r.rating) === 5 && r.show !== false,
-    ),
-    box = $('#review');
-  let n = 0;
-  if (box && rv.length) {
-    const show = () => {
-      const r = rv[n];
-      box.innerHTML = `<div class="avatar">${r.photo ? `<img src="${esc(r.photo)}" alt="">` : esc((r.name || 'C')[0])}</div><div><div class="stars">${STARS}</div><blockquote>${esc(r.quote).replace(/\n\n/g, '<br><br>')}</blockquote><cite>${esc(r.name)}${r.website ? ` <a class="vis" href="${esc(r.website)}" target="_blank" rel="noopener" aria-label="Client website">↗</a>` : ''}<span>${esc(sub(r))}</span></cite></div>`;
-    };
-    const go = (k) => {
-      box.classList.add('fade');
-      setTimeout(() => {
-        n = (n + k + rv.length) % rv.length;
-        show();
-        box.classList.remove('fade');
-      }, 300);
-    };
-    show();
-    $('#prev').onclick = () => go(-1);
-    $('#next').onclick = () => go(1);
-    if (rv.length > 1) setInterval(() => go(1), 9000);
-  }
-  // testimonials page: masonry of 5-star reviews, one featured
+    (r) => Number(r.rating) === 5 && r.show !== false,
+  );
+  // One card renderer feeds both walls of reviews: the home page takes the
+  // newest few (data-limit), the reviews page takes all of them.
   const QUOTE_ICON =
     '<svg class="icon-quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 5.2C6.3 6.3 4 9.3 4 12.9v5.9h6.6v-6.6H7.2c0-2 1.1-3.6 3-4.4l-.6-2.6zm10 0c-3.3 1.1-5.6 4.1-5.6 7.7v5.9h6.6v-6.6h-3.4c0-2 1.1-3.6 3-4.4l-.6-2.6z"/></svg>';
-  set(
-    '#tgrid',
-    rv
-      .map((r, i) => {
-        const featured = i === 0;
-        return `<article class="tcard${featured ? ' featured-glow' : ''} reveal">${
-          featured
-            ? `<div class="tcard-top">${QUOTE_ICON}<span class="tcard-flag">Featured review</span></div>`
-            : ''
-        }<div class="stars">${STARS}</div><blockquote>${esc(r.quote).replace(/\n\n/g, '<br><br>')}</blockquote><cite>${esc(r.name)}${r.website ? ` <a class="vis" href="${esc(r.website)}" target="_blank" rel="noopener" aria-label="Client website">↗</a>` : ''}<span>${esc(sub(r))}</span></cite></article>`;
-      })
-      .join(''),
-  );
+  const rcard = (r, featured) =>
+    `<article class="tcard${featured ? ' featured-glow' : ''} reveal">${
+      featured
+        ? `<div class="tcard-top">${QUOTE_ICON}<span class="tcard-flag">Featured review</span></div>`
+        : ''
+    }<div class="stars" role="img" aria-label="Rated ${Number(r.rating)} out of 5">${STARS}</div><blockquote>${esc(r.quote).replace(/\n\n/g, '<br><br>')}</blockquote><cite>${esc(r.name)}${r.website ? ` <a class="vis" href="${esc(r.website)}" target="_blank" rel="noopener" aria-label="Client website">↗</a>` : ''}<span>${esc(sub(r))}</span></cite></article>`;
+  ['#reviewGrid', '#tgrid'].forEach((sel) => {
+    const box = $(sel);
+    if (!box || !rv.length) return;
+    box.innerHTML = rv
+      .slice(0, +box.dataset.limit || rv.length)
+      .map((r, i) => rcard(r, i === 0))
+      .join('');
+  });
   // header scroll state: full-size at top, floating pill on scroll
   const navWrap = document.querySelector('.nav-wrap');
   const onScroll = () => {
@@ -658,6 +736,25 @@ ${/^https?:/.test(S.bookCall || '') ? `<a class="opt" style="--i:1" href="${esc(
   addEventListener('hashchange', () => {
     revealInView();
     revealHash();
+  });
+  // nav links carry their filename (index.html#services) so they work from any
+  // page. When the target is on the page we're already on, scroll to it
+  // rather than reloading.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest?.('a[href*="#"]');
+    if (!a || a.target === '_blank') return;
+    const url = new URL(a.getAttribute('href'), location.href);
+    if (url.pathname !== location.pathname || !url.hash) return;
+    let t = null;
+    try {
+      t = document.querySelector(url.hash);
+    } catch {
+      t = null;
+    }
+    if (!t) return;
+    e.preventDefault();
+    history.pushState(null, '', url.hash);
+    t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   });
   const px = $$('.px');
   let tick;
