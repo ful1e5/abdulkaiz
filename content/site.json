@@ -555,9 +555,7 @@
           "unit": "per month",
           "from": false,
           "note": "Add-on · works with any plan",
-          "features": [
-            "Monitoring and fixes for the workflows you built"
-          ],
+          "features": ["Monitoring and fixes for the workflows you built"],
           "popular": false,
           "group": "Add-ons"
         }
@@ -570,20 +568,13 @@
       "name": "Brand & Launch",
       "amount": 2600,
       "save": 300,
-      "includes": [
-        "Business Website",
-        "Brand Identity"
-      ]
+      "includes": ["Business Website", "Brand Identity"]
     },
     {
       "name": "Full Launch",
       "amount": 4500,
       "save": 650,
-      "includes": [
-        "Growth Website",
-        "Brand Identity",
-        "Social Media Kit"
-      ]
+      "includes": ["Growth Website", "Brand Identity", "Social Media Kit"]
     }
   ],
   "process": [
