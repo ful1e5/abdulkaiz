@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://abdulkaiz.com/</loc></url>
-  <url><loc>https://abdulkaiz.com/portfolio.html</loc></url>
-  <url><loc>https://abdulkaiz.com/testimonials.html</loc></url>
-  <url><loc>https://abdulkaiz.com/about.html</loc></url>
+  <url>
+    <loc>https://ful1e5.github.io/abdulkaiz/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ful1e5.github.io/abdulkaiz/portfolio/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ful1e5.github.io/abdulkaiz/testimonials/</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ful1e5.github.io/abdulkaiz/about/</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>

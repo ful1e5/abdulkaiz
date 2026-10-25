@@ -10,8 +10,14 @@ Token system: black/white base + one accent. Full-width sections.
   --ink: #0a0a0a;
   --ink-2: #161616;
   --ink-3: #242424;
-  --muted: #6b6b6b;
-  --faint: #9a9a9a;
+  /* Both greys carry text at sizes well under the 18.66px-bold large-text
+     exemption, so each has to clear 4.5:1 on white *and* on --bg-alt. The old
+     values were 5.33:1 and 2.81:1 — the faint one failed everywhere it was
+     used, including every .eyebrow. These are the lightest greys that pass on
+     both surfaces, and they stay a step apart so the label hierarchy survives
+     instead of collapsing into a single grey. */
+  --muted: #5c5c5c; /* 6.69:1 on white, 6.18:1 on --bg-alt */
+  --faint: #6f6f6f; /* 5.02:1 on white, 4.65:1 on --bg-alt */
   --line: #e6e6e6;
   --line-dark: #2a2a2a;
   --bg: #ffffff;
@@ -1002,8 +1008,11 @@ ratio means cover never crops it. */
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* the site is monochrome — keep the photo in the same register */
-  filter: grayscale(1) contrast(1.06);
+  /* The monochrome treatment used to be a filter here. It is baked into the
+     portrait variants by tools/images.py instead, which keeps a large element
+     off its own filter/compositing layer and lets AVIF store one channel
+     rather than three. Swap the master image and re-run that script — do not
+     swap in a colour photo, or it will render in colour. */
 }
 
 /* tools — a 2-row grid that cycles through the stack, between hero and services */
@@ -2902,12 +2911,16 @@ content needs: the checklist reads a word or two per line otherwise. */
   align-items: start;
   padding: var(--sp-6) 0;
   border-top: 1px solid var(--line);
-  opacity: 0.35;
-  transition: opacity 0.5s ease;
 }
 
-.svc-panel.on {
-  opacity: 1;
+/* The unfocused panel used to be dimmed as a whole (opacity 0.35), which put
+its own body copy at 1.37:1 against white. Nothing clears 4.5:1 through 35%
+opacity — even pure black only reaches 2.5:1 — so no text colour could have
+rescued it. The dimming sits on the artwork instead, which is where the visual
+weight of the panel actually is, and the words keep their full contrast. The
+glyph is decorative and lives inside .svc-media, so it fades with it. */
+.svc-panel:not(.on) .svc-media {
+  opacity: 0.3;
 }
 
 /* the artwork is 800x600, so this keeps its 4:3 and never crops it */
@@ -2918,6 +2931,7 @@ content needs: the checklist reads a word or two per line otherwise. */
   overflow: hidden;
   background: var(--bg-alt);
   border-radius: var(--radius);
+  transition: opacity 0.5s ease;
 }
 
 .svc-media img,

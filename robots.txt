@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://abdulkaiz.com/sitemap.xml
+Sitemap: https://ful1e5.github.io/abdulkaiz/sitemap.xml

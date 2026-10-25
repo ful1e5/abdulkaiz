@@ -22,13 +22,13 @@ repointed at the live host.
 
 ## Baseline (from the owner's PageSpeed runs, 2026-10-25)
 
-| Category    | Mobile | Desktop |
-| ----------- | ------ | ------- |
-| Performance | 69     | 92      |
-| Accessibility | 92   | 96      |
-| Best Practices | 96  | 96      |
-| SEO         | 100    | 100     |
-| Agentic Browsing | 1/2 | 2/2    |
+| Category         | Mobile | Desktop |
+| ---------------- | ------ | ------- |
+| Performance      | 69     | 92      |
+| Accessibility    | 92     | 96      |
+| Best Practices   | 96     | 96      |
+| SEO              | 100    | 100     |
+| Agentic Browsing | 1/2    | 2/2     |
 
 Mobile metrics: FCP 2.6s, **LCP 7.9s**, TBT 0ms, CLS 0, SI 4.9s.
 Desktop metrics: FCP 0.7s, LCP 1.5s, TBT 0ms, CLS 0.093, SI 1.2s.
@@ -140,7 +140,7 @@ Ordered by measured impact.
 
 The hero portrait is a **1.1 MB PNG injected by JavaScript** (`script.js:307`,
 and again at `:842` on the About page) with no dimensions, above the fold on
-both pages. LCP cannot begin until `script.js` has parsed *and* four content
+both pages. LCP cannot begin until `script.js` has parsed _and_ four content
 `fetch`es have resolved. Mobile LCP is 7.9s against a 1,039 KiB "improve image
 delivery" estimate.
 
@@ -174,8 +174,8 @@ JPEG fallback via `srcset`/`sizes`, and a preload for the mobile candidate.
 
 ## 5. SEO
 
-Lighthouse SEO already reads 100 because it only verifies a canonical *exists
-and is well-formed*, not that it resolves. The real work:
+Lighthouse SEO already reads 100 because it only verifies a canonical _exists
+and is well-formed_, not that it resolves. The real work:
 
 - Repoint canonicals, `og:url`, sitemap and `robots.txt` at the live host
   (see **Canonical host** above).
@@ -192,11 +192,11 @@ and is well-formed*, not that it resolves. The real work:
 
 Precise causes identified, not guessed:
 
-| Failure | Cause | Fix |
-| --- | --- | --- |
-| Contrast (both form factors) | `--faint: #9a9a9a` is **2.81:1** on white, needs 4.5:1. Used as text in 9 places, including `.eyebrow` at 12.5px — far below the large-text exemption | Retune **per surface**. A single token cannot be fixed globally: `.svc-sec` has no background of its own (it sits on a viewport-pinned colour wash), and `.footer` is `background: var(--ink)` with white text. Light, wash and black each get a measured value |
-| Links lack a discernible name (mobile only) | `style.css:3235` sets `display:none` on `.uplink span` below 860px. `display:none` removes the node from the accessibility tree, and the only sibling is an `aria-hidden` SVG — so the link has **no accessible name at all** | Constant `aria-label` on the anchor. This also closes the Agentic Browsing failure, which is the same element |
-| Identical links, same purpose (both) | "See my work" appears twice on `index.html` — `#work` (line 129) and `portfolio.html` (line 270) | Distinct accessible names per destination |
+| Failure                                     | Cause                                                                                                                                                                                                                         | Fix                                                                                                                                                                                                                                                             |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Contrast (both form factors)                | `--faint: #9a9a9a` is **2.81:1** on white, needs 4.5:1. Used as text in 9 places, including `.eyebrow` at 12.5px — far below the large-text exemption                                                                         | Retune **per surface**. A single token cannot be fixed globally: `.svc-sec` has no background of its own (it sits on a viewport-pinned colour wash), and `.footer` is `background: var(--ink)` with white text. Light, wash and black each get a measured value |
+| Links lack a discernible name (mobile only) | `style.css:3235` sets `display:none` on `.uplink span` below 860px. `display:none` removes the node from the accessibility tree, and the only sibling is an `aria-hidden` SVG — so the link has **no accessible name at all** | Constant `aria-label` on the anchor. This also closes the Agentic Browsing failure, which is the same element                                                                                                                                                   |
+| Identical links, same purpose (both)        | "See my work" appears twice on `index.html` — `#work` (line 129) and `portfolio.html` (line 270)                                                                                                                              | Distinct accessible names per destination                                                                                                                                                                                                                       |
 
 `.vh` was audited and is correctly clip-based (`clip-path: inset(50%)`), not
 `display:none`, so the hero's visually-hidden tagline is already exposed to
@@ -225,17 +225,17 @@ than masked by relabelling or hiding the LCP element.
 
 ## Files
 
-| Path | Change |
-| --- | --- |
-| `build.py` | Rewritten as generator + `--check` |
-| `templates/nav.html`, `templates/footer.html` | New — single source for chrome |
-| `index.html` | Head rework, markers, LCP image, no seed tag |
-| `about/`, `portfolio/`, `testimonials/` `index.html` | Moved, `<base>`, head rework, markers |
-| `about.html`, `portfolio.html`, `testimonials.html` | Redirect stubs |
-| `script.js` | Path handling, drop chrome injection, seed fallback, region gating, image markup |
-| `style.css` | Contrast tokens, critical split |
-| `sitemap.xml`, `robots.txt` | Generated |
-| `assets/og.png` | New social card |
-| `assets/uploads/` | Optimized portrait variants |
-| `assets/fonts/` | Self-hosted subset woff2 |
-| `README.md` | Document build step, URL scheme, deploy |
+| Path                                                 | Change                                                                           |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `build.py`                                           | Rewritten as generator + `--check`                                               |
+| `templates/nav.html`, `templates/footer.html`        | New — single source for chrome                                                   |
+| `index.html`                                         | Head rework, markers, LCP image, no seed tag                                     |
+| `about/`, `portfolio/`, `testimonials/` `index.html` | Moved, `<base>`, head rework, markers                                            |
+| `about.html`, `portfolio.html`, `testimonials.html`  | Redirect stubs                                                                   |
+| `script.js`                                          | Path handling, drop chrome injection, seed fallback, region gating, image markup |
+| `style.css`                                          | Contrast tokens, critical split                                                  |
+| `sitemap.xml`, `robots.txt`                          | Generated                                                                        |
+| `assets/og.png`                                      | New social card                                                                  |
+| `assets/uploads/`                                    | Optimized portrait variants                                                      |
+| `assets/fonts/`                                      | Self-hosted subset woff2                                                         |
+| `README.md`                                          | Document build step, URL scheme, deploy                                          |
