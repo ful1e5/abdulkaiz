@@ -33,7 +33,7 @@
     ['site', 'portfolio', 'testimonials', 'pricing'].map(get),
   );
   const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const UP = 'https://www.upwork.com/freelancers/abdulkaizk',
+  const UP = 'https://www.upwork.com/freelancers/~015f3c5097705a3287',
     LI = 'https://www.linkedin.com/in/ful1e5/';
   const mail = S.email || 'hello@abdulkaiz.com';
   // rating star: the fill carries the shape, the stroke rounds every point off
